@@ -22,8 +22,8 @@
 │   ├── js/
 │   │       ├── juego.js
 │   │       
-│   │       
-│   │       
+│   │       ├── views
+│        
 │   
 │   ├── media/
 │          ├── imagenes <-carpeta si se necesitan imagenes

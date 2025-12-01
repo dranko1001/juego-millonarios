@@ -1,0 +1,7 @@
+1.Uso de CamelCase para nombrar todas las variables y en español
+
+2.verificar antes de subir un git o un commit si hay cambios en la main con git fetch
+para evitar los problemas como el proyecto anterior
+
+3.verificar si usan codigo de otras fuentes que no cause problemas con el resto del
+proyecto y entender que hace cada linea
