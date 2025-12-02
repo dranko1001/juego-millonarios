@@ -23,11 +23,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         $_SESSION["admin"] = $usuario;
 
-        header("Location: ../../index.php");
+        header("Location: ../../frontend/views/menu.html");
         exit();
 
     } else {
-        header("Location: ../views/login_administrador.php?error=1");
+        header("Location: ../views/login_administrador.php");
         exit();
     }
 

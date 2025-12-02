@@ -19,7 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (mysqli_num_rows($resultado) > 0) {
 
         $_SESSION["aprendiz"] = $usuario;
-        header("Location: ../../index.php");
+        header("Location: ../../frontend/views/prueba.html");
         exit();
 
     } else {
