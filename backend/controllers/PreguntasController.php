@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 // Ajusta la ruta a tu modelo si es necesario
 require_once __DIR__ . '/../models/PreguntaModel.php'; 
 
@@ -39,9 +41,11 @@ if ($datosPregunta) {
     $pregunta['opciones_mostradas'] = $opciones_a_mostrar;
     $pregunta['respuesta_correcta_letra'] = $respuesta_correcta_letra;
     
-    // Opcional: podrías guardar el ID de la pregunta en la sesión para validarla después
-    // session_start();
-    // $_SESSION['pregunta_actual_id'] = $datosPregunta['ID_pregunta'];
+    // IMPORTANTE: Guardar en sesión para validar después
+    $_SESSION['pregunta_actual_id'] = $datosPregunta['ID_pregunta'];
+    $_SESSION['respuesta_correcta_letra'] = $respuesta_correcta_letra;
+    $_SESSION['respuesta_correcta_texto'] = $pregunta['respuesta_correcta_texto'];
+    $_SESSION['enunciado_pregunta'] = $pregunta['enunciado'];
 
 } else {
     // Si no hay preguntas en la base de datos
@@ -50,6 +54,5 @@ if ($datosPregunta) {
 }
 
 // 8. Cargar la vista
-// El controlador le pasa las variables $pregunta y $opciones_a_mostrar a la vista
 require_once __DIR__ . '/../../frontend/views/juego.php';
 ?>
