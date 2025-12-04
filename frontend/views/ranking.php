@@ -33,6 +33,7 @@ require_once __DIR__ . '/../../backend/controllers/ranking.php';
                             <th>Ficha</th>
                             <th>Usuario</th>
                             <th>Puntuación</th>
+                            <th>Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -61,6 +62,10 @@ require_once __DIR__ . '/../../backend/controllers/ranking.php';
                                 <td><?php echo htmlspecialchars($jugador['usuario_jugador']); ?></td>
                                 <td class="score">
                                     <?php echo number_format($jugador['puntaje_jugador'], 0, ',', '.'); ?> pts
+                                </td>
+                                <td>
+                                <button class="swal2-confirm swal2-styled" type="button"
+style="display: inline-block; --swal2-confirm-button-background-color: #dc3545; --swal2-confirm-button-hover-background-color: #c82333; --swal2-confirm-button-focus-box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.5);">Eliminar</button>
                                 </td>
                             </tr>
                             <?php
