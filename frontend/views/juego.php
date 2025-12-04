@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>¿Quién Quiere Ser Millonario? - SENA</title>
+    <title>¿Quién Quiere Ser Millonario? </title>
     <link rel="stylesheet" href="/frontend/css/juego.css"> 
     
 </head>
 <body>
 <div class="game-container">
     <div class="header">
-        <h1>Bienvenidos al SENA: ¡Millonarios! </h1>
+        <h1>¡¿Quién Quiere Ser Millonario?! </h1>
     </div>
 
     <div class="main-content">
@@ -19,7 +19,7 @@
                 
 
 
-                <img src="../media/logo.jpg" alt="Logo SENA">
+                <img src="../../frontend/media/logo.jpg" alt="Logo SENA">
             </div>
 
             <div class="lifelines">
@@ -30,7 +30,7 @@
                     <span class="lifeline-icon">📞</span>
                 </div>
                 <div class="lifeline" title="50:50">
-                    <span class="lifeline-icon">50:50</span>
+                    <span class="lifeline-icon">50/50</span>
                 </div>
             </div>
         </div>

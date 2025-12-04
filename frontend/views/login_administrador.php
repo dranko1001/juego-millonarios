@@ -52,7 +52,7 @@ if (isset($_GET['error'])) {
     <a href="login_aprendiz.php" class="btn-aprendiz">Aprendiz</a>
 
     <form method="POST" action="../../backend/controllers/validar_administrador.php">
-        <h2>Iniciar Sesión Administrador</h2>
+        <h2>Iniciar Sesión </h2>
 
         <?php if (!empty($error_msg)): ?>
             <div class="error-message">
