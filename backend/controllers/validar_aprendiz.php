@@ -1,30 +1,37 @@
 <?php
-require_once "../models/MySQL.php";
+require_once "../models/pdoconexion.php"; 
 session_start();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $ficha = $_POST["ficha"];
-    $usuario = $_POST["usuario_jugador"];
+    $usuario = $_POST["usuario_jugador"]; 
 
-    $db = new MySQL();
-    $conn = $db->conectar();
+    $db = new PDOConnection();
+    $conn = $db->conectar(); 
 
     $sql = "SELECT * FROM tbl_jugadores
-            WHERE ficha_jugador = '$ficha'
-            AND usuario_jugador = '$usuario'";
+            WHERE ficha_jugador = :ficha
+            AND usuario_jugador = :usuario";
 
-    $resultado = $db->efectuarConsulta($sql);
+    try {
+        $stmt = $conn->prepare($sql);
 
-    if (mysqli_num_rows($resultado) > 0) {
+        $stmt->execute([':ficha' => $ficha, ':usuario' => $usuario]);
 
-        $_SESSION["aprendiz"] = $usuario;
-        header("Location: ../../frontend/views/prueba.html");
-        exit();
+        if ($stmt->rowCount() > 0) {
 
-    } else {
+            $_SESSION["aprendiz"] = $usuario;
+            header("Location: ../../frontend/views/prueba.html");
+            exit();
 
-        header("Location: ../views/login_aprendiz.php");
+        } else {
+            header("Location: ../views/login_aprendiz.php?error=invalido");
+            exit();
+        }
+
+    } catch (PDOException $e) {
+        header("Location: ../views/login_aprendiz.php?error=db_error");
         exit();
     }
 }

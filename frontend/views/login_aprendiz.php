@@ -10,7 +10,6 @@
 <body>
 
     <a href="login_administrador.php" class="btn-aprendiz">Administrador</a>
-
     
     <form method="POST" action="../../backend/controllers/validar_aprendiz.php">
         <h2>Iniciar Sesión Aprendiz</h2>
