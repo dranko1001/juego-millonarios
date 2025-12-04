@@ -1,16 +1,15 @@
 <?php
-require_once __DIR__ . '/MySQL_PDO.php'; 
+require_once __DIR__ . '/pdoconexion.php'; 
 
 class PreguntaModel {
     private $mysql;
 
     public function __construct() {
-        $this->mysql = new MySQL();
+        $this->mysql = new PDOConnection(); // ← cambiado
     }
 
     /**
-     * Obtiene una pregunta aleatoria de la base de datos.
-     * @return array|null Un array asociativo con los datos de la pregunta o null si no hay preguntas.
+     * Obtiene una pregunta aleatoria
      */
     public function obtenerPreguntaAleatoria() {
         $this->mysql->conectar();
@@ -37,14 +36,13 @@ class PreguntaModel {
             $pregunta = $stmt->fetch(PDO::FETCH_ASSOC);
             
             if ($pregunta) {
-                // Preparar las opciones
                 $opciones = [
                     'A' => $pregunta['opcion1_pregunta'],
                     'B' => $pregunta['opcion2_pregunta'],
                     'C' => $pregunta['opcion3_pregunta'],
                     'D' => $pregunta['opcion4_pregunta']
                 ];
-                
+
                 $pregunta['opciones'] = $opciones;
             }
             
@@ -60,9 +58,6 @@ class PreguntaModel {
 
     /**
      * Valida si la respuesta es correcta
-     * @param int $idPregunta ID de la pregunta
-     * @param string $respuestaUsuario La letra que eligió el usuario
-     * @return array Array con 'es_correcta' (bool) y 'respuesta_correcta' (string)
      */
     public function validarRespuesta($idPregunta, $respuestaUsuario) {
         $this->mysql->conectar();
@@ -96,7 +91,6 @@ class PreguntaModel {
                 ];
             }
             
-            // Crear el mismo array de opciones que en obtenerPreguntaAleatoria
             $opciones = [
                 'A' => $pregunta['opcion1_pregunta'],
                 'B' => $pregunta['opcion2_pregunta'],
@@ -104,9 +98,8 @@ class PreguntaModel {
                 'D' => $pregunta['opcion4_pregunta']
             ];
             
-            // Buscar qué letra corresponde a la respuesta correcta
             $letraCorrecta = array_search($pregunta['correcta_pregunta'], $opciones);
-            
+
             $this->mysql->desconectar();
             
             return [
@@ -125,10 +118,9 @@ class PreguntaModel {
             ];
         }
     }
-    
+
     /**
-     * Obtiene el total de preguntas disponibles
-     * @return int Total de preguntas
+     * Cuenta las preguntas totales
      */
     public function contarPreguntas() {
         $this->mysql->conectar();
