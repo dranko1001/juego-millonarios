@@ -7,16 +7,23 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST' || !isset($_POST['respuesta_elegida'])
     exit;
 }
 
-// Obtener datos del POST
+require_once __DIR__ . '/../models/PreguntaModel.php';
+
 $respuestaElegida = $_POST['respuesta_elegida'];
-$idPregunta = $_POST['id_pregunta'];
+$idPregunta = (int)$_POST['id_pregunta'];
 
-// Obtener la respuesta correcta guardada en sesión
-$respuestaCorrectaLetra = $_SESSION['respuesta_correcta_letra'] ?? null;
-$respuestaCorrectaTexto = $_SESSION['respuesta_correcta_texto'] ?? null;
+// Validar usando el modelo
+$preguntaModel = new PreguntaModel();
+$resultado = $preguntaModel->validarRespuesta($idPregunta, $respuestaElegida);
 
-// Validar la respuesta
-$esCorrecta = ($respuestaElegida === $respuestaCorrectaLetra);
+// Verificar si hubo error
+if (isset($resultado['error'])) {
+    $_SESSION['error'] = $resultado['error'];
+    header('Location: PreguntaController.php');
+    exit;
+}
+
+$esCorrecta = $resultado['es_correcta'];
 
 // Incrementar contador de preguntas respondidas
 if (!isset($_SESSION['preguntas_correctas'])) {
@@ -32,6 +39,7 @@ if ($esCorrecta) {
 
 // Guardar información para mostrar en la vista de resultado
 $_SESSION['respuesta_elegida'] = $respuestaElegida;
+$_SESSION['respuesta_correcta_letra'] = $resultado['respuesta_correcta'];
 $_SESSION['enunciado_actual'] = $_SESSION['enunciado_pregunta'] ?? '';
 
 // Redirigir a la vista de resultado
