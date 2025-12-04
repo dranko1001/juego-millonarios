@@ -15,7 +15,7 @@
         <h2>Iniciar Sesión Aprendiz</h2>
 
         <input type="text" name="ficha" placeholder="Ficha" required>
-        <input type="text" name="usuario_jugador" placeholder="Numero Identificación Del Aprendiz" required>
+        <input type="text" name="usuario_jugador" placeholder="ingrese su nombre" required>
 
         <button type="submit">Guardar</button>
     </form>
