@@ -1,16 +1,14 @@
 <?php
-class PDOConnection
-{
+class PDOConnection {
     // Propiedades de conexión
     private $ipServidor = "localhost";
     private $usuarioBase = "root";
     private $contrasena = "";
     private $nombreBaseDatos = "juegomillonarios";
-    private $conexion;
+    private $conexion; 
 
     // Conectar a la base de datos
-    public function conectar()
-    {
+    public function conectar() {
         $dsn = "mysql:host={$this->ipServidor};dbname={$this->nombreBaseDatos};charset=utf8mb4";
 
         try {
@@ -32,8 +30,7 @@ class PDOConnection
     }
 
     // Obtener conexión existente o crear una nueva
-    public function getConexion()
-    {
+    public function getConexion() {
         if (!$this->conexion) {
             $this->conectar();
         }
@@ -41,9 +38,8 @@ class PDOConnection
     }
 
     // Cerrar conexión
-    public function desconectar()
-    {
-        $this->conexion = null;
-    }
+public function desconectar() {
+    $this->conexion = null;
+}
 }
 ?>
