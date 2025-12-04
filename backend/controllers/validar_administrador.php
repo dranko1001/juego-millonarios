@@ -16,24 +16,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     try {
         $stmt = $conn->prepare($sql);
-
         $stmt->bindParam(':usuario', $usuario);
         $stmt->bindParam(':password', $password);
+
 
         $stmt->execute();
 
         if ($stmt->rowCount() > 0) { 
 
-            $_SESSION["admin"] = $usuario;
+            $_SESSION["admin"] = $usuario; 
+            
             header("Location: ../../frontend/views/menu.html");
             exit();
 
         } else {
+            
             header("Location: ../views/login_administrador.php?error=credenciales");
             exit();
         }
-
+        
     } catch (PDOException $e) {
+
         header("Location: ../views/login_administrador.php?error=db_error");
         exit();
     }
