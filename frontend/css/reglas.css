@@ -69,7 +69,6 @@ body {
     color: #00A14B;
 }
 
-
 .btn {
     padding: 15px 30px;
     font-size: 1.2em;
@@ -77,6 +76,7 @@ body {
     border: none;
     border-radius: 15px;
     cursor: pointer;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); 
     transition: all 0.3s ease;
     text-transform: uppercase;
     letter-spacing: 1px;
@@ -86,10 +86,20 @@ body {
     text-align: center;
 }
 
+
 .btn-secondary{
-    background-color: #818181;
+    background-color: #7b7a7a; 
     color: white;
 }
+
+
+.btn-secondary:hover {
+    background-color: #666666;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+
 
 .btn-primary {
     background: #39B54A;
