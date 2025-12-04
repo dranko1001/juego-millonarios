@@ -10,13 +10,13 @@ require_once __DIR__ . '/../../backend/controllers/ranking.php';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🏆 Ranking - Juego Millonarios</title>
+    <title>Ranking - Juego Millonarios</title>
     <link rel="stylesheet" href="../css/estiloPrueba.css">
 </head>
 
 <body>
     <div class="container">
-        <h1 class="title">🏆 Top 10 Mejores Jugadores</h1>
+        <h1 class="title">Top 10 Mejores Jugadores</h1>
 
         <?php if (isset($mensaje)): ?>
             <!-- Si hay un mensaje (error o no hay datos), mostrarlo -->
@@ -47,11 +47,11 @@ require_once __DIR__ . '/../../backend/controllers/ranking.php';
                                     <?php
                                     // Mostrar medallas para los primeros 3
                                     if ($posicion == 1) {
-                                        echo "🥇 " . $posicion;
+                                        echo $posicion;
                                     } elseif ($posicion == 2) {
-                                        echo "🥈 " . $posicion;
+                                        echo $posicion;
                                     } elseif ($posicion == 3) {
-                                        echo "🥉 " . $posicion;
+                                        echo $posicion;
                                     } else {
                                         echo $posicion;
                                     }
