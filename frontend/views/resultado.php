@@ -29,7 +29,7 @@ $enunciado = $_SESSION['enunciado_actual'] ?? '';
     <?php if ($esCorrecta): ?>
         
         
-        <div class="emoji">🎉</div>
+        <!-- <div class="emoji">🎉</div> -->
         <div class="resultado-correcto">¡CORRECTO!</div>
         
         <div class="info-respuesta">
@@ -47,7 +47,7 @@ $enunciado = $_SESSION['enunciado_actual'] ?? '';
     <?php else: ?>
         
         
-        <div class="emoji"><img src="../media/blasito.jpg"width="300" height="200" alt=""></div>
+        <!-- <div class="emoji"></div> --> 
         <div class="resultado-incorrecto">INCORRECTO</div>
         
         <div class="info-respuesta">
