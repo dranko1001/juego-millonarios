@@ -1,15 +1,16 @@
 <?php
-class PDOConnection {
-
+class PDOConnection
+{
+    // Propiedades de conexión
     private $ipServidor = "localhost";
     private $usuarioBase = "root";
     private $contrasena = "";
     private $nombreBaseDatos = "juegomillonarios";
+    private $conexion;
 
-    private $conexion; 
-
-
-    public function conectar() {
+    // Conectar a la base de datos
+    public function conectar()
+    {
         $dsn = "mysql:host={$this->ipServidor};dbname={$this->nombreBaseDatos};charset=utf8mb4";
 
         try {
@@ -20,24 +21,29 @@ class PDOConnection {
                 [
                     PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
                     PDO::ATTR_EMULATE_PREPARES => false,
-                    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC 
+                    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
                 ]
             );
             return $this->conexion;
         } catch (PDOException $e) {
-            die("Error al conectar a la base de datos: " . $e->getMessage());
+            error_log("Error de conexión PDO: " . $e->getMessage()); // ← MEJORA
+            die("Error al conectar a la base de datos. Por favor contacte al administrador.");
         }
     }
 
-    public function getConexion() {
+    // Obtener conexión existente o crear una nueva
+    public function getConexion()
+    {
         if (!$this->conexion) {
-            $this->conectar(); 
+            $this->conectar();
         }
         return $this->conexion;
     }
-    public function desconectar() {
+
+    // Cerrar conexión
+    public function desconectar()
+    {
         $this->conexion = null;
     }
-
 }
 ?>
