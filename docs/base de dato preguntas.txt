@@ -1,0 +1,6 @@
+//el código debe ser not null y con auto incremental?
+//cedula o id autoincremental con el usuario
+//el campo validar código como bolleano para ver si ya fue utilizado <-no deja poner booleano el workbench
+//fecha al código
+//terminar relaciones
+//comprobar autoincrementales y FK antes de exportar
