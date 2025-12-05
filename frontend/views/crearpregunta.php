@@ -65,7 +65,7 @@ $categorias = $stmt->fetchAll();
                             <option value="">Selecciona el Nivel</option>
                             <option value="1">Facil</option>
                             <option value="2">Medio</option>
-                            <option value="3">Difícil</option>
+                            <option value="3">Dificil</option>
                         </select>
                     </div>
                 </div>
