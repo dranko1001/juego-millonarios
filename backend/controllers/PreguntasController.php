@@ -1,5 +1,5 @@
 <?php
- add// backend/controllers/PreguntasController.php
+// backend/controllers/PreguntasController.php
 session_start();
 
 if (!isset($_SESSION["aprendiz"]) || !isset($_SESSION["codigo_validado"])) {
