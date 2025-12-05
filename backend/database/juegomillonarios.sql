@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 02, 2025 at 01:10 PM
+-- Generation Time: Dec 05, 2025 at 02:34 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -33,6 +33,13 @@ CREATE TABLE `tbl_administradores` (
   `password_administrador` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
+--
+-- Dumping data for table `tbl_administradores`
+--
+
+INSERT INTO `tbl_administradores` (`ID_administrador`, `usuario_administrador`, `password_administrador`) VALUES
+(1, 'admin', '123');
+
 -- --------------------------------------------------------
 
 --
@@ -43,6 +50,15 @@ CREATE TABLE `tbl_categorias` (
   `ID_categoria` int(11) NOT NULL,
   `nombre_categoria` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `tbl_categorias`
+--
+
+INSERT INTO `tbl_categorias` (`ID_categoria`, `nombre_categoria`) VALUES
+(3, 'Arte y Literatura'),
+(2, 'Ciencia'),
+(1, 'Historia');
 
 -- --------------------------------------------------------
 
@@ -79,6 +95,15 @@ CREATE TABLE `tbl_dificultades` (
   `nombre_dificultad` varchar(45) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
+--
+-- Dumping data for table `tbl_dificultades`
+--
+
+INSERT INTO `tbl_dificultades` (`ID_dificultad`, `nombre_dificultad`) VALUES
+(3, 'Dificil'),
+(1, 'Facil'),
+(2, 'Medio');
+
 -- --------------------------------------------------------
 
 --
@@ -88,7 +113,7 @@ CREATE TABLE `tbl_dificultades` (
 CREATE TABLE `tbl_jugadores` (
   `ID_jugador` int(11) NOT NULL,
   `ficha_jugador` varchar(100) NOT NULL,
-  `usuario_jugador` bigint(20) NOT NULL,
+  `usuario_jugador` varchar(200) NOT NULL,
   `puntaje_jugador` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
@@ -120,6 +145,15 @@ CREATE TABLE `tbl_preguntas` (
   `TBL_categorias_ID_categoria` int(11) NOT NULL,
   `TBL_dificultades_ID_dificultad` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `tbl_preguntas`
+--
+
+INSERT INTO `tbl_preguntas` (`ID_pregunta`, `enunciado_pregunta`, `opcion1_pregunta`, `opcion2_pregunta`, `opcion3_pregunta`, `opcion4_pregunta`, `correcta_pregunta`, `TBL_categorias_ID_categoria`, `TBL_dificultades_ID_dificultad`) VALUES
+(1, '¿Cuál es el planeta más grande de nuestro Sistema Solar?', 'Júpiter', 'Saturno', 'Marte', 'Tierra', 'Júpiter', 1, 1),
+(2, '¿Qué gas es el más abundante en la atmósfera terrestre?', 'Oxígeno', 'Nitrógeno', 'Dióxido de Carbono', 'Argón', 'Nitrógeno', 1, 2),
+(3, '¿Quién escribió la obra \"Cien años de soledad\"?', 'Mario Vargas Llosa', 'Gabriel García Márquez', 'Pablo Neruda', 'Jorge Luis Borges', 'Gabriel García Márquez', 1, 3);
 
 -- --------------------------------------------------------
 
@@ -206,13 +240,13 @@ ALTER TABLE `tbl_tema`
 -- AUTO_INCREMENT for table `tbl_administradores`
 --
 ALTER TABLE `tbl_administradores`
-  MODIFY `ID_administrador` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID_administrador` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `tbl_categorias`
 --
 ALTER TABLE `tbl_categorias`
-  MODIFY `ID_categoria` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID_categoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `tbl_codigoacesso`
@@ -230,7 +264,7 @@ ALTER TABLE `tbl_comodines`
 -- AUTO_INCREMENT for table `tbl_dificultades`
 --
 ALTER TABLE `tbl_dificultades`
-  MODIFY `ID_dificultad` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID_dificultad` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `tbl_jugadores`
@@ -242,7 +276,7 @@ ALTER TABLE `tbl_jugadores`
 -- AUTO_INCREMENT for table `tbl_preguntas`
 --
 ALTER TABLE `tbl_preguntas`
-  MODIFY `ID_pregunta` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID_pregunta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Constraints for dumped tables
