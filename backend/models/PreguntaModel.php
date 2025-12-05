@@ -1,11 +1,12 @@
 <?php
+// backend/models/PreguntaModel.php
 require_once __DIR__ . '/pdoconexion.php'; 
 
 class PreguntaModel {
     private $mysql;
 
     public function __construct() {
-        $this->mysql = new PDOConnection(); // ← cambiado
+        $this->mysql = new PDOConnection();
     }
 
     /**
@@ -57,69 +58,6 @@ class PreguntaModel {
     }
 
     /**
-     * Valida si la respuesta es correcta
-     */
-    public function validarRespuesta($idPregunta, $respuestaUsuario) {
-        $this->mysql->conectar();
-        $conexion = $this->mysql->getConexion();
-        
-        $sql = "
-            SELECT 
-                correcta_pregunta,
-                opcion1_pregunta,
-                opcion2_pregunta,
-                opcion3_pregunta,
-                opcion4_pregunta
-            FROM tbl_preguntas
-            WHERE ID_pregunta = :id_pregunta
-            LIMIT 1
-        ";
-
-        try {
-            $stmt = $conexion->prepare($sql);
-            $stmt->bindParam(':id_pregunta', $idPregunta, PDO::PARAM_INT);
-            $stmt->execute();
-            
-            $pregunta = $stmt->fetch(PDO::FETCH_ASSOC);
-            
-            if (!$pregunta) {
-                $this->mysql->desconectar();
-                return [
-                    'es_correcta' => false,
-                    'respuesta_correcta' => null,
-                    'error' => 'Pregunta no encontrada'
-                ];
-            }
-            
-            $opciones = [
-                'A' => $pregunta['opcion1_pregunta'],
-                'B' => $pregunta['opcion2_pregunta'],
-                'C' => $pregunta['opcion3_pregunta'],
-                'D' => $pregunta['opcion4_pregunta']
-            ];
-            
-            $letraCorrecta = array_search($pregunta['correcta_pregunta'], $opciones);
-
-            $this->mysql->desconectar();
-            
-            return [
-                'es_correcta' => ($respuestaUsuario === $letraCorrecta),
-                'respuesta_correcta' => $letraCorrecta,
-                'texto_correcto' => $pregunta['correcta_pregunta']
-            ];
-            
-        } catch (PDOException $e) {
-            $this->mysql->desconectar();
-            error_log("Error al validar respuesta: " . $e->getMessage());
-            return [
-                'es_correcta' => false,
-                'respuesta_correcta' => null,
-                'error' => 'Error en la validación'
-            ];
-        }
-    }
-
-    /**
      * Cuenta las preguntas totales
      */
     public function contarPreguntas() {
@@ -142,5 +80,7 @@ class PreguntaModel {
             return 0;
         }
     }
+    
+    // Ya no necesitas validarRespuesta() aquí porque lo haces en el controlador con sesiones
 }
 ?>

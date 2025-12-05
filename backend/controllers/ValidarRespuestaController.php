@@ -1,29 +1,29 @@
 <?php
+// backend/controllers/ValidarRespuestaController.php
 session_start();
 
 // Verificar que lleguen los datos por POST
 if ($_SERVER['REQUEST_METHOD'] !== 'POST' || !isset($_POST['respuesta_elegida']) || !isset($_POST['id_pregunta'])) {
-    header('Location: PreguntaController.php');
+    header('Location: PreguntasController.php');
     exit;
 }
-
-require_once __DIR__ . '/../models/PreguntaModel.php';
 
 $respuestaElegida = $_POST['respuesta_elegida'];
 $idPregunta = (int)$_POST['id_pregunta'];
 
-// Validar usando el modelo
-$preguntaModel = new PreguntaModel();
-$resultado = $preguntaModel->validarRespuesta($idPregunta, $respuestaElegida);
+// ✅ SOLUCIÓN: Usar el mapeo guardado en sesión
+$respuestaCorrectaLetra = $_SESSION['respuesta_correcta_letra'] ?? null;
+$respuestaCorrectaTexto = $_SESSION['respuesta_correcta_texto'] ?? null;
 
-// Verificar si hubo error
-if (isset($resultado['error'])) {
-    $_SESSION['error'] = $resultado['error'];
-    header('Location: PreguntaController.php');
+// Verificar que tengamos los datos necesarios
+if (!$respuestaCorrectaLetra || !$respuestaCorrectaTexto) {
+    $_SESSION['error'] = 'Error: Datos de pregunta no encontrados en sesión';
+    header('Location: PreguntasController.php');
     exit;
 }
 
-$esCorrecta = $resultado['es_correcta'];
+// Validar la respuesta comparando con lo guardado en sesión
+$esCorrecta = ($respuestaElegida === $respuestaCorrectaLetra);
 
 // Incrementar contador de preguntas respondidas
 if (!isset($_SESSION['preguntas_correctas'])) {
@@ -39,7 +39,6 @@ if ($esCorrecta) {
 
 // Guardar información para mostrar en la vista de resultado
 $_SESSION['respuesta_elegida'] = $respuestaElegida;
-$_SESSION['respuesta_correcta_letra'] = $resultado['respuesta_correcta'];
 $_SESSION['enunciado_actual'] = $_SESSION['enunciado_pregunta'] ?? '';
 
 // Redirigir a la vista de resultado
