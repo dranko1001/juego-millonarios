@@ -16,7 +16,7 @@ $nombre_admin = $_SESSION["admin"];
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menú Administrador</title>
+    <title>Menú de configuraciones del Administrador</title>
     <link rel="stylesheet" href="../css/menu.css">
 </head>
 
@@ -28,7 +28,7 @@ $nombre_admin = $_SESSION["admin"];
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menú Administrador</title>
+    <title>Menú de configuraciones</title>
     <link rel="stylesheet" href="../css/menu.css">
 </head>
 
@@ -36,17 +36,16 @@ $nombre_admin = $_SESSION["admin"];
    
         <!-- Mostrar nombre del administrador -->
         <div style="text-align: right; padding: 10px;">
-            <span style="color: #666;">Bienvenido, <strong><?php echo htmlspecialchars($nombre_admin); ?></strong></span>
+            <span style="color: #666;">¿que deseas editar?, <strong><?php echo htmlspecialchars($nombre_admin); ?></strong></span>
         </div>
         
-        <h1 class="title">Menú de opciones</h1>
+        <h1 class="title">Configuraciones</h1>
         <br>
         <div class="buttons-container">
-            <a href="../../backend/controllers/PreguntasController.php" class="btn btn-primary">Iniciar juego </a>
-            <button class="btn btn-primary">Reglas</button>
-            <a href="menuOpciones.php" class="btn btn-primary">Configuracion</a>
-            <a href="ranking.php" class="btn btn-primary">Puntajes</a>
-            <a href="../../backend/controllers/logout.php" class="btn btn-secondary btn-full">Cerrar sesión</a>
+            <a href="../../backend/controllers/GenerarCodigoController.php?accion=listar" class="btn btn-yellow btn-full">cambiar codigo</a>
+            <a href="toca meter enlace aqui" class="btn btn-yellow btn-full">editar preguntas</a>
+            <a href="toca meter enlace aqui" class="btn btn-yellow btn-full">+ agregar cuenta</a>
+            <a href="menu.php" class="btn btn-gris btn-full">volver al menu</a>
         </div>
    
 </body>
