@@ -9,13 +9,13 @@
 
 <body>
 
-    <a href="login_administrador.php" class="btn-aprendiz">Administrador</a>
+    <a href="login_administrador.php" class="btn-aprendiz">Admin</a>
     
     <form method="POST" action="../../backend/controllers/validar_aprendiz.php">
-        <h2>Iniciar Sesión Aprendiz</h2>
+        <h2>Ingrese los datos</h2>
 
         <input type="text" name="ficha" placeholder="Ficha" required>
-        <input type="text" name="usuario_jugador" placeholder="Numero Identificación Del Aprendiz" required>
+        <input type="text" name="usuario_jugador" placeholder="ingrese su nombre" required>
 
         <button type="submit">Guardar</button>
     </form>

@@ -1,0 +1,481 @@
+/* --- Reseteo Global --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* --- Estilos Generales --- */
+body {
+    font-family: 'Arial', sans-serif;
+    /* Fondo verde claro / principal */
+    background: #39B54A;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; 
+    padding: 30px 0;
+    color: #1a1a1a; /* Color de texto base oscuro */
+}
+
+/* --- Contenedor Principal (Caja de la Página) --- */
+.container-full {
+    width: 90%; 
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 30px;
+    /* Fondo blanco o muy claro */
+    background: rgba(255, 255, 255, 0.95); 
+    border-radius: 15px;
+    /* Sombra con tono verde para mayor cohesión */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2), 0 0 0 5px rgba(57, 181, 74, 0.1); 
+}
+
+.title-page {
+    text-align: center;
+    /* Color principal verde */
+    color: #39B54A; 
+    margin-bottom: 30px;
+    font-size: 2.5em;
+    font-weight: bold;
+    /* Borde verde */
+    border-bottom: 3px solid #39B54A; 
+    padding-bottom: 15px;
+}
+
+/* --- Estructura de Dos Columnas (Menú y Contenido) --- */
+.main-content {
+    display: flex;
+    gap: 30px; 
+    /* Clave para igualar la altura de sidebar-menu y content-area */
+    align-items: stretch; 
+}
+
+/* --- 2. Menú Lateral (Sidebar) --- */
+.sidebar-menu {
+    flex-basis: 250px; 
+    flex-shrink: 0; 
+    background-color: #f0fff0; 
+    padding: 20px 0;
+    border-radius: 10px;
+    border: 1px solid #c8e6c9;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+
+    /* --- FLEXBOX VERTICAL PARA EMPUJAR EL BOTÓN ABAJO --- */
+    display: flex; 
+    flex-direction: column; 
+    height: 100%; /* Asegura que tome toda la altura estirada */
+}
+
+/* --- 3. Lista de Opciones (Las opciones que deben estar arriba) --- */
+.menu-list {
+    list-style: none; 
+    padding: 0;
+    margin: 0;
+    /* Ocupa todo el espacio vertical disponible, empujando el back-link */
+    flex-grow: 1; 
+}
+
+.menu-list li {
+    margin-bottom: 0;
+}
+
+.menu-item {
+    display: block;
+    padding: 12px 20px;
+    text-decoration: none;
+    color: #1a1a1a;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+/* Efecto hover general del menú */
+.menu-item:hover {
+    background-color: #e6f0ff; 
+    color: #00A14B;
+    transform: translateX(5px);
+}
+
+/* Estilos de hover específicos (Verdes) */
+.menu-create:hover { 
+    background-color: #a3d9a3; /* Verde de creación */
+    color: white;
+} 
+.menu-edit:hover { 
+    background-color: #ffe082; /* Amarillo/Naranja sutil para edición */
+    color: #1a1a1a;
+} 
+.menu-delete:hover { 
+    background-color: #ffcdd2; /* Rojo suave para eliminar */
+    color: #c62828;
+}
+
+/* --- 4. Enlace de Volver (El botón de abajo) --- */
+.back-link {
+    display: block;
+    /* Se quita el margin-top: auto; de la regla anterior si ya se definió abajo, 
+       pero se usa 'auto' para la separación: */
+    margin-top: auto; 
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-bottom: 10px; 
+    
+    text-align: center;
+    padding: 10px;
+    background-color: #39B54A;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.2s ease;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+}
+
+.back-link:hover {
+    background-color: #2d8f3b; /* Tono de hover oscuro */
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* --- 5. Área de Contenido Principal --- */
+.content-area {
+    flex-grow: 1; 
+    padding: 30px;
+    border: 2px dashed #a3d9a3; 
+    min-height: 450px;
+    border-radius: 10px;
+    background-color: #ffffff;
+}
+
+
+/* --- Responsividad (Para que se apile en móviles) --- */
+@media (max-width: 800px) {
+    body {
+        padding: 15px 0;
+    }
+    
+    .main-content {
+        /* Apila el menú sobre el contenido */
+        flex-direction: column; 
+    }
+    
+    .sidebar-menu {
+        flex-basis: auto; 
+        width: 100%;
+        padding: 15px;
+        margin-bottom: 20px;
+        /* IMPORTANTE: Deshacer el flex vertical en móvil para que funcione la lista horizontal */
+        flex-direction: row; 
+        height: auto; 
+    }
+    
+    .menu-title {
+        /* Oculta el título "Opciones" en móvil si está definido */
+        display: none; 
+    }
+    
+    .menu-list {
+        /* Permite que el menú sea una lista horizontal en pantallas pequeñas */
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
+        border-bottom: 1px solid #ddd;
+        padding-bottom: 10px;
+        flex-grow: 0; /* Deshacer el grow en móvil */
+        width: 80%;
+    }
+    
+    .menu-list li {
+        width: auto; /* Ajuste automático del ancho */
+        flex-basis: 30%;
+        text-align: center;
+    }
+
+    .menu-item {
+        padding: 10px 5px;
+        font-size: 0.9em;
+    }
+
+    .back-link {
+        /* Mueve el botón de volver al final del flex-row y lo separa */
+        margin: 0;
+        margin-left: auto; /* Empuja el botón al final derecho */
+        align-self: center;
+        width: auto;
+        padding: 8px 15px;
+    }
+    
+    .container-full {
+        padding: 15px;
+        width: 100%;
+    }
+    
+    .content-area {
+        min-height: 200px;
+        padding: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .menu-list {
+        display: block; /* Vuelve a apilar las opciones verticalmente */
+        width: 100%;
+        margin-bottom: 10px;
+        padding-bottom: 0;
+        border-bottom: none;
+    }
+    
+    .menu-list li {
+        width: 100%;
+        margin-bottom: 5px;
+    }
+
+    .sidebar-menu {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .back-link {
+        margin: 0;
+        margin-top: 10px;
+        margin-left: 0;
+        width: 100%;
+    }
+}
+
+/* --- Estilos del Formulario --- */
+.form-title {
+    color: #00A14B;
+    font-size: 1.8em;
+    margin-bottom: 25px;
+    border-bottom: 1px solid #c8e6c9;
+    padding-bottom: 10px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: #39B54A;
+}
+
+/* Estilos para campos de texto y select */
+.form-group input[type="text"],
+.form-group textarea,
+.form-group select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #c8e6c9;
+    border-radius: 5px;
+    font-size: 1em;
+    transition: border-color 0.3s;
+}
+/* --- Estilo para la Alineación del Select y el Botón --- */
+.select-with-button {
+    /* Contenedor que alinea horizontalmente */
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.select-with-button select {
+    /* El select ocupa la mayor parte del espacio */
+    flex-grow: 1;
+    width: auto; /* Anula el 100% que puede venir de .form-group input/select */
+}
+
+.add-category-btn {
+    padding: 10px 15px;
+    font-size: 0.9em;
+    background-color: #00A14B;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    white-space: nowrap; /* Evita que el texto se rompa */
+    line-height: normal; /* Asegura que el texto esté centrado verticalmente */
+}
+
+.add-category-btn:hover {
+    background-color: #2d8f3b;
+}
+
+/* --- (El resto del CSS del Modal y el formulario) --- */
+
+.form-group input[type="text"]:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    border-color: #39B54A;
+    outline: none;
+    box-shadow: 0 0 5px rgba(57, 181, 74, 0.5);
+}
+
+.form-group textarea {
+    resize: vertical;
+}
+
+.form-group.half-width {
+    max-width: 50%;
+}
+
+.form-divider {
+    border: 0;
+    height: 1px;
+    background-color: #c8e6c9;
+    margin: 30px 0;
+}
+
+/* --- Estilos para Opciones de Respuesta --- */
+.options-title {
+    color: #00A14B;
+    font-size: 1.5em;
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.options-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.option-group {
+    background-color: #f8fff8;
+    padding: 15px;
+    border: 1px solid #c8e6c9;
+    border-radius: 8px;
+    text-align: left;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.option-group input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+}
+
+.option-group input[type="radio"] {
+    margin-right: 10px;
+    accent-color: #39B54A; /* Colorea el radio button */
+    transform: scale(1.2);
+}
+
+.radio-label {
+    font-weight: bold;
+    color: #1a1a1a;
+}
+
+/* Estilo para el botón de envío */
+.submit-btn {
+    width: 50%;
+    padding: 15px;
+    margin-top: 30px;
+    font-size: 1.2em;
+    font-weight: bold;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: #39B54A;
+    color: white;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.submit-btn:hover {
+    background: #2d8f3b;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(57, 181, 74, 0.4);
+}
+
+/* --- Estilos del Modal (Estructura Base) --- */
+.modal {
+    display: none; /* Oculto por defecto */
+    position: fixed;
+    z-index: 100; 
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6); 
+    overflow: auto;
+    backdrop-filter: blur(3px);
+}
+
+.modal-content {
+    background-color: #ffffff;
+    margin: 15% auto;
+    padding: 30px;
+    border: 1px solid #888;
+    width: 90%;
+    max-width: 450px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+    position: relative;
+    animation-name: animatetop;
+    animation-duration: 0.4s;
+}
+
+@keyframes animatetop {
+    from {top: -300px; opacity: 0} 
+    to {top: 0; opacity: 1}
+}
+
+.modal-title {
+    color: #39B54A;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #c8e6c9;
+    padding-bottom: 10px;
+}
+
+.close-btn {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    position: absolute;
+    top: 10px;
+    right: 15px;
+}
+
+.close-btn:hover,
+.close-btn:focus {
+    color: #c62828;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal-submit-btn {
+    width: 100%;
+    padding: 12px;
+    margin-top: 20px;
+    font-size: 1em;
+    background: #39B54A;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.modal-submit-btn:hover {
+    background: #2d8f3b;
+}
+
+/* También asegura que los estilos para la alineación del botón existan */
+.select-with-button {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+.select-with-button select {
+    flex-grow: 1;
+    width: auto;
+}

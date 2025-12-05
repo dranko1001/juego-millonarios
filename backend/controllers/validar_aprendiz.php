@@ -1,37 +1,58 @@
 <?php
+// backend/controllers/validar_aprendiz.php
 require_once "../models/pdoconexion.php"; 
 session_start();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-    $ficha = $_POST["ficha"];
-    $usuario = $_POST["usuario_jugador"]; 
+    $ficha = trim($_POST["ficha"]);
+    $usuario = trim($_POST["usuario_jugador"]); 
+
+    // Validar campos vacíos
+    if (empty($ficha) || empty($usuario)) {
+        header("Location: ../../frontend/views/login_aprendiz.php?error=campos_vacios");
+        exit();
+    }
 
     $db = new PDOConnection();
     $conn = $db->conectar(); 
 
-    $sql = "SELECT * FROM tbl_jugadores
-            WHERE ficha_jugador = :ficha
-            AND usuario_jugador = :usuario";
+    // Primero verificar si el jugador existe
+    $sqlVerificar = "SELECT * FROM tbl_jugadores
+                     WHERE ficha_jugador = :ficha
+                     AND usuario_jugador = :usuario";
 
     try {
-        $stmt = $conn->prepare($sql);
+        $stmtVerificar = $conn->prepare($sqlVerificar);
+        $stmtVerificar->execute([':ficha' => $ficha, ':usuario' => $usuario]);
 
-        $stmt->execute([':ficha' => $ficha, ':usuario' => $usuario]);
-
-        if ($stmt->rowCount() > 0) {
-
+        if ($stmtVerificar->rowCount() > 0) {
+            // Jugador existe
+            $jugador = $stmtVerificar->fetch(PDO::FETCH_ASSOC);
             $_SESSION["aprendiz"] = $usuario;
-            header("Location: ../../frontend/views/prueba.html");
-            exit();
-
+            $_SESSION["ficha_aprendiz"] = $ficha;
+            $_SESSION["id_jugador"] = $jugador['ID_jugador'];
+            
         } else {
-            header("Location: ../views/login_aprendiz.php?error=invalido");
-            exit();
+            // Jugador no existe, crear uno nuevo
+            $sqlInsertar = "INSERT INTO tbl_jugadores (ficha_jugador, usuario_jugador, puntaje_jugador) 
+                           VALUES (:ficha, :usuario, 0)";
+            
+            $stmtInsertar = $conn->prepare($sqlInsertar);
+            $stmtInsertar->execute([':ficha' => $ficha, ':usuario' => $usuario]);
+            
+            $_SESSION["aprendiz"] = $usuario;
+            $_SESSION["ficha_aprendiz"] = $ficha;
+            $_SESSION["id_jugador"] = $conn->lastInsertId();
         }
+        
+        // Redirigir a validar código
+        header("Location: ../../frontend/views/validar_codigo.php");
+        exit();
 
     } catch (PDOException $e) {
-        header("Location: ../views/login_aprendiz.php?error=db_error");
+        error_log("Error en validar_aprendiz: " . $e->getMessage());
+        header("Location: ../../frontend/views/login_aprendiz.php?error=db_error");
         exit();
     }
 }
