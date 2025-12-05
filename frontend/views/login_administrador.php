@@ -11,8 +11,7 @@
     <a href="login_aprendiz.php" class="btn-aprendiz">Aprendiz</a>
 
     <form method="POST" action="../../backend/controllers/validar_administrador.php">
-        <h2>Iniciar Sesión Administrador</h2>
-
+        
         <input type="text" name="usuario" placeholder="Nombre de usuario" required>
         <input type="password" name="password" placeholder="Contraseña" required>
 
