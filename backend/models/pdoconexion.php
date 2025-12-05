@@ -19,7 +19,7 @@ class PDOConnection {
                 [
                     PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
                     PDO::ATTR_EMULATE_PREPARES => false,
-                    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC 
+                    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
                 ]
             );
             return $this->conexion;
@@ -32,7 +32,7 @@ class PDOConnection {
     // Obtener conexión existente o crear una nueva
     public function getConexion() {
         if (!$this->conexion) {
-            $this->conectar(); 
+            $this->conectar();
         }
         return $this->conexion;
     }
