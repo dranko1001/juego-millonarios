@@ -43,7 +43,6 @@ class PreguntaModel {
                     'C' => $pregunta['opcion3_pregunta'],
                     'D' => $pregunta['opcion4_pregunta']
                 ];
-
                 $pregunta['opciones'] = $opciones;
             }
             
