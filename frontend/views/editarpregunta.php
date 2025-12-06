@@ -12,7 +12,6 @@ require_once __DIR__ . "/../../backend/models/pdoconexion.php";
 $db = new PDOConnection();
 $pdo = $db->getConexion();
 
-// Buscar preguntas si se envía el filtro
 $search = trim($_GET['buscar'] ?? '');
 
 $sql = "SELECT p.ID_pregunta, p.enunciado_pregunta, p.opcion1_pregunta, p.opcion2_pregunta, 
@@ -98,7 +97,7 @@ $categorias = $pdo->query($sqlCat)->fetchAll();
                                 <td><?= htmlspecialchars($p['nombre_categoria']) ?></td>
                                 <td><?= htmlspecialchars($p['nombre_dificultad']) ?></td>
                                 <td>
-                                    
+
                                     <button class="btn btn-warning btn-sm" 
                                             data-bs-toggle="modal" 
                                             data-bs-target="#editarModal"

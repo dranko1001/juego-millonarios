@@ -1,5 +1,4 @@
 <?php
-// backend/controllers/validar_administrador.php
 require_once __DIR__ . "/../models/pdoconexion.php"; 
 session_start();
 
@@ -17,45 +16,51 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $db = new PDOConnection();
     $conn = $db->conectar(); 
 
+    // BUSCAR SOLO POR USUARIO
     $sql = "SELECT * FROM tbl_administradores 
-            WHERE usuario_administrador = :usuario 
-            AND password_administrador = :password";
+            WHERE usuario_administrador = :usuario
+            LIMIT 1";
 
     try {
         $stmt = $conn->prepare($sql);
         $stmt->bindParam(':usuario', $usuario, PDO::PARAM_STR);
-        $stmt->bindParam(':password', $password, PDO::PARAM_STR);
-
         $stmt->execute();
 
-        if ($stmt->rowCount() > 0) { 
+        if ($stmt->rowCount() == 1) { 
             
-            // Obtener datos del administrador
             $admin = $stmt->fetch(PDO::FETCH_ASSOC);
 
-            // Guardar en sesión
-            $_SESSION["admin"] = $usuario;
-            $_SESSION["admin_id"] = $admin['ID_administrador'];
-            $_SESSION["admin_logueado"] = true;
-            
-            // Redirigir al menú PHP (no HTML)
-            header("Location: ../../frontend/views/menu.php");
-            exit();
+            //este es para que la contraseña que esta encriptada se pueda validar
+            if (password_verify($password, $admin["password_administrador"])) {
+
+                // Guardar en sesión
+                $_SESSION["admin"] = $admin['usuario_administrador'];
+                $_SESSION["admin_id"] = $admin['ID_administrador'];
+                $_SESSION["admin_logueado"] = true;
+
+                // Página a donde va el admin
+                header("Location: ../../frontend/views/menu.php");
+                exit();
+
+            } else {
+                // Contraseña incorrecta
+                header("Location: ../../frontend/views/login_administrador.php?error=credenciales");
+                exit();
+            }
 
         } else {
-            
+            // Usuario no encontrado
             header("Location: ../../frontend/views/login_administrador.php?error=credenciales");
             exit();
         }
         
     } catch (PDOException $e) {
-        
         error_log("Error de login: " . $e->getMessage());
         header("Location: ../../frontend/views/login_administrador.php?error=db_error");
         exit();
     }
+
 } else {
-    // Si acceden directamente sin POST
     header("Location: ../../frontend/views/login_administrador.php");
     exit();
 }

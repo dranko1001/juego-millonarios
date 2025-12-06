@@ -56,7 +56,7 @@ if (isset($_GET['error'])) {
 
         <?php if (!empty($error_msg)): ?>
             <div class="error-message">
-                ⚠️ <?php echo htmlspecialchars($error_msg); ?>
+                <?php echo htmlspecialchars($error_msg); ?>
             </div>
         <?php endif; ?>
 
