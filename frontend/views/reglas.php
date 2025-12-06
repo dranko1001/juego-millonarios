@@ -1,3 +1,16 @@
+<?php
+session_start();
+
+if (!isset($_SESSION["admin"]) || empty($_SESSION["admin"])) {
+    header("Location: login_administrador.php");
+    exit();
+}
+
+$nombre_admin = $_SESSION["admin"];
+
+require_once __DIR__ . "/../../backend/models/pdoconexion.php";
+
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -37,7 +50,7 @@
             </ul>
         </section>
 
-                    <a href="./menu.html" class="btn btn-secondary">volver</a>
+                    <a href="./menu.php" class="btn btn-secondary">volver</a>
                     <button class="btn btn-primary">Inicio de juego</button>
 
 

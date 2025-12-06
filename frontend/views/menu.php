@@ -43,7 +43,7 @@ $nombre_admin = $_SESSION["admin"];
         <br>
         <div class="buttons-container">
             <a href="../../backend/controllers/PreguntasController.php" class="btn btn-primary">Iniciar juego </a>
-            <a href="reglas.html" class="btn btn-primary">Reglas</a>
+            <a href="reglas.php" class="btn btn-primary">Reglas</a>
             <a href="menuOpciones.php" class="btn btn-primary">Configuracion</a>
             <a href="ranking.php" class="btn btn-primary">Puntajes</a>
             <a href="../../backend/controllers/logout.php" class="btn btn-secondary btn-full">Cerrar sesión</a>

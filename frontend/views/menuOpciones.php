@@ -43,7 +43,7 @@ $nombre_admin = $_SESSION["admin"];
         <br>
         <div class="buttons-container">
             <a href="../../backend/controllers/GenerarCodigoController.php?accion=listar" class="btn btn-yellow btn-full">cambiar codigo</a>
-            <a href="toca meter enlace aqui" class="btn btn-yellow btn-full">editar preguntas</a>
+            <a href="./crearpregunta.php" class="btn btn-yellow btn-full">editar preguntas</a>
             <a href="toca meter enlace aqui" class="btn btn-yellow btn-full">+ agregar cuenta</a>
             <a href="menu.php" class="btn btn-gris btn-full">volver al menu</a>
         </div>

@@ -7,7 +7,6 @@ $pdo = $db->getConexion();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-    // Recoger datos del formulario
     $enunciado       = trim($_POST['enunciado_pregunta'] ?? '');
     $opcion1         = trim($_POST['opcion1_pregunta'] ?? '');
     $opcion2         = trim($_POST['opcion2_pregunta'] ?? '');
@@ -17,7 +16,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $dificultad_id   = intval($_POST['ID_dificultad'] ?? 0);
     $correcta_index  = $_POST['correcta_pregunta'] ?? '';
 
-    // Mapear el índice al texto correspondiente
     $correcta_text = '';
     switch ($correcta_index) {
         case '1':

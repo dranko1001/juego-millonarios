@@ -1,4 +1,13 @@
 <?php
+session_start();
+
+if (!isset($_SESSION["admin"]) || empty($_SESSION["admin"])) {
+    header("Location: login_administrador.php");
+    exit();
+}
+
+$nombre_admin = $_SESSION["admin"];
+
 require_once __DIR__ . "/../../backend/models/pdoconexion.php";
 
 $db = new PDOConnection();
@@ -26,10 +35,10 @@ $categorias = $stmt->fetchAll();
         <nav class="sidebar-menu">
             <ul class="menu-list">
                 <li><a href="./crearpregunta.php" class="menu-item menu-create">Crear Pregunta</a></li>
-                <li><a href="./editar_pregunta.html" class="menu-item menu-edit">Editar Pregunta</a></li>
-                <li><a href="./eliminar_pregunta.html" class="menu-item menu-delete">Eliminar Pregunta</a></li>
+                <li><a href="./editarpregunta.php" class="menu-item menu-edit">Editar Pregunta</a></li>
+                <li><a href="./eliminarpregunta.php" class="menu-item menu-delete">Eliminar Pregunta</a></li>
             </ul>
-            <a href="./configuracion.html" class="btn back-link">Volver</a>
+            <a href="./menuOpciones.php" class="btn back-link">Volver</a>
         </nav>
 
         <div class="content-area">
