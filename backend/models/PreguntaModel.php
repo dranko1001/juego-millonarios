@@ -11,8 +11,9 @@ class PreguntaModel {
 
     /**
      * Obtiene una pregunta aleatoria (sin filtro de categoría)
+     * @param array $preguntasExcluidas - IDs de preguntas a excluir
      */
-    public function obtenerPreguntaAleatoria() {
+    public function obtenerPreguntaAleatoria($preguntasExcluidas = []) {
         $this->mysql->conectar();
         $conexion = $this->mysql->getConexion();
         
@@ -28,13 +29,24 @@ class PreguntaModel {
                 TBL_categorias_ID_categoria,
                 TBL_dificultades_ID_dificultad
             FROM tbl_preguntas
-            ORDER BY RAND()
-            LIMIT 1
         ";
+        
+        // Excluir preguntas ya respondidas
+        if (!empty($preguntasExcluidas)) {
+            $placeholders = str_repeat('?,', count($preguntasExcluidas) - 1) . '?';
+            $sql .= " WHERE ID_pregunta NOT IN ($placeholders)";
+        }
+        
+        $sql .= " ORDER BY RAND() LIMIT 1";
 
         try {
             $stmt = $conexion->prepare($sql);
-            $stmt->execute();
+            
+            if (!empty($preguntasExcluidas)) {
+                $stmt->execute($preguntasExcluidas);
+            } else {
+                $stmt->execute();
+            }
             
             $pregunta = $stmt->fetch(PDO::FETCH_ASSOC);
             
@@ -49,9 +61,11 @@ class PreguntaModel {
     }
 
     /**
-     * NUEVO: Obtiene una pregunta aleatoria filtrada por categoría
+     * Obtiene una pregunta aleatoria filtrada por categoría
+     * @param int $id_categoria - ID de la categoría
+     * @param array $preguntasExcluidas - IDs de preguntas a excluir
      */
-    public function obtenerPreguntaPorCategoria($id_categoria) {
+    public function obtenerPreguntaPorCategoria($id_categoria, $preguntasExcluidas = []) {
         $this->mysql->conectar();
         $conexion = $this->mysql->getConexion();
         
@@ -67,16 +81,27 @@ class PreguntaModel {
                 TBL_categorias_ID_categoria,
                 TBL_dificultades_ID_dificultad
             FROM tbl_preguntas
-            WHERE TBL_categorias_ID_categoria = :id_categoria
-            ORDER BY RAND()
-            LIMIT 1
+            WHERE TBL_categorias_ID_categoria = ?
         ";
+        
+        // Excluir preguntas ya respondidas
+        if (!empty($preguntasExcluidas)) {
+            $placeholders = str_repeat('?,', count($preguntasExcluidas) - 1) . '?';
+            $sql .= " AND ID_pregunta NOT IN ($placeholders)";
+        }
+        
+        $sql .= " ORDER BY RAND() LIMIT 1";
 
         try {
             $stmt = $conexion->prepare($sql);
-            $stmt->bindParam(':id_categoria', $id_categoria, PDO::PARAM_INT);
-            $stmt->execute();
             
+            // Preparar parámetros: primero el ID de categoría, luego los excluidos
+            $params = [$id_categoria];
+            if (!empty($preguntasExcluidas)) {
+                $params = array_merge($params, $preguntasExcluidas);
+            }
+            
+            $stmt->execute($params);
             $pregunta = $stmt->fetch(PDO::FETCH_ASSOC);
             
             $this->mysql->desconectar();
@@ -90,7 +115,7 @@ class PreguntaModel {
     }
 
     /**
-     * NUEVO: Cuenta las preguntas disponibles por categoría
+     * Cuenta las preguntas disponibles por categoría
      */
     public function contarPreguntasPorCategoria($id_categoria) {
         $this->mysql->conectar();

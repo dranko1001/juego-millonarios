@@ -12,11 +12,7 @@ unset($_SESSION['respuesta_elegida']);
 unset($_SESSION['preguntas_correctas']);
 unset($_SESSION['enunciado_actual']);
 unset($_SESSION['opciones_mostradas']);
-
-// IMPORTANTE: NO limpiar la categoría seleccionada para mantenerla
-// Si quieres que vuelva a seleccionar categoría, descomenta estas líneas:
-// unset($_SESSION['categoria_seleccionada']);
-// unset($_SESSION['categoria_nombre']);
+unset($_SESSION['preguntas_respondidas']); // ← NUEVO: Limpiar historial de preguntas
 
 // Verificar si quiere cambiar de categoría
 if (isset($_GET['cambiar_categoria']) && $_GET['cambiar_categoria'] == '1') {
@@ -27,7 +23,7 @@ if (isset($_GET['cambiar_categoria']) && $_GET['cambiar_categoria'] == '1') {
     exit;
 }
 
-// Redirigir al inicio del juego (mantiene la categoría actual)
+// Redirigir al inicio del juego (mantiene la categoría actual pero reinicia preguntas)
 header('Location: ../../backend/controllers/PreguntasController.php');
 exit;
 ?>
