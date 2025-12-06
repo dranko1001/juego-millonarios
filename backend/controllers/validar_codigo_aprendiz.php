@@ -27,8 +27,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION["codigo_validado"] = true;
         $_SESSION["codigo_usado"] = $codigo;
         
-        // Redirigir al juego
-        header("Location: PreguntasController.php");
+        // Redirigir a la selección de categoría (en lugar del juego directo)
+        header("Location: ../../frontend/views/seleccionar_categoria.php");
         exit();
     } else {
         // Código inválido
