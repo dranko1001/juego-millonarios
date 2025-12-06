@@ -9,6 +9,8 @@ if (!isset($_SESSION['ultima_respuesta'])) {
 
 $esCorrecta = ($_SESSION['ultima_respuesta'] === 'correcta');
 $preguntasCorrectas = $_SESSION['preguntas_correctas'] ?? 0;
+$puntajePesos = $_SESSION['puntaje_pesos'] ?? 0;
+$ultimoPuntajeGanado = $_SESSION['ultimo_puntaje_ganado'] ?? 0;
 $respuestaElegida = $_SESSION['respuesta_elegida'] ?? '';
 $respuestaCorrectaLetra = $_SESSION['respuesta_correcta_letra'] ?? '';
 $respuestaCorrectaTexto = $_SESSION['respuesta_correcta_texto'] ?? '';
@@ -49,8 +51,16 @@ $textoRespuestaElegida = $opcionesMostradas[$respuestaElegida] ?? '';
             <p>📚 Categoría: <strong><?php echo htmlspecialchars($categoriaNombre); ?></strong></p>
         </div>
         
+        <div class="puntaje-ganado">
+            💰 ¡Ganaste: <strong>$<?php echo number_format($ultimoPuntajeGanado, 0, ',', '.'); ?> pesos!</strong>
+        </div>
+        
         <div class="puntaje">
-            Puntaje: <strong><?php echo $preguntasCorrectas; ?></strong> pregunta<?php echo $preguntasCorrectas != 1 ? 's' : ''; ?> correcta<?php echo $preguntasCorrectas != 1 ? 's' : ''; ?>
+            💵 Puntaje Total: <strong>$<?php echo number_format($puntajePesos, 0, ',', '.'); ?> pesos</strong>
+        </div>
+        
+        <div class="preguntas-correctas">
+            ✅ Preguntas correctas: <strong><?php echo $preguntasCorrectas; ?></strong>
         </div>
         
         <div class="botones-container">
@@ -87,7 +97,11 @@ $textoRespuestaElegida = $opcionesMostradas[$respuestaElegida] ?? '';
         </div>
         
         <div class="puntaje">
-            Puntaje final: <strong><?php echo $preguntasCorrectas; ?> pregunta<?php echo $preguntasCorrectas != 1 ? 's' : ''; ?> correcta<?php echo $preguntasCorrectas != 1 ? 's' : ''; ?></strong>
+            💵 Puntaje Final: <strong>$<?php echo number_format($puntajePesos, 0, ',', '.'); ?> pesos</strong>
+        </div>
+        
+        <div class="preguntas-correctas">
+            ✅ Preguntas correctas: <strong><?php echo $preguntasCorrectas; ?></strong>
         </div>
         
         <h3>¡Juego Terminado!</h3>
@@ -180,6 +194,47 @@ $textoRespuestaElegida = $opcionesMostradas[$respuestaElegida] ?? '';
         color: #333;
     }
     
+    .puntaje-ganado {
+        background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+        color: #1a1a1a;
+        padding: 15px 20px;
+        border-radius: 12px;
+        margin: 15px 0;
+        text-align: center;
+        font-size: 1.3em;
+        font-weight: 700;
+        box-shadow: 0 5px 20px rgba(255, 165, 0, 0.4);
+        animation: pulse 2s ease-in-out;
+    }
+    
+    .puntaje {
+        background: rgba(57, 181, 74, 0.2);
+        color: #1a1a1a;
+        padding: 12px 20px;
+        border-radius: 10px;
+        margin: 15px 0;
+        text-align: center;
+        font-size: 1.2em;
+        font-weight: 600;
+        border: 2px solid #39B54A;
+    }
+    
+    .preguntas-correctas {
+        background: rgba(57, 181, 74, 0.1);
+        color: #1a1a1a;
+        padding: 10px 20px;
+        border-radius: 10px;
+        margin: 10px 0;
+        text-align: center;
+        font-size: 1em;
+        border: 1px solid #39B54A;
+    }
+    
+    @keyframes pulse {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.05); }
+    }
+    
     .botones-container {
         display: flex;
         flex-direction: column;
@@ -263,6 +318,14 @@ $textoRespuestaElegida = $opcionesMostradas[$respuestaElegida] ?? '';
         
         .emoji {
             font-size: 4em;
+        }
+        
+        .puntaje-ganado {
+            font-size: 1.1em;
+        }
+        
+        .puntaje {
+            font-size: 1em;
         }
     }
 </style>

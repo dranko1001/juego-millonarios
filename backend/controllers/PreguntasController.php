@@ -70,6 +70,7 @@ if ($datosPregunta) {
     $_SESSION['respuesta_correcta_texto'] = $pregunta['respuesta_correcta_texto'];
     $_SESSION['enunciado_pregunta'] = $pregunta['enunciado'];
     $_SESSION['opciones_mostradas'] = $opciones_a_mostrar;
+    $_SESSION['dificultad_pregunta'] = $datosPregunta['TBL_dificultades_ID_dificultad']; // Guardar dificultad para calcular puntaje
     
     // Agregar esta pregunta a las ya respondidas
     $_SESSION['preguntas_respondidas'][] = $datosPregunta['ID_pregunta'];

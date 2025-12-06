@@ -25,7 +25,12 @@ if (!$respuestaCorrectaLetra || !$respuestaCorrectaTexto) {
 // Validar la respuesta comparando con lo guardado en sesión
 $esCorrecta = ($respuestaElegida === $respuestaCorrectaLetra);
 
-// Incrementar contador de preguntas respondidas
+// Inicializar puntaje en pesos si no existe
+if (!isset($_SESSION['puntaje_pesos'])) {
+    $_SESSION['puntaje_pesos'] = 0;
+}
+
+// Inicializar contador de preguntas correctas si no existe
 if (!isset($_SESSION['preguntas_correctas'])) {
     $_SESSION['preguntas_correctas'] = 0;
 }
@@ -33,8 +38,30 @@ if (!isset($_SESSION['preguntas_correctas'])) {
 if ($esCorrecta) {
     $_SESSION['preguntas_correctas']++;
     $_SESSION['ultima_respuesta'] = 'correcta';
+    
+    // Calcular puntaje en pesos según la dificultad
+    $dificultadId = $_SESSION['dificultad_pregunta'] ?? 1; // Default: Fácil
+    $puntajeGanado = 0;
+    
+    switch ($dificultadId) {
+        case 1: // Fácil
+            $puntajeGanado = 100000;
+            break;
+        case 2: // Medio
+            $puntajeGanado = 150000;
+            break;
+        case 3: // Difícil
+            $puntajeGanado = 175000;
+            break;
+        default:
+            $puntajeGanado = 100000;
+    }
+    
+    $_SESSION['puntaje_pesos'] += $puntajeGanado;
+    $_SESSION['ultimo_puntaje_ganado'] = $puntajeGanado; // Para mostrar en resultado
 } else {
     $_SESSION['ultima_respuesta'] = 'incorrecta';
+    $_SESSION['ultimo_puntaje_ganado'] = 0;
 }
 
 // Guardar información para mostrar en la vista de resultado
