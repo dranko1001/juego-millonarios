@@ -1,5 +1,19 @@
 <?php
 session_start();
+// ✅ DEBUG: Mostrar info de sesión actual
+$DEBUG_INFO = [
+    'id_jugador' => $_SESSION['id_jugador'] ?? 'NO EXISTE',
+    'puntaje_pesos' => $_SESSION['puntaje_pesos'] ?? 'NO EXISTE',
+    'preguntas_correctas' => $_SESSION['preguntas_correctas'] ?? 'NO EXISTE',
+    'ultima_respuesta' => $_SESSION['ultima_respuesta'] ?? 'NO EXISTE'
+];
+
+// Verificar que hay información de respuesta
+if (!isset($_SESSION['ultima_respuesta'])) {
+    header('Location: ../../backend/controllers/PreguntasController.php');
+    exit;
+}
+
 
 // Verificar que hay información de respuesta
 if (!isset($_SESSION['ultima_respuesta'])) {
@@ -29,7 +43,16 @@ $textoRespuestaElegida = $opcionesMostradas[$respuestaElegida] ?? '';
     <link rel="stylesheet" href="../css/resultado.css">
 </head>
 <body>
-
+<!-- DEBUG INFO - Eliminar en producción -->
+<div style="position: fixed; bottom: 10px; right: 10px; background: rgba(0,0,0,0.8); color: white; padding: 15px; border-radius: 10px; font-family: monospace; font-size: 12px; max-width: 300px; z-index: 9999;">
+    <strong>🔍 DEBUG INFO:</strong><br>
+    <strong>ID Jugador:</strong> <?php echo $DEBUG_INFO['id_jugador']; ?><br>
+    <strong>Puntaje:</strong> $<?php echo number_format($DEBUG_INFO['puntaje_pesos']); ?><br>
+    <strong>Correctas:</strong> <?php echo $DEBUG_INFO['preguntas_correctas']; ?><br>
+    <strong>Última resp:</strong> <?php echo $DEBUG_INFO['ultima_respuesta']; ?><br>
+    <hr style="border-color: rgba(255,255,255,0.3);">
+    <a href="../../backend/controllers/ver_logs.php" target="_blank" style="color: #FFD700; text-decoration: none;">📋 Ver Logs Completos</a>
+</div>
 <div class="contenedor-resultado">
     
     <?php if ($esCorrecta): ?>

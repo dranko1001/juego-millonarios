@@ -10,37 +10,39 @@ class JugadorModel {
     }
     
     /**
-     * Actualiza el puntaje del jugador solo si el nuevo puntaje es mayor que el actual
-     * Esto permite guardar el mejor puntaje histórico del jugador
-     * 
-     * @param int $idJugador - ID del jugador en tbl_jugadores
-     * @param int $nuevoPuntaje - Nuevo puntaje a guardar
-     * @return bool - true si se actualizó, false si no
+     * Actualiza el puntaje del jugador SIEMPRE
+     * Cambiado: Ya no valida si es mayor, simplemente actualiza
      */
     public function actualizarPuntaje($idJugador, $nuevoPuntaje) {
         try {
             $this->mysql->conectar();
             $conexion = $this->mysql->getConexion();
             
-            // Solo actualizar si el nuevo puntaje es mayor que el actual
+            // ✅ CAMBIO CRÍTICO: Quité la condición "AND puntaje_jugador < :puntaje"
             $sql = "UPDATE tbl_jugadores 
                     SET puntaje_jugador = :puntaje 
-                    WHERE ID_jugador = :id 
-                    AND puntaje_jugador < :puntaje";
+                    WHERE ID_jugador = :id";
             
             $stmt = $conexion->prepare($sql);
-            $stmt->execute([
+            $resultado = $stmt->execute([
                 ':id' => $idJugador,
                 ':puntaje' => $nuevoPuntaje
             ]);
             
             $filasAfectadas = $stmt->rowCount();
+            
+            // Log en tabla de debug
+            $this->guardarLog('ACTUALIZAR_PUNTAJE', 
+                "ID: $idJugador | Puntaje: $nuevoPuntaje | Filas afectadas: $filasAfectadas",
+                $idJugador, $nuevoPuntaje);
+            
             $this->mysql->desconectar();
             
             return $filasAfectadas > 0;
             
         } catch (PDOException $e) {
             $this->mysql->desconectar();
+            $this->guardarLog('ERROR_ACTUALIZAR', $e->getMessage(), $idJugador, $nuevoPuntaje);
             error_log("Error al actualizar puntaje del jugador: " . $e->getMessage());
             return false;
         }
@@ -48,9 +50,6 @@ class JugadorModel {
     
     /**
      * Obtiene el puntaje actual del jugador
-     * 
-     * @param int $idJugador - ID del jugador
-     * @return int - Puntaje actual del jugador
      */
     public function obtenerPuntaje($idJugador) {
         try {
@@ -70,6 +69,30 @@ class JugadorModel {
             $this->mysql->desconectar();
             error_log("Error al obtener puntaje del jugador: " . $e->getMessage());
             return 0;
+        }
+    }
+    
+    /**
+     * Guarda logs en la tabla de debug
+     */
+    private function guardarLog($tipo, $mensaje, $id_jugador = null, $puntaje = null) {
+        try {
+            $db = new PDOConnection();
+            $conn = $db->conectar();
+            
+            $sql = "INSERT INTO tbl_logs_debug (tipo, mensaje, id_jugador, puntaje) 
+                    VALUES (:tipo, :mensaje, :id_jugador, :puntaje)";
+            
+            $stmt = $conn->prepare($sql);
+            $stmt->execute([
+                ':tipo' => $tipo,
+                ':mensaje' => $mensaje,
+                ':id_jugador' => $id_jugador,
+                ':puntaje' => $puntaje
+            ]);
+            $db->desconectar();
+        } catch (Exception $e) {
+            // Silenciar errores de log
         }
     }
 }
