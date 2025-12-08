@@ -62,6 +62,16 @@ if ($esCorrecta) {
 } else {
     $_SESSION['ultima_respuesta'] = 'incorrecta';
     $_SESSION['ultimo_puntaje_ganado'] = 0;
+    
+    // Guardar puntaje en la base de datos cuando pierde
+    if (isset($_SESSION['id_jugador']) && isset($_SESSION['puntaje_pesos'])) {
+        require_once __DIR__ . '/../models/JugadorModel.php';
+        $jugadorModel = new JugadorModel();
+        $jugadorModel->actualizarPuntaje(
+            $_SESSION['id_jugador'], 
+            $_SESSION['puntaje_pesos']
+        );
+    }
 }
 
 // Guardar información para mostrar en la vista de resultado
