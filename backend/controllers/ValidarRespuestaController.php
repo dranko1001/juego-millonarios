@@ -32,6 +32,39 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST' || !isset($_POST['respuesta_elegida'])
     exit;
 }
 
+if (isset($_SESSION['tiempo_inicio_pregunta']) && isset($_SESSION['tiempo_limite_segundos'])) {
+    $tiempoTranscurrido = time() - $_SESSION['tiempo_inicio_pregunta'];
+    $tiempoLimite = $_SESSION['tiempo_limite_segundos'];
+    
+    if ($tiempoTranscurrido > $tiempoLimite) {
+        // ⏰ TIEMPO AGOTADO
+        guardarLog(
+            'TIEMPO_AGOTADO',
+            'Tiempo agotado - Transcurrido: ' . $tiempoTranscurrido . 's | Límite: ' . $tiempoLimite . 's',
+            $_SESSION['id_jugador'] ?? null,
+            $_SESSION['puntaje_pesos'] ?? 0
+        );
+        
+        // Guardar puntaje actual
+        if (isset($_SESSION['id_jugador']) && isset($_SESSION['puntaje_pesos'])) {
+            require_once __DIR__ . '/../models/JugadorModel.php';
+            $jugadorModel = new JugadorModel();
+            $jugadorModel->actualizarPuntaje(
+                $_SESSION['id_jugador'], 
+                $_SESSION['puntaje_pesos']
+            );
+        }
+        
+        // Marcar como tiempo agotado
+        $_SESSION['ultima_respuesta'] = 'tiempo_agotado';
+        $_SESSION['pregunta_activa'] = false;
+        $_SESSION['enunciado_actual'] = $_SESSION['enunciado_pregunta'] ?? '';
+        
+        header('Location: ../../frontend/views/resultado.php');
+        exit;
+    }
+    }
+
 $respuestaElegida = $_POST['respuesta_elegida'];
 $idPregunta = (int)$_POST['id_pregunta'];
 

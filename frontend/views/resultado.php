@@ -15,9 +15,10 @@ if (!isset($_SESSION['ultima_respuesta'])) {
 }
 
 $esCorrecta = ($_SESSION['ultima_respuesta'] === 'correcta');
+$esTiempoAgotado = ($_SESSION['ultima_respuesta'] === 'tiempo_agotado');
 $preguntasCorrectas = $_SESSION['preguntas_correctas'] ?? 0;
-$puntajePesos = $_SESSION['puntaje_pesos'] ?? 0; // ✅ NUEVO: Obtener puntaje en pesos
-$ultimoPuntajeGanado = $_SESSION['ultimo_puntaje_ganado'] ?? 0; // ✅ NUEVO: Último puntaje ganado
+$puntajePesos = $_SESSION['puntaje_pesos'] ?? 0;
+$ultimoPuntajeGanado = $_SESSION['ultimo_puntaje_ganado'] ?? 0;
 $respuestaElegida = $_SESSION['respuesta_elegida'] ?? '';
 $respuestaCorrectaLetra = $_SESSION['respuesta_correcta_letra'] ?? '';
 $respuestaCorrectaTexto = $_SESSION['respuesta_correcta_texto'] ?? '';
@@ -51,13 +52,52 @@ $textoRespuestaElegida = $opcionesMostradas[$respuestaElegida] ?? '';
 </div>
 
 <div class="contenedor-resultado">
-    
-    <?php if ($esCorrecta): ?>
+
+    <?php if ($esTiempoAgotado): ?>
+        <!-- ============ CASO: TIEMPO AGOTADO ============ -->
+        <div class="emoji">⏰</div>
+        <div class="resultado-incorrecto" style="color: #ff9800;">¡TIEMPO AGOTADO!</div>
         
+        <div class="info-pregunta">
+            <p class="enunciado"><?php echo htmlspecialchars($enunciado); ?></p>
+        </div>
+        
+        <div class="info-respuesta correcta">
+            <p><strong>Respuesta correcta era:</strong> <span class="respuesta-letra"><?php echo htmlspecialchars($respuestaCorrectaLetra); ?>:</span> <?php echo htmlspecialchars($respuestaCorrectaTexto); ?></p>
+        </div>
+        
+        <div class="info-categoria">
+            <p>📚 Categoría: <strong><?php echo htmlspecialchars($categoriaNombre); ?></strong></p>
+        </div>
+        
+        <div class="puntaje-final">
+            <div class="label-puntaje-final">💵 Puntaje Final:</div>
+            <div class="valor-puntaje-final">$<?php echo number_format($puntajePesos); ?></div>
+            <div class="preguntas-correctas"><?php echo $preguntasCorrectas; ?> pregunta<?php echo $preguntasCorrectas != 1 ? 's' : ''; ?> correcta<?php echo $preguntasCorrectas != 1 ? 's' : ''; ?></div>
+        </div>
+        
+        <h3>¡Se acabó el tiempo!</h3>
+        <p style="color: #fff; margin: 15px 0;">No respondiste a tiempo, pero tu puntaje ha sido guardado.</p>
+        
+        <div class="botones-container">
+            <a href="reiniciar.php" class="boton boton-reiniciar">
+                🔄 Jugar de Nuevo (Misma Categoría)
+            </a>
+            
+            <a href="reiniciar.php?cambiar_categoria=1" class="boton boton-cambiar">
+                📚 Cambiar Categoría
+            </a>
+            
+            <a href="../../backend/controllers/logout.php" class="boton boton-salir">
+                🚪 Salir
+            </a>
+        </div>
+        
+    <?php elseif ($esCorrecta): ?>
+        <!-- ============ CASO: RESPUESTA CORRECTA ============ -->
         <div class="emoji">🎉</div>
         <div class="resultado-correcto">¡CORRECTO!</div>
         
-        <!-- ✅ NUEVO: Mostrar cuánto ganaste -->
         <?php if ($ultimoPuntajeGanado > 0): ?>
         <div class="puntaje-ganado">
             <span class="signo-mas">+</span> $<?php echo number_format($ultimoPuntajeGanado); ?>
@@ -76,7 +116,6 @@ $textoRespuestaElegida = $opcionesMostradas[$respuestaElegida] ?? '';
             <p>📚 Categoría: <strong><?php echo htmlspecialchars($categoriaNombre); ?></strong></p>
         </div>
         
-        <!-- ✅ CAMBIADO: Mostrar puntaje en pesos en lugar de cantidad de preguntas -->
         <div class="puntaje-total">
             <div class="label-puntaje">💰 Puntaje Acumulado:</div>
             <div class="valor-puntaje">$<?php echo number_format($puntajePesos); ?></div>
@@ -96,7 +135,7 @@ $textoRespuestaElegida = $opcionesMostradas[$respuestaElegida] ?? '';
         </div>
         
     <?php else: ?>
-        
+        <!-- ============ CASO: RESPUESTA INCORRECTA ============ -->
         <div class="emoji">😢</div>
         <div class="resultado-incorrecto">INCORRECTO</div>
         
@@ -116,7 +155,6 @@ $textoRespuestaElegida = $opcionesMostradas[$respuestaElegida] ?? '';
             <p>📚 Categoría: <strong><?php echo htmlspecialchars($categoriaNombre); ?></strong></p>
         </div>
         
-        <!-- ✅ CAMBIADO: Mostrar puntaje final en pesos -->
         <div class="puntaje-final">
             <div class="label-puntaje-final">💵 Puntaje Final:</div>
             <div class="valor-puntaje-final">$<?php echo number_format($puntajePesos); ?></div>

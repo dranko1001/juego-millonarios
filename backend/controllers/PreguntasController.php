@@ -121,6 +121,17 @@ if (!isset($_SESSION['pregunta_activa']) || $_SESSION['pregunta_activa'] === fal
         exit();
     }
 }
+if ($datosPregunta) {
+    // ... tu código actual de generar pregunta ...
+    
+    // ✅ NUEVO: Guardar timestamp de inicio de la pregunta
+    $_SESSION['tiempo_inicio_pregunta'] = time(); // Timestamp actual
+    $_SESSION['tiempo_limite_segundos'] = 120; // 2 minutos = 120 segundos
+    
+    $_SESSION['pregunta_activa'] = true;
+    $_SESSION['preguntas_respondidas'][] = $datosPregunta['ID_pregunta'];
+}
+
 
 require_once __DIR__ . '/../../frontend/views/juego.php';
 ?>
