@@ -24,61 +24,102 @@ if (!isset($_SESSION['preguntas_respondidas'])) {
     $_SESSION['preguntas_respondidas'] = [];
 }
 
-// Obtener pregunta según la categoría seleccionada
-if ($categoria_seleccionada === "MIXTA") {
-    $datosPregunta = $preguntaModel->obtenerPreguntaAleatoria($_SESSION['preguntas_respondidas']);
-} else {
-    $datosPregunta = $preguntaModel->obtenerPreguntaPorCategoria($categoria_seleccionada, $_SESSION['preguntas_respondidas']);
-}
-
 $pregunta = [];
 $opciones_a_mostrar = [];
+$datosPregunta = null;
 
-if ($datosPregunta) {
-    $pregunta['enunciado'] = $datosPregunta['enunciado_pregunta'];
-
-    $opciones = [
-        $datosPregunta['opcion1_pregunta'],
-        $datosPregunta['opcion2_pregunta'],
-        $datosPregunta['opcion3_pregunta'],
-        $datosPregunta['opcion4_pregunta']
-    ];
-
-    $pregunta['respuesta_correcta_texto'] = $datosPregunta['correcta_pregunta'];
-    shuffle($opciones);
-
-    $letras = ['A', 'B', 'C', 'D'];
-    for ($i = 0; $i < count($opciones); $i++) {
-        $opciones_a_mostrar[$letras[$i]] = $opciones[$i];
+// ✅ ANTI-TRAMPA: Verificar si ya hay una pregunta activa (sin responder)
+if (isset($_SESSION['pregunta_activa']) && $_SESSION['pregunta_activa'] === true) {
+    
+    // ✅ Reutilizar la pregunta actual guardada en sesión
+    if (isset($_SESSION['pregunta_actual_id']) && 
+        isset($_SESSION['enunciado_pregunta']) && 
+        isset($_SESSION['opciones_mostradas'])) {
+        
+        // Reconstruir la pregunta desde la sesión
+        $pregunta['enunciado'] = $_SESSION['enunciado_pregunta'];
+        $opciones_a_mostrar = $_SESSION['opciones_mostradas'];
+        
+        // Crear un array simulado de datos de pregunta para compatibilidad
+        $datosPregunta = [
+            'ID_pregunta' => $_SESSION['pregunta_actual_id'],
+            'enunciado_pregunta' => $_SESSION['enunciado_pregunta'],
+            'TBL_dificultades_ID_dificultad' => $_SESSION['dificultad_pregunta'] ?? 1
+        ];
+        
+        $pregunta['opciones_mostradas'] = $opciones_a_mostrar;
+        $pregunta['respuesta_correcta_letra'] = $_SESSION['respuesta_correcta_letra'];
+        $pregunta['respuesta_correcta_texto'] = $_SESSION['respuesta_correcta_texto'];
+        
+    } else {
+        // Si falta información, forzar nueva pregunta
+        $_SESSION['pregunta_activa'] = false;
     }
-    
-    $respuesta_correcta_letra = array_search($pregunta['respuesta_correcta_texto'], $opciones_a_mostrar);
+}
 
-    $pregunta['opciones_mostradas'] = $opciones_a_mostrar;
-    $pregunta['respuesta_correcta_letra'] = $respuesta_correcta_letra;
+// ✅ Si NO hay pregunta activa, generar una nueva
+if (!isset($_SESSION['pregunta_activa']) || $_SESSION['pregunta_activa'] === false) {
     
-    $_SESSION['pregunta_actual_id'] = $datosPregunta['ID_pregunta'];
-    $_SESSION['respuesta_correcta_letra'] = $respuesta_correcta_letra;
-    $_SESSION['respuesta_correcta_texto'] = $pregunta['respuesta_correcta_texto'];
-    $_SESSION['enunciado_pregunta'] = $pregunta['enunciado'];
-    $_SESSION['opciones_mostradas'] = $opciones_a_mostrar;
-    $_SESSION['dificultad_pregunta'] = $datosPregunta['TBL_dificultades_ID_dificultad'];
-    
-    $_SESSION['preguntas_respondidas'][] = $datosPregunta['ID_pregunta'];
-
-} else {
-    // ✅ NO HAY MÁS PREGUNTAS - GUARDAR PUNTAJE Y REDIRIGIR
-    if (isset($_SESSION['id_jugador']) && isset($_SESSION['puntaje_pesos'])) {
-        require_once __DIR__ . '/../models/JugadorModel.php';
-        $jugadorModel = new JugadorModel();
-        $jugadorModel->actualizarPuntaje(
-            $_SESSION['id_jugador'], 
-            $_SESSION['puntaje_pesos']
-        );
+    // Obtener pregunta según la categoría seleccionada
+    if ($categoria_seleccionada === "MIXTA") {
+        $datosPregunta = $preguntaModel->obtenerPreguntaAleatoria($_SESSION['preguntas_respondidas']);
+    } else {
+        $datosPregunta = $preguntaModel->obtenerPreguntaPorCategoria($categoria_seleccionada, $_SESSION['preguntas_respondidas']);
     }
-    
-    header("Location: ../../frontend/views/categoria_completada.php");
-    exit();
+
+    if ($datosPregunta) {
+        $pregunta['enunciado'] = $datosPregunta['enunciado_pregunta'];
+
+        $opciones = [
+            $datosPregunta['opcion1_pregunta'],
+            $datosPregunta['opcion2_pregunta'],
+            $datosPregunta['opcion3_pregunta'],
+            $datosPregunta['opcion4_pregunta']
+        ];
+
+        $pregunta['respuesta_correcta_texto'] = $datosPregunta['correcta_pregunta'];
+        
+        // ✅ Mezclar las opciones
+        shuffle($opciones);
+
+        $letras = ['A', 'B', 'C', 'D'];
+        for ($i = 0; $i < count($opciones); $i++) {
+            $opciones_a_mostrar[$letras[$i]] = $opciones[$i];
+        }
+        
+        $respuesta_correcta_letra = array_search($pregunta['respuesta_correcta_texto'], $opciones_a_mostrar);
+
+        $pregunta['opciones_mostradas'] = $opciones_a_mostrar;
+        $pregunta['respuesta_correcta_letra'] = $respuesta_correcta_letra;
+        
+        // ✅ Guardar en sesión
+        $_SESSION['pregunta_actual_id'] = $datosPregunta['ID_pregunta'];
+        $_SESSION['respuesta_correcta_letra'] = $respuesta_correcta_letra;
+        $_SESSION['respuesta_correcta_texto'] = $pregunta['respuesta_correcta_texto'];
+        $_SESSION['enunciado_pregunta'] = $pregunta['enunciado'];
+        $_SESSION['opciones_mostradas'] = $opciones_a_mostrar;
+        $_SESSION['dificultad_pregunta'] = $datosPregunta['TBL_dificultades_ID_dificultad'];
+        
+        // ✅ MARCAR PREGUNTA COMO ACTIVA (sin responder)
+        $_SESSION['pregunta_activa'] = true;
+        
+        // ✅ Agregar a preguntas respondidas para no repetirla
+        $_SESSION['preguntas_respondidas'][] = $datosPregunta['ID_pregunta'];
+
+    } else {
+        // ✅ NO HAY MÁS PREGUNTAS - GUARDAR PUNTAJE Y REDIRIGIR
+        if (isset($_SESSION['id_jugador']) && isset($_SESSION['puntaje_pesos'])) {
+            require_once __DIR__ . '/../models/JugadorModel.php';
+            $jugadorModel = new JugadorModel();
+            $jugadorModel->actualizarPuntaje(
+                $_SESSION['id_jugador'], 
+                $_SESSION['puntaje_pesos']
+            );
+        }
+        
+        header("Location: ../../frontend/views/categoria_completada.php");
+        exit();
+    }
 }
 
 require_once __DIR__ . '/../../frontend/views/juego.php';

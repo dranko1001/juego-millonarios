@@ -145,7 +145,19 @@ if ($esCorrecta) {
 $_SESSION['respuesta_elegida'] = $respuestaElegida;
 $_SESSION['enunciado_actual'] = $_SESSION['enunciado_pregunta'] ?? '';
 
+if ($esCorrecta) {
+    // Si es correcta, permitir nueva pregunta
+    $_SESSION['pregunta_activa'] = false;
+} else {
+    // Si es incorrecta, el juego termina, desactivar pregunta activa
+    $_SESSION['pregunta_activa'] = false;
+}
+
 guardarLog('FIN', 'Redirigiendo a resultado.php', $_SESSION['id_jugador'] ?? null, $_SESSION['puntaje_pesos'] ?? 0);
+
+
+
+
 
 header('Location: ../../frontend/views/resultado.php');
 exit;
