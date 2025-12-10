@@ -37,11 +37,11 @@ $nombre_admin = $_SESSION["admin"];
                     Cambiar Código
                 </a>
                 
-                <a href="toca meter enlace aqui" class="btn btn-yellow" data-icon="❓">
+                <a href="crearpregunta.php" class="btn btn-yellow" data-icon="❓">
                     Editar Preguntas
                 </a>
                 
-                <a href="toca meter enlace aqui" class="btn btn-yellow" data-icon="👤">
+                <a href="agregaradmi.php" class="btn btn-yellow" data-icon="👤">
                     + Agregar Cuenta
                 </a>
                 
