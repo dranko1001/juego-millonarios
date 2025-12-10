@@ -1,4 +1,3 @@
-/* Fondo general */
 body {
     margin: 0;
     padding: 0;
@@ -10,14 +9,12 @@ body {
     align-items: center;
 }
 
-/* Contenedor centrado */
 .main-container {
     width: 100%;
     max-width: 450px;
     padding: 20px;
 }
 
-/* Caja del formulario */
 .form-box {
     background: rgba(255, 255, 255, 0.97);
     border-radius: 25px;
@@ -26,7 +23,6 @@ body {
     backdrop-filter: blur(5px);
 }
 
-/* Título */
 .title {
     text-align: center;
     font-weight: 800;
@@ -34,7 +30,6 @@ body {
     margin-bottom: 25px;
 }
 
-/* Botón verde */
 .btn-primary {
     background: linear-gradient(135deg, #39B54A, #00A14B);
     border: none;
