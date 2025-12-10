@@ -60,7 +60,11 @@ if (isset($_SESSION['pregunta_activa']) && $_SESSION['pregunta_activa'] === true
         $pregunta['opciones_mostradas'] = $opciones_a_mostrar;
         $pregunta['respuesta_correcta_letra'] = $_SESSION['respuesta_correcta_letra'];
         $pregunta['respuesta_correcta_texto'] = $_SESSION['respuesta_correcta_texto'];
-
+        
+        // ✅ CRÍTICO: NO REINICIAR EL TIEMPO - mantener el timestamp original
+        // El tiempo ya está guardado en $_SESSION['tiempo_inicio_pregunta']
+        // No hacer nada aquí con el tiempo
+        
     } else {
         // Si falta información, forzar nueva pregunta
         $_SESSION['pregunta_activa'] = false;
@@ -109,7 +113,11 @@ if (!isset($_SESSION['pregunta_activa']) || $_SESSION['pregunta_activa'] === fal
         $_SESSION['enunciado_pregunta'] = $pregunta['enunciado'];
         $_SESSION['opciones_mostradas'] = $opciones_a_mostrar;
         $_SESSION['dificultad_pregunta'] = $datosPregunta['TBL_dificultades_ID_dificultad'];
-
+        
+        // ✅ CRÍTICO: SOLO guardar el tiempo de inicio SI ES UNA PREGUNTA NUEVA
+        $_SESSION['tiempo_inicio_pregunta'] = time(); // Timestamp actual
+        $_SESSION['tiempo_limite_segundos'] = 120; // 2 minutos = 120 segundos
+        
         // ✅ MARCAR PREGUNTA COMO ACTIVA (sin responder)
         $_SESSION['pregunta_activa'] = true;
 
@@ -131,17 +139,9 @@ if (!isset($_SESSION['pregunta_activa']) || $_SESSION['pregunta_activa'] === fal
         exit();
     }
 }
-if ($datosPregunta) {
-    // ... tu código actual de generar pregunta ...
 
-    // ✅ NUEVO: Guardar timestamp de inicio de la pregunta
-    $_SESSION['tiempo_inicio_pregunta'] = time(); // Timestamp actual
-    $_SESSION['tiempo_limite_segundos'] = 120; // 2 minutos = 120 segundos
-
-    $_SESSION['pregunta_activa'] = true;
-    $_SESSION['preguntas_respondidas'][] = $datosPregunta['ID_pregunta'];
-}
-
+// ✅ ELIMINADO: El código duplicado que estaba al final
+// Ya no necesitas esto porque el tiempo se guarda arriba solo para preguntas nuevas
 
 require_once __DIR__ . '/../../frontend/views/juego.php';
 ?>
