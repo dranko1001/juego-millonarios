@@ -165,5 +165,44 @@ class PreguntaModel {
             return 0;
         }
     }
+
+    /**
+     * ✅ NUEVO: Obtiene una pregunta específica por su ID
+     * Este método se usa cuando se agota el tiempo para recuperar la respuesta correcta
+     * @param int $idPregunta - ID de la pregunta a obtener
+     * @return array|null - Datos de la pregunta o null si no existe
+     */
+    public function obtenerPreguntaPorId($idPregunta) {
+        try {
+            $this->mysql->conectar();
+            $conexion = $this->mysql->getConexion();
+            
+            $sql = "SELECT 
+                        ID_pregunta,
+                        enunciado_pregunta,
+                        opcion1_pregunta,
+                        opcion2_pregunta,
+                        opcion3_pregunta,
+                        opcion4_pregunta,
+                        correcta_pregunta,
+                        TBL_categorias_ID_categoria,
+                        TBL_dificultades_ID_dificultad
+                    FROM tbl_preguntas
+                    WHERE ID_pregunta = :id";
+            
+            $stmt = $conexion->prepare($sql);
+            $stmt->execute([':id' => $idPregunta]);
+            
+            $pregunta = $stmt->fetch(PDO::FETCH_ASSOC);
+            $this->mysql->desconectar();
+            
+            return $pregunta;
+            
+        } catch (PDOException $e) {
+            $this->mysql->desconectar();
+            error_log("Error al obtener pregunta por ID: " . $e->getMessage());
+            return null;
+        }
+    }
 }
 ?>

@@ -1,25 +1,3 @@
-<?php
-// frontend/views/categoria_completada.php
-session_start();
-
-// Verificar autenticación
-if (!isset($_SESSION["aprendiz"]) || !isset($_SESSION["codigo_validado"])) {
-    header("Location: login_aprendiz.php");
-    exit();
-}
-
-$categoriaNombre = $_SESSION['categoria_nombre'] ?? 'Desconocida';
-$preguntasCorrectas = $_SESSION['preguntas_correctas'] ?? 0;
-$preguntasRespondidas = count($_SESSION['preguntas_respondidas'] ?? []);
-$aprendiz = $_SESSION['aprendiz'] ?? 'Aprendiz';
-
-// Calcular porcentaje
-$porcentaje = $preguntasRespondidas > 0 ? round(($preguntasCorrectas / $preguntasRespondidas) * 100) : 0;
-?>
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>¡Categoría Completada! - Millonarios SENA</title>
     <link rel="stylesheet" href="../css/resultado.css">
@@ -37,35 +15,6 @@ $porcentaje = $preguntasRespondidas > 0 ? round(($preguntasCorrectas / $pregunta
     <div class="felicitaciones">
         <h2>🏆 ¡Felicitaciones, <?php echo htmlspecialchars($aprendiz); ?>! 🏆</h2>
         <p>Has completado todas las preguntas de la categoría:</p>
-    </div>
-    
-    <div class="info-categoria-final">
-        <h3>📚 <?php echo htmlspecialchars($categoriaNombre); ?></h3>
-    </div>
-    
-    <div class="estadisticas">
-        <div class="stat-item">
-            <div class="stat-icon">📝</div>
-            <div class="stat-number"><?php echo $preguntasRespondidas; ?></div>
-            <div class="stat-label">Preguntas<br>Respondidas</div>
-        </div>
-        
-        <div class="stat-item">
-            <div class="stat-icon">✅</div>
-            <div class="stat-number"><?php echo $preguntasCorrectas; ?></div>
-            <div class="stat-label">Respuestas<br>Correctas</div>
-        </div>
-        
-        <div class="stat-item">
-            <div class="stat-icon">📊</div>
-            <div class="stat-number"><?php echo $porcentaje; ?>%</div>
-            <div class="stat-label">Porcentaje de<br>Acierto</div>
-        </div>
-    </div>
-    
-    <div class="mensaje-motivacional">
-        <?php
-        if ($porcentaje >= 90) {
             echo "🌟 ¡Excelente! Dominas completamente este tema.";
         } elseif ($porcentaje >= 70) {
             echo "👏 ¡Muy bien! Tienes un buen conocimiento de este tema.";
@@ -78,7 +27,7 @@ $porcentaje = $preguntasRespondidas > 0 ? round(($preguntasCorrectas / $pregunta
     </div>
     
     <div class="botones-container">
-        <a href="reiniciar.php?cambiar_categoria=1" class="boton boton-nueva-categoria">
+        <a href="../../frontend/views/reiniciar.php?cambiar_categoria=1" class="boton boton-nueva-categoria">
             📚 Seleccionar Otra Categoría
         </a>
         
@@ -184,23 +133,6 @@ $porcentaje = $preguntasRespondidas > 0 ? round(($preguntasCorrectas / $pregunta
     
     .info-categoria-final h3 {
         color: #1a1a1a;
-        font-size: 2em;
-        margin: 0;
-        font-weight: 800;
-        text-shadow: 0 2px 5px rgba(255, 255, 255, 0.5);
-    }
-    
-    .estadisticas {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 20px;
-        margin: 30px 0;
-    }
-    
-    .stat-item {
-        background: white;
-        padding: 25px 15px;
-        border-radius: 15px;
         text-align: center;
         box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
         border: 3px solid #39B54A;
@@ -220,23 +152,6 @@ $porcentaje = $preguntasRespondidas > 0 ? round(($preguntasCorrectas / $pregunta
     .stat-number {
         font-size: 3em;
         font-weight: 800;
-        color: #39B54A;
-        margin-bottom: 10px;
-        text-shadow: 0 2px 5px rgba(57, 181, 74, 0.2);
-        line-height: 1;
-    }
-    
-    .stat-label {
-        font-size: 0.9em;
-        color: #666;
-        font-weight: 600;
-        line-height: 1.3;
-    }
-    
-    .mensaje-motivacional {
-        background: rgba(57, 181, 74, 0.1);
-        padding: 20px;
-        border-radius: 12px;
         text-align: center;
         font-size: 1.3em;
         font-weight: 600;
@@ -299,20 +214,6 @@ $porcentaje = $preguntasRespondidas > 0 ? round(($preguntasCorrectas / $pregunta
         .felicitaciones h2 {
             font-size: 1.5em;
         }
-        
-        .info-categoria-final h3 {
-            font-size: 1.5em;
-        }
-        
-        .estadisticas {
-            grid-template-columns: 1fr;
-            gap: 15px;
-        }
-        
-        .stat-number {
-            font-size: 2.5em;
-        }
-
         .stat-label {
             font-size: 0.85em;
         }
