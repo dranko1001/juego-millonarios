@@ -2,11 +2,16 @@
 // backend/controllers/PreguntasController.php
 session_start();
 
+// ✅ NUEVO: Inicializar comodines
+require_once __DIR__ . '/../models/ComodinModel.php';
+ComodinModel::inicializarComodines();
+
 // Verificar autenticación
 if (!isset($_SESSION["aprendiz"]) || !isset($_SESSION["codigo_validado"])) {
     header("Location: ../../frontend/views/login_aprendiz.php");
     exit();
 }
+
 
 // ✅ NUEVO: Inicializar puntajes si no existen
 if (!isset($_SESSION['puntaje_pesos'])) {

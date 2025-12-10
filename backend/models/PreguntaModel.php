@@ -204,5 +204,75 @@ class PreguntaModel {
             return null;
         }
     }
+    /**
+     * Obtiene pregunta aleatoria por dificultad
+     */
+    public function obtenerPreguntaAleatoriaPorDificultad($dificultad, $preguntasExcluidas = [])
+    {
+        $this->mysql->conectar();
+        $conexion = $this->mysql->getConexion();
+
+        $sql = "SELECT * FROM tbl_preguntas WHERE TBL_dificultades_ID_dificultad = ?";
+
+        if (!empty($preguntasExcluidas)) {
+            $placeholders = str_repeat('?,', count($preguntasExcluidas) - 1) . '?';
+            $sql .= " AND ID_pregunta NOT IN ($placeholders)";
+        }
+
+        $sql .= " ORDER BY RAND() LIMIT 1";
+
+        try {
+            $stmt = $conexion->prepare($sql);
+            $params = [$dificultad];
+            if (!empty($preguntasExcluidas)) {
+                $params = array_merge($params, $preguntasExcluidas);
+            }
+            $stmt->execute($params);
+            $pregunta = $stmt->fetch(PDO::FETCH_ASSOC);
+            $this->mysql->desconectar();
+            return $pregunta;
+        } catch (PDOException $e) {
+            $this->mysql->desconectar();
+            error_log("Error: " . $e->getMessage());
+            return null;
+        }
+    }
+
+    /**
+     * Obtiene pregunta por categoría y dificultad
+     */
+    public function obtenerPreguntaPorCategoriaYDificultad($id_categoria, $dificultad, $preguntasExcluidas = [])
+    {
+        $this->mysql->conectar();
+        $conexion = $this->mysql->getConexion();
+
+        $sql = "SELECT * FROM tbl_preguntas 
+            WHERE TBL_categorias_ID_categoria = ? 
+            AND TBL_dificultades_ID_dificultad = ?";
+
+        if (!empty($preguntasExcluidas)) {
+            $placeholders = str_repeat('?,', count($preguntasExcluidas) - 1) . '?';
+            $sql .= " AND ID_pregunta NOT IN ($placeholders)";
+        }
+
+        $sql .= " ORDER BY RAND() LIMIT 1";
+
+        try {
+            $stmt = $conexion->prepare($sql);
+            $params = [$id_categoria, $dificultad];
+            if (!empty($preguntasExcluidas)) {
+                $params = array_merge($params, $preguntasExcluidas);
+            }
+            $stmt->execute($params);
+            $pregunta = $stmt->fetch(PDO::FETCH_ASSOC);
+            $this->mysql->desconectar();
+            return $pregunta;
+        } catch (PDOException $e) {
+            $this->mysql->desconectar();
+            error_log("Error: " . $e->getMessage());
+            return null;
+        }
+    }
+    
 }
 ?>

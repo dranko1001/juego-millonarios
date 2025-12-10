@@ -6,7 +6,7 @@ session_start();
 if (isset($_SESSION['id_jugador']) && isset($_SESSION['puntaje_pesos'])) {
     require_once __DIR__ . '/../../backend/models/pdoconexion.php';
     require_once __DIR__ . '/../../backend/models/JugadorModel.php';
-    
+    require_once __DIR__ . '/../../backend/models/ComodinModel.php';
     $jugadorModel = new JugadorModel();
     $jugadorModel->actualizarPuntaje(
         $_SESSION['id_jugador'], 
@@ -28,13 +28,16 @@ unset($_SESSION['preguntas_respondidas']);
 unset($_SESSION['puntaje_pesos']);
 unset($_SESSION['ultimo_puntaje_ganado']);
 unset($_SESSION['dificultad_pregunta']);
-
+// ✅ NUEVO: Resetear comodines
+ComodinModel::resetearComodines();
 // Verificar si quiere cambiar de categoría
 if (isset($_GET['cambiar_categoria']) && $_GET['cambiar_categoria'] == '1') {
     // Limpiar categoría y redirigir a selección
     unset($_SESSION['categoria_seleccionada']);
     unset($_SESSION['categoria_nombre']);
     header('Location: seleccionar_categoria.php');
+    // ✅ NUEVO: Resetear comodines
+    ComodinModel::resetearComodines();
     exit;
 }
 
