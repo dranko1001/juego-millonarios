@@ -64,6 +64,15 @@ if (isset($_GET['error'])) {
             </div>
         <?php endif; ?>
 
+        <!-- 🔄 LOADER DE CARGA -->
+        <div class="loader-overlay" id="loaderOverlay">
+            <div class="loader-content">
+                <div class="loader-spinner"></div>
+                <h3 class="loader-text">Cargando categorías...</h3>
+                <p class="loader-subtext">Por favor espera un momento</p>
+            </div>
+        </div>
+
         <div class="categorias-grid" id="categoriasGrid">
             <!-- Opción MIXTA (todas las categorías) - DESTACADA -->
             <?php if ($total_preguntas > 0): ?>
@@ -158,6 +167,84 @@ if (isset($_GET['error'])) {
     </div>
 
     <style>
+        /* ========================================
+           LOADER DE CARGA ANIMADO
+        ======================================== */
+        .loader-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            opacity: 1;
+            transition: opacity 0.5s ease;
+        }
+
+        .loader-overlay.hide {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .loader-content {
+            background: white;
+            padding: 40px 60px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: slideDown 0.5s ease;
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .loader-spinner {
+            width: 60px;
+            height: 60px;
+            border: 6px solid #f3f3f3;
+            border-top: 6px solid #667eea;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .loader-text {
+            color: #2c3e50;
+            font-size: 1.5em;
+            margin: 10px 0;
+            font-weight: 700;
+        }
+
+        .loader-subtext {
+            color: #7f8c8d;
+            font-size: 0.95em;
+            margin: 5px 0 0 0;
+        }
+
         /* ========================================
            ESTILOS ORIGINALES (TU CSS)
         ======================================== */
@@ -457,6 +544,9 @@ if (isset($_GET['error'])) {
 
             console.log(`📖 Mostrando página ${numeroPagina}`);
 
+            // Mostrar loader
+            mostrarLoader();
+
             // Efecto fade
             grid.classList.add('fade');
 
@@ -478,9 +568,12 @@ if (isset($_GET['error'])) {
                 actualizarControles();
                 grid.classList.remove('fade');
 
+                // Ocultar loader
+                ocultarLoader();
+
                 // Scroll suave
                 window.scrollTo({ top: 0, behavior: 'smooth' });
-            }, 150);
+            }, 600); // Tiempo para mostrar el loader
         }
 
         /**
@@ -543,10 +636,29 @@ if (isset($_GET['error'])) {
             if (items.length > ITEMS_POR_PAGINA) {
                 mostrarPagina(1);
             } else {
-                // Si hay 6 o menos, ocultar controles
+                // Si hay 6 o menos, ocultar controles y loader
                 document.querySelector('.pagination-wrapper').style.display = 'none';
+                ocultarLoader();
             }
         });
+
+        /**
+         * Muestra el loader
+         */
+        function mostrarLoader() {
+            const loader = document.getElementById('loaderOverlay');
+            loader.classList.remove('hide');
+        }
+
+        /**
+         * Oculta el loader
+         */
+        function ocultarLoader() {
+            const loader = document.getElementById('loaderOverlay');
+            setTimeout(() => {
+                loader.classList.add('hide');
+            }, 1000);
+        }
 
         /**
          * Navegación con teclado
