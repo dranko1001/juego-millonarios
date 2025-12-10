@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>¿Quién Quiere Ser Millonario? - SENA</title>
-    <link rel="stylesheet" href="/frontend/css/juego.css">
+    <!-- <link rel="stylesheet" href="../css/juego.css"> -->
+     <link rel="stylesheet" href="../../frontend/css/juego.css">
     
     <!-- ✅ Script del temporizador -->
     <script>
