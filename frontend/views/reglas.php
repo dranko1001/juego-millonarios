@@ -50,7 +50,7 @@ require_once __DIR__ . "/../../backend/models/pdoconexion.php";
             </ul>
         </section>
 
-                    <a href="./menu..php" class="btn btn-secondary">volver</a>
+                    <a href="menu.php" class="btn btn-secondary">volver</a>
                     <button class="btn btn-primary">Inicio de juego</button>
 
 
