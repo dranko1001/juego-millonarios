@@ -16,37 +16,40 @@ $nombre_admin = $_SESSION["admin"];
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menú de configuraciones del Administrador</title>
-    <link rel="stylesheet" href="../css/menu.css">
+    <title>Panel de Administración - Millonarios SENA</title>
+    <link rel="stylesheet" href="../css/menuOpciones.css">
 </head>
 
 <body>
     <div class="container">
-<!DOCTYPE html>
-<html lang="es">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menú de configuraciones</title>
-    <link rel="stylesheet" href="../css/menu.css">
-</head>
-
-<body>
-   
-        <!-- Mostrar nombre del administrador -->
-        <div style="text-align: right; padding: 10px;">
-            <span style="color: #666;">¿que deseas editar?, <strong><?php echo htmlspecialchars($nombre_admin); ?></strong></span>
+        <!-- Header del administrador -->
+        <div class="admin-header" style="text-align: right; padding: 25px 40px;">
+            <span>¿Qué deseas editar?, <strong><?php echo htmlspecialchars($nombre_admin); ?></strong></span>
         </div>
         
-        <h1 class="title">Configuraciones</h1>
-        <br>
-        <div class="buttons-container">
-            <a href="../../backend/controllers/GenerarCodigoController.php?accion=listar" class="btn btn-yellow btn-full">cambiar codigo</a>
-            <a href="crearpregunta.php" class="btn btn-yellow btn-full">editar preguntas</a>
-            <a href="agregaradmi.php" class="btn btn-yellow btn-full">+ agregar cuenta</a>
-            <a href="menu.php" class="btn btn-gris btn-full">volver al menu</a>
+        <!-- Contenido principal del panel -->
+        <div class="panel-content">
+            <h1 class="title">Configuraciones</h1>
+            <p class="subtitle">Panel de administración del sistema</p>
+            
+            <div class="buttons-container">
+                <a href="../../backend/controllers/GenerarCodigoController.php?accion=listar" class="btn btn-yellow" data-icon="🔑">
+                    Cambiar Código
+                </a>
+                
+                <a href="toca meter enlace aqui" class="btn btn-yellow" data-icon="❓">
+                    Editar Preguntas
+                </a>
+                
+                <a href="toca meter enlace aqui" class="btn btn-yellow" data-icon="👤">
+                    + Agregar Cuenta
+                </a>
+                
+                <a href="menu.php" class="btn btn-gris btn-full" data-icon="↩️">
+                    Volver al Menú
+                </a>
+            </div>
         </div>
-   
+    </div>
 </body>
 </html>
