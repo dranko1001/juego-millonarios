@@ -27,7 +27,7 @@
     </div>
     
     <div class="botones-container">
-        <a href="reiniciar.php?cambiar_categoria=1" class="boton boton-nueva-categoria">
+        <a href="../../frontend/views/reiniciar.php?cambiar_categoria=1" class="boton boton-nueva-categoria">
             📚 Seleccionar Otra Categoría
         </a>
         

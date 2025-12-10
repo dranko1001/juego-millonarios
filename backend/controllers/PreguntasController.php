@@ -8,6 +8,14 @@ if (!isset($_SESSION["aprendiz"]) || !isset($_SESSION["codigo_validado"])) {
     exit();
 }
 
+// ✅ NUEVO: Inicializar puntajes si no existen
+if (!isset($_SESSION['puntaje_pesos'])) {
+    $_SESSION['puntaje_pesos'] = 0;
+}
+if (!isset($_SESSION['preguntas_correctas'])) {
+    $_SESSION['preguntas_correctas'] = 0;
+}
+
 // Verificar que se haya seleccionado una categoría
 if (!isset($_SESSION["categoria_seleccionada"])) {
     header("Location: ../../frontend/views/seleccionar_categoria.php");

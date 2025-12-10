@@ -57,8 +57,10 @@
                 });
             }
         });
-        
         // Advertencia al recargar
+        //se tuvo que comentar para que no causara un problema con el tiempo, si se activa cuando
+        //se acabe el tiempo pedira esta confirmacion crrasheando el programa
+        /*
         window.addEventListener('beforeunload', function (e) {
             if (!formSubmitted) {
                 e.preventDefault();
@@ -66,6 +68,7 @@
                 return e.returnValue;
             }
         });
+        */
     </script>
     
     <style>
@@ -129,7 +132,7 @@
             </div>
 
             <div style="margin-top: 20px; width: 100%; display: flex; flex-direction: column; gap: 10px;">
-                <a href="reiniciar.php?cambiar_categoria=1" 
+                <a href="../../frontend/views/seleccionar_categoria.php" 
                    onclick="return confirm('¿Seguro que deseas cambiar de categoría? Se reiniciará tu progreso y perderás tu puntaje actual.')"
                    style="display: block; background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%); 
                           color: #1a1a1a; text-decoration: none; padding: 12px 15px; 
