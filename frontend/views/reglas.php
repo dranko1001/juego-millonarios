@@ -1,16 +1,17 @@
 <?php
 session_start();
 
-if (!isset($_SESSION["admin"]) || empty($_SESSION["admin"])) {
-    header("Location: login_administrador.php");
-    exit();
+$rol = $_SESSION["rol"] ?? null;
+
+if ($rol === "admin") {
+    $enlaceVolver = "menuOpciones.php";
+} elseif ($rol !== "aprendiz") {
+    $enlaceVolver = "validar_codigo.php";
+} else {
+    $enlaceVolver = "menu.php";
 }
-
-$nombre_admin = $_SESSION["admin"];
-
-require_once __DIR__ . "/../../backend/models/pdoconexion.php";
-
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -31,30 +32,25 @@ require_once __DIR__ . "/../../backend/models/pdoconexion.php";
         <section>
             <h2>Mecánica del Juego</h2>
             <ul>
-                <li><strong>Preguntas Multiples:</strong> El juego consiste en una secuencia de preguntas, cada una con cuatro opciones de respuesta, de las cuales solo una es la correcta.</li>
-                <li><strong>Escala De Puntuacion:</strong> Cada pregunta tiene asociado una puntacion. Al responder correctamente, el jugador avanza a la siguiente pregunta.</li>
-                <li><strong>Respuesta Incorrecta:</strong> Si el concursante da una respuesta incorrecta automaticamente termina el juego.</li>
-                <li><strong>Retirada:</strong> El concursante puede decidir retirarse en cualquier momento.</li>
+                <li><strong>Preguntas Multiples:</strong> Secuencia de preguntas con cuatro opciones, solo una correcta.</li>
+                <li><strong>Escala de Puntuacion:</strong> Avanza si responde correctamente.</li>
+                <li><strong>Respuesta Incorrecta:</strong> Termina el juego.</li>
+                <li><strong>Retirada:</strong> Puede retirarse en cualquier momento.</li>
             </ul>
         </section>
 
         <section>
             <h2>Comodines</h2>
-            <p>El concursante dispone de 4 comodines que puede utilizar en cualquier momento durante la partido que podra ser usado una unica vez :</p>
             <ul class="lifeline-list">
-                <li><strong>50/50:</strong>Elimina dos opciones de respuesta incorrectas, dejando solo una incorrecta y la correcta.</li>
-                <li><strong>Llamada:</strong>Permite consultar a un contacto durante un tiempo limitado.</li>
-                <li><strong>cambio de pregunta:</strong>Permite al concursante reemplazar la pregunta actual por una nueva pregunta.</li>
-                <li><strong>Respuesta Del Publico:</strong>Permite al concursante consultar a la audiencia para que vote por la opción que creen es la correcta.</li>
-
+                <li><strong>50/50:</strong> Elimina dos opciones incorrectas.</li>
+                <li><strong>Llamada:</strong> Consulta a un contacto.</li>
+                <li><strong>Cambio de pregunta:</strong> Cambia la pregunta actual.</li>
+                <li><strong>Respuesta del Público:</strong> La audiencia vota.</li>
             </ul>
         </section>
 
-                    <a href="menu.php" class="btn btn-secondary">volver</a>
-                    <button class="btn btn-primary">Inicio de juego</button>
+        <a href="<?= $enlaceVolver ?>" class="btn btn-secondary">Volver</a>
 
-
-        
     </div>
 </body>
 </html>

@@ -12,6 +12,7 @@ if (!isset($_SESSION["aprendiz"]) || !isset($_SESSION["codigo_validado"])) {
 if (!isset($_SESSION['puntaje_pesos'])) {
     $_SESSION['puntaje_pesos'] = 0;
 }
+
 if (!isset($_SESSION['preguntas_correctas'])) {
     $_SESSION['preguntas_correctas'] = 0;
 }
