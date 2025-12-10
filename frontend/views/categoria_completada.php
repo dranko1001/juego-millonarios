@@ -1,3 +1,14 @@
+<?php
+session_start();
+
+// Variables recibidas desde el controlador
+$aprendiz = $_SESSION["aprendiz"] ?? "Aprendiz";
+$porcentaje = $_SESSION["porcentaje"] ?? 0;
+?>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>¡Categoría Completada! - Millonarios SENA</title>
     <link rel="stylesheet" href="../css/categoria_completada.css">
@@ -15,6 +26,9 @@
     <div class="felicitaciones">
         <h2>🏆 ¡Felicitaciones, <?php echo htmlspecialchars($aprendiz); ?>! 🏆</h2>
         <p>Has completado todas las preguntas de la categoría:</p>
+
+        <?php
+        if ($porcentaje >= 90) {
             echo "🌟 ¡Excelente! Dominas completamente este tema.";
         } elseif ($porcentaje >= 70) {
             echo "👏 ¡Muy bien! Tienes un buen conocimiento de este tema.";

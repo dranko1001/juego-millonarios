@@ -1,13 +1,11 @@
 <?php
 session_start();
 
-// Proteger la página: si no hay sesión de admin, redirigir al login
 if (!isset($_SESSION["admin"])) {
     header("Location: login_administrador.php");
     exit();
 }
 
-// Obtener el nombre del administrador
 $nombre_admin = $_SESSION["admin"];
 ?>
 <!DOCTYPE html>
@@ -37,11 +35,11 @@ $nombre_admin = $_SESSION["admin"];
                     Cambiar Código
                 </a>
                 
-                <a href="toca meter enlace aqui" class="btn btn-yellow" data-icon="❓">
+                <a href="crearpregunta.php" class="btn btn-yellow" data-icon="❓">
                     Editar Preguntas
                 </a>
                 
-                <a href="toca meter enlace aqui" class="btn btn-yellow" data-icon="👤">
+                <a href="agregaradmi.php" class="btn btn-yellow" data-icon="👤">
                     + Agregar Cuenta
                 </a>
                 

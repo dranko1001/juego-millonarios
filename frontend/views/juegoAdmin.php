@@ -18,7 +18,7 @@ require_once __DIR__ . '/../../backend/controllers/ranking.php';
     <div class="container">
         <h1 class="title">Codigo para la Partida</h1>
         <div class="buttons-container">
-            <a href="menu.html" class="btn btn-primary">Volver al Menú</a>
+            <a href="/juego-millonarios/frontend/views/menu.php" class="btn btn-primary">Volver login</a>
             <a href="" class="btn btn-primary">Nuevo Codigo</a>
         </div>
     </div>

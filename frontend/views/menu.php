@@ -42,7 +42,7 @@ $nombre_admin = $_SESSION["admin"];
         <h1 class="title">Menú de opciones</h1>
         <br>
         <div class="buttons-container">
-            <a href="../../backend/controllers/PreguntasController.php" class="btn btn-primary">Iniciar juego </a>
+            <a href="../../backend/controllers/GenerarCodigoController.php" class="btn btn-primary">Iniciar juego </a>
             <a href="reglas.php" class="btn btn-primary">Reglas</a>
             <a href="menuOpciones.php" class="btn btn-primary">Configuracion</a>
             <a href="ranking.php" class="btn btn-primary">Puntajes</a>
