@@ -7,7 +7,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestionar Códigos de Acceso</title>
-    <link rel="stylesheet" href="../css/gestionCodigo.css">
+    <link rel="stylesheet" href="../../frontend/css/gestionCodigo.css">
     <style>
         
     </style>
@@ -16,7 +16,7 @@
     <div class="container">
         <div class="header">
             <h1>🔑 Códigos de Acceso</h1>
-            <div>
+            <div class="header-buttons">
                 <a href="../../backend/controllers/GenerarCodigoController.php?accion=generar" class="btn btn-primary">🎲 Generar Nuevo Código</a>
                 <a href="menu.php" class="btn btn-secondary"> Volver al Menú</a>
             </div>
