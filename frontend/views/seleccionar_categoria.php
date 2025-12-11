@@ -47,20 +47,17 @@ if (isset($_GET['error'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Seleccionar Categoría - Millonarios SENA</title>
     <link rel="stylesheet" href="../css/seleccionar_categoria.css">
+    
+    <!-- enlaces para que funcione bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 </head>
-<!-- enlaces para que funcione boostrap -->
- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
-<!-- fin de los enlaces de boostrap -->
- <script src="../js/seleccionarCategoria.js"></script>
 
 <body>
     <div class="categoria-container">
         <div class="header">
             <h1> <img src="../media/icons/libro.png" alt=""> Selecciona una Categoría</h1>
             <p class="subtitle">Elige el tema de las preguntas que responderás</p>
-            <p class="user-info"> Aprendiz: <strong><?php echo htmlspecialchars($_SESSION['aprendiz']); ?></strong>
-            </p>
+            <p class="user-info"> Aprendiz: <strong><?php echo htmlspecialchars($_SESSION['aprendiz']); ?></strong></p>
         </div>
 
         <?php if (!empty($error_msg)): ?>
@@ -69,8 +66,7 @@ if (isset($_GET['error'])) {
             </div>
         <?php endif; ?>
 
-        <!--  LOADER DE CARGA -->
-          <!-- necesario porque si hay muchas categortias se bugea -->
+        <!-- LOADER DE CARGA -->
         <div class="loader-overlay" id="loaderOverlay">
             <div class="loader-content">
                 <div class="loader-spinner"></div>
@@ -80,7 +76,7 @@ if (isset($_GET['error'])) {
         </div>
 
         <div class="categorias-grid" id="categoriasGrid">
-            <!-- Opción MIXTA (todas las categorías), con un css que destaquen porque es el juego base-->
+            <!-- Opción MIXTA (todas las categorías) -->
             <?php if ($total_preguntas > 0): ?>
                 <form method="POST" action="../../backend/controllers/SeleccionarCategoriaController.php"
                     class="categoria-card-form pagina-item">
@@ -108,8 +104,6 @@ if (isset($_GET['error'])) {
                             style="animation-delay: <?php echo ($index + 1) * 0.1; ?>s">
                             <div class="categoria-icon">
                                 <?php
-                                // Iconos según la categoría
-                                //se pueden agregar mmas dependiendo de la categoria que quieras
                                 $iconos = [
                                     'Historia' => '🏛️',
                                     'Ciencia' => '🔬',
@@ -173,6 +167,11 @@ if (isset($_GET['error'])) {
         </div>
     </div>
 
+    <!-- Scripts  body -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    
+    <!--  Script de paginación  -->
+    <script src="../js/seleccionarCategoria.js"></script>
 </body>
 
 </html>
