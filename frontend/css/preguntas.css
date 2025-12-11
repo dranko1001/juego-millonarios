@@ -1,3 +1,6 @@
+/* preguntas.css - Sistema de Gestión de Preguntas SENA */
+/* Colores del SENA: #39B54A (verde principal), #00A14B (verde oscuro), #FFD700 (dorado) */
+
 /* --- Reseteo Global --- */
 * {
     margin: 0;
@@ -5,477 +8,830 @@
     box-sizing: border-box;
 }
 
-/* --- Estilos Generales --- */
+/* --- Estilos Generales del Body --- */
 body {
-    font-family: 'Arial', sans-serif;
-    /* Fondo verde claro / principal */
-    background: #39B54A;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #39B54A 0%, #ffffff 100%);
     min-height: 100vh;
     display: flex;
     justify-content: center;
-    align-items: flex-start; 
-    padding: 30px 0;
-    color: #1a1a1a; /* Color de texto base oscuro */
+    align-items: flex-start;
+    padding: 40px 20px;
+    color: #1a1a1a;
+    position: relative;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
-/* --- Contenedor Principal (Caja de la Página) --- */
+/* Efecto de fondo animado profesional */
+body::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+   width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.08) 2px, transparent 2px);
+    background-size: 60px 60px;
+    animation: backgroundMove 25s linear infinite;
+    z-index: 0;
+    pointer-events: none;
+}
+
+@keyframes backgroundMove {
+    0% {
+        transform: translate(0, 0);
+    }
+    100% {
+        transform: translate(60px, 60px);
+    }
+}
+
+/* --- Contenedor Principal --- */
 .container-full {
-    width: 90%; 
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 30px;
-    /* Fondo blanco o muy claro */
-    background: rgba(255, 255, 255, 0.95); 
-    border-radius: 15px;
-    /* Sombra con tono verde para mayor cohesión */
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2), 0 0 0 5px rgba(57, 181, 74, 0.1); 
+    width: 95%;
+    max-width: 1400px;
+    margin: 20px auto;
+    padding: 0;
+    background: rgba(255, 255, 255, 0.98);
+    border-radius: 30px;
+    box-shadow: 0 30px 90px rgba(0, 0, 0, 0.3),
+                0 15px 40px rgba(0, 0, 0, 0.2);
+    position: relative;
+    z-index: 1;
+    backdrop-filter: blur(15px);
+    border: 3px solid rgba(255, 255, 255, 0.4);
+    overflow: hidden;
+    animation: fadeInScale 0.6s ease-out;
 }
 
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.95) translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+/* --- Título Principal de la Página --- */
 .title-page {
     text-align: center;
-    /* Color principal verde */
-    color: #39B54A; 
-    margin-bottom: 30px;
-    font-size: 2.5em;
-    font-weight: bold;
-    /* Borde verde */
-    border-bottom: 3px solid #39B54A; 
-    padding-bottom: 15px;
+    background: linear-gradient(135deg, #39B54A 0%, #00A14B 100%);
+    color: white;
+    margin: 0;
+    padding: 30px 40px;
+    font-size: 2.8em;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+    border-bottom: 5px solid #FFD700;
+    position: relative;
+    overflow: hidden;
 }
 
-/* --- Estructura de Dos Columnas (Menú y Contenido) --- */
+.title-page::before {
+    content: '📋';
+    position: absolute;
+    left: 40px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 2.5em;
+    opacity: 0.3;
+}
+
+.title-page::after {
+    content: '✏️';
+    position: absolute;
+    right: 40px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 2.5em;
+    opacity: 0.3;
+}
+
+/* --- Estructura de Contenido --- */
 .main-content {
     display: flex;
-    gap: 30px; 
-    /* Clave para igualar la altura de sidebar-menu y content-area */
-    align-items: stretch; 
+    flex-direction: column;
+    gap: 30px;
+    padding: 40px;
 }
 
-/* --- 2. Menú Lateral (Sidebar) --- */
+/* --- Menú Horizontal (Sidebar) --- */
 .sidebar-menu {
-    flex-basis: 250px; 
-    flex-shrink: 0; 
-    background-color: #f0fff0; 
-    padding: 20px 0;
-    border-radius: 10px;
-    border: 1px solid #c8e6c9;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-
-    /* --- FLEXBOX VERTICAL PARA EMPUJAR EL BOTÓN ABAJO --- */
-    display: flex; 
-    flex-direction: column; 
-    height: 100%; /* Asegura que tome toda la altura estirada */
+    width: 100%;
+    background: linear-gradient(180deg, #f0fff0 0%, #ffffff 100%);
+    padding: 20px;
+    border-radius: 20px;
+    border: 3px solid #39B54A;
+    box-shadow: 0 10px 30px rgba(57, 181, 74, 0.2);
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    animation: slideInTop 0.6s ease-out;
 }
 
-/* --- 3. Lista de Opciones (Las opciones que deben estar arriba) --- */
+@keyframes slideInTop {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* --- Lista de Opciones del Menú --- */
 .menu-list {
-    list-style: none; 
+    list-style: none;
     padding: 0;
     margin: 0;
-    /* Ocupa todo el espacio vertical disponible, empujando el back-link */
-    flex-grow: 1; 
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+    flex-grow: 1;
+    justify-content: flex-start;
 }
 
 .menu-list li {
-    margin-bottom: 0;
+    margin: 0;
+    position: relative;
 }
 
 .menu-item {
-    display: block;
+    display: flex;
+    align-items: center;
     padding: 12px 20px;
     text-decoration: none;
     color: #1a1a1a;
-    font-weight: 500;
-    transition: all 0.2s ease;
+    font-weight: 600;
+    font-size: 1.05em;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    border-radius: 12px;
+    border-bottom: 3px solid transparent;
+    white-space: nowrap;
 }
 
-/* Efecto hover general del menú */
+.menu-item::before {
+    content: '●';
+    margin-right: 12px;
+    font-size: 1.2em;
+    transition: all 0.3s ease;
+}
+
 .menu-item:hover {
-    background-color: #e6f0ff; 
+    transform: translateY(-3px);
+    border-bottom-color: #39B54A;
+}
+
+/* Estilos específicos para cada tipo de acción */
+.menu-create {
     color: #00A14B;
-    transform: translateX(5px);
 }
 
-/* Estilos de hover específicos (Verdes) */
-.menu-create:hover { 
-    background-color: #a3d9a3; /* Verde de creación */
-    color: white;
-} 
-.menu-edit:hover { 
-    background-color: #ffe082; /* Amarillo/Naranja sutil para edición */
-    color: #1a1a1a;
-} 
-.menu-delete:hover { 
-    background-color: #ffcdd2; /* Rojo suave para eliminar */
-    color: #c62828;
+.menu-create::before {
+    content: '➕';
 }
 
-/* --- 4. Enlace de Volver (El botón de abajo) --- */
+.menu-create:hover {
+    background: linear-gradient(90deg, rgba(57, 181, 74, 0.15), transparent);
+    color: #00A14B;
+}
+
+.menu-create:hover::before {
+    transform: scale(1.3) rotate(90deg);
+}
+
+.menu-edit {
+    color: #f57c00;
+}
+
+.menu-edit::before {
+    content: '✏️';
+}
+
+.menu-edit:hover {
+    background: linear-gradient(90deg, rgba(255, 193, 7, 0.15), transparent);
+    color: #f57c00;
+}
+
+.menu-edit:hover::before {
+    transform: scale(1.3);
+}
+
+.menu-delete {
+    color: #d32f2f;
+}
+
+.menu-delete::before {
+    content: '🗑️';
+}
+
+.menu-delete:hover {
+    background: linear-gradient(90deg, rgba(211, 47, 47, 0.15), transparent);
+    color: #d32f2f;
+}
+
+.menu-delete:hover::before {
+    transform: scale(1.3);
+}
+
+/* --- Botón de Volver --- */
 .back-link {
     display: block;
-    /* Se quita el margin-top: auto; de la regla anterior si ya se definió abajo, 
-       pero se usa 'auto' para la separación: */
-    margin-top: auto; 
-    margin-left: 20px;
-    margin-right: 20px;
-    margin-bottom: 10px; 
-    
     text-align: center;
-    padding: 10px;
-    background-color: #39B54A;
+    padding: 12px 25px;
+    background: linear-gradient(135deg, #6c757d 0%, #495057 100%);
     color: white;
     border: none;
-    border-radius: 8px;
+    border-radius: 12px;
     text-decoration: none;
-    font-weight: bold;
-    transition: all 0.2s ease;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    font-weight: 700;
+    font-size: 1.05em;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+    letter-spacing: 1px;
+    white-space: nowrap;
+}
+
+.back-link::before {
+    content: '↩️ ';
+    font-size: 1.2em;
 }
 
 .back-link:hover {
-    background-color: #2d8f3b; /* Tono de hover oscuro */
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    background: linear-gradient(135deg, #5a6268 0%, #3d4349 100%);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
 }
 
-/* --- 5. Área de Contenido Principal --- */
+.back-link:active {
+    transform: translateY(-1px);
+}
+
+/* --- Área de Contenido Principal --- */
 .content-area {
-    flex-grow: 1; 
-    padding: 30px;
-    border: 2px dashed #a3d9a3; 
-    min-height: 450px;
-    border-radius: 10px;
-    background-color: #ffffff;
+    flex-grow: 1;
+    padding: 35px;
+    border: none;
+    min-height: 500px;
+    border-radius: 20px;
+    background: #ffffff;
+    box-shadow: inset 0 0 0 2px rgba(57, 181, 74, 0.2);
+    animation: fadeInRight 0.6s ease-out 0.2s backwards;
 }
 
-
-/* --- Responsividad (Para que se apile en móviles) --- */
-@media (max-width: 800px) {
-    body {
-        padding: 15px 0;
+@keyframes fadeInRight {
+    from {
+        opacity: 0;
+        transform: translateX(50px);
     }
-    
-    .main-content {
-        /* Apila el menú sobre el contenido */
-        flex-direction: column; 
-    }
-    
-    .sidebar-menu {
-        flex-basis: auto; 
-        width: 100%;
-        padding: 15px;
-        margin-bottom: 20px;
-        /* IMPORTANTE: Deshacer el flex vertical en móvil para que funcione la lista horizontal */
-        flex-direction: row; 
-        height: auto; 
-    }
-    
-    .menu-title {
-        /* Oculta el título "Opciones" en móvil si está definido */
-        display: none; 
-    }
-    
-    .menu-list {
-        /* Permite que el menú sea una lista horizontal en pantallas pequeñas */
-        display: flex;
-        justify-content: space-around;
-        flex-wrap: wrap;
-        border-bottom: 1px solid #ddd;
-        padding-bottom: 10px;
-        flex-grow: 0; /* Deshacer el grow en móvil */
-        width: 80%;
-    }
-    
-    .menu-list li {
-        width: auto; /* Ajuste automático del ancho */
-        flex-basis: 30%;
-        text-align: center;
-    }
-
-    .menu-item {
-        padding: 10px 5px;
-        font-size: 0.9em;
-    }
-
-    .back-link {
-        /* Mueve el botón de volver al final del flex-row y lo separa */
-        margin: 0;
-        margin-left: auto; /* Empuja el botón al final derecho */
-        align-self: center;
-        width: auto;
-        padding: 8px 15px;
-    }
-    
-    .container-full {
-        padding: 15px;
-        width: 100%;
-    }
-    
-    .content-area {
-        min-height: 200px;
-        padding: 15px;
+    to {
+        opacity: 1;
+        transform: translateX(0);
     }
 }
 
-@media (max-width: 480px) {
-    .menu-list {
-        display: block; /* Vuelve a apilar las opciones verticalmente */
-        width: 100%;
-        margin-bottom: 10px;
-        padding-bottom: 0;
-        border-bottom: none;
-    }
-    
-    .menu-list li {
-        width: 100%;
-        margin-bottom: 5px;
-    }
-
-    .sidebar-menu {
-        flex-direction: column;
-        align-items: center;
-        gap: 10px;
-    }
-
-    .back-link {
-        margin: 0;
-        margin-top: 10px;
-        margin-left: 0;
-        width: 100%;
-    }
-}
-
-/* --- Estilos del Formulario --- */
+/* --- Título del Formulario --- */
 .form-title {
-    color: #00A14B;
-    font-size: 1.8em;
-    margin-bottom: 25px;
-    border-bottom: 1px solid #c8e6c9;
-    padding-bottom: 10px;
+    background: linear-gradient(135deg, #39B54A, #00A14B, #FFD700);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-size: 2.2em;
+    font-weight: 800;
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    border-bottom: 3px solid #FFD700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
 }
 
+/* --- Formularios --- */
 .form-group {
-    margin-bottom: 20px;
+    margin-bottom: 25px;
     text-align: left;
+    animation: fadeInUp 0.5s ease-out backwards;
+}
+
+.form-group:nth-child(1) { animation-delay: 0.1s; }
+.form-group:nth-child(2) { animation-delay: 0.2s; }
+.form-group:nth-child(3) { animation-delay: 0.3s; }
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .form-group label {
     display: block;
-    font-weight: bold;
-    margin-bottom: 8px;
+    font-weight: 700;
+    margin-bottom: 10px;
     color: #39B54A;
+    font-size: 1.05em;
+    letter-spacing: 0.5px;
 }
 
 /* Estilos para campos de texto y select */
 .form-group input[type="text"],
 .form-group textarea,
-.form-group select {
+.form-group select,
+.form-control {
     width: 100%;
-    padding: 12px;
-    border: 1px solid #c8e6c9;
-    border-radius: 5px;
+    padding: 14px 18px;
+    border: 2px solid #c8e6c9;
+    border-radius: 12px;
     font-size: 1em;
-    transition: border-color 0.3s;
+    transition: all 0.3s ease;
+    background: #ffffff;
+    font-family: inherit;
 }
-/* --- Estilo para la Alineación del Select y el Botón --- */
-.select-with-button {
-    /* Contenedor que alinea horizontalmente */
-    display: flex;
-    gap: 10px;
-    align-items: center;
-}
-
-.select-with-button select {
-    /* El select ocupa la mayor parte del espacio */
-    flex-grow: 1;
-    width: auto; /* Anula el 100% que puede venir de .form-group input/select */
-}
-
-.add-category-btn {
-    padding: 10px 15px;
-    font-size: 0.9em;
-    background-color: #00A14B;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background-color 0.2s;
-    white-space: nowrap; /* Evita que el texto se rompa */
-    line-height: normal; /* Asegura que el texto esté centrado verticalmente */
-}
-
-.add-category-btn:hover {
-    background-color: #2d8f3b;
-}
-
-/* --- (El resto del CSS del Modal y el formulario) --- */
 
 .form-group input[type="text"]:focus,
 .form-group textarea:focus,
-.form-group select:focus {
+.form-group select:focus,
+.form-control:focus {
     border-color: #39B54A;
     outline: none;
-    box-shadow: 0 0 5px rgba(57, 181, 74, 0.5);
+    box-shadow: 0 0 0 4px rgba(57, 181, 74, 0.2),
+                0 5px 15px rgba(57, 181, 74, 0.15);
+    transform: translateY(-2px);
 }
 
 .form-group textarea {
     resize: vertical;
+    min-height: 120px;
+    line-height: 1.6;
 }
 
-.form-group.half-width {
-    max-width: 50%;
-}
-
-.form-divider {
-    border: 0;
-    height: 1px;
-    background-color: #c8e6c9;
-    margin: 30px 0;
-}
-
-/* --- Estilos para Opciones de Respuesta --- */
-.options-title {
-    color: #00A14B;
-    font-size: 1.5em;
-    margin-bottom: 20px;
-    text-align: left;
-}
-
-.options-grid {
+/* --- Grid de Metadata (Categoría y Dificultad) --- */
+.metadata-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
+    gap: 25px;
+    margin-bottom: 30px;
 }
 
-.option-group {
-    background-color: #f8fff8;
-    padding: 15px;
-    border: 1px solid #c8e6c9;
-    border-radius: 8px;
-    text-align: left;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-}
-
-.option-group input[type="text"] {
-    width: 100%;
-    padding: 10px;
-    margin-top: 10px;
-}
-
-.option-group input[type="radio"] {
-    margin-right: 10px;
-    accent-color: #39B54A; /* Colorea el radio button */
-    transform: scale(1.2);
-}
-
-.radio-label {
-    font-weight: bold;
-    color: #1a1a1a;
-}
-
-/* Estilo para el botón de envío */
-.submit-btn {
-    width: 50%;
-    padding: 15px;
-    margin-top: 30px;
-    font-size: 1.2em;
-    font-weight: bold;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    background: #39B54A;
-    color: white;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-}
-
-.submit-btn:hover {
-    background: #2d8f3b;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 15px rgba(57, 181, 74, 0.4);
-}
-
-/* --- Estilos del Modal (Estructura Base) --- */
-.modal {
-    display: none; /* Oculto por defecto */
-    position: fixed;
-    z-index: 100; 
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.6); 
-    overflow: auto;
-    backdrop-filter: blur(3px);
-}
-
-.modal-content {
-    background-color: #ffffff;
-    margin: 15% auto;
-    padding: 30px;
-    border: 1px solid #888;
-    width: 90%;
-    max-width: 450px;
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
-    position: relative;
-    animation-name: animatetop;
-    animation-duration: 0.4s;
-}
-
-@keyframes animatetop {
-    from {top: -300px; opacity: 0} 
-    to {top: 0; opacity: 1}
-}
-
-.modal-title {
-    color: #39B54A;
-    margin-bottom: 20px;
-    border-bottom: 2px solid #c8e6c9;
-    padding-bottom: 10px;
-}
-
-.close-btn {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-    position: absolute;
-    top: 10px;
-    right: 15px;
-}
-
-.close-btn:hover,
-.close-btn:focus {
-    color: #c62828;
-    text-decoration: none;
-    cursor: pointer;
-}
-
-.modal-submit-btn {
-    width: 100%;
-    padding: 12px;
-    margin-top: 20px;
-    font-size: 1em;
-    background: #39B54A;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background 0.2s;
-}
-
-.modal-submit-btn:hover {
-    background: #2d8f3b;
-}
-
-/* También asegura que los estilos para la alineación del botón existan */
+/* --- Alineación del Select y el Botón --- */
 .select-with-button {
     display: flex;
-    gap: 10px;
-    align-items: center;
+    gap: 12px;
+    align-items: stretch;
 }
+
 .select-with-button select {
     flex-grow: 1;
     width: auto;
+}
+
+.add-category-btn {
+    padding: 14px 20px;
+    font-size: 0.95em;
+    font-weight: 700;
+    background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+    color: #1a1a1a;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    box-shadow: 0 5px 15px rgba(255, 165, 0, 0.3);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.add-category-btn:hover {
+    background: linear-gradient(135deg, #FFC107 0%, #FF9800 100%);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(255, 165, 0, 0.4);
+}
+
+.add-category-btn:active {
+    transform: translateY(-1px);
+}
+
+/* --- Opciones de Respuesta (Radio + Texto) --- */
+.form-group .mb-2 {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 15px;
+    background: #f8fff8;
+    border: 2px solid #c8e6c9;
+    border-radius: 12px;
+    margin-bottom: 15px !important;
+    transition: all 0.3s ease;
+}
+
+.form-group .mb-2:hover {
+    background: #e8f5e8;
+    border-color: #39B54A;
+    transform: translateX(5px);
+}
+
+.form-group .mb-2 input[type="radio"] {
+    margin: 0;
+    accent-color: #39B54A;
+    transform: scale(1.3);
+    cursor: pointer;
+}
+
+.form-group .mb-2 input[type="text"] {
+    margin: 0;
+}
+
+/* --- Botón de Guardar Pregunta --- */
+.save-btn,
+.submit-btn {
+    width: 100%;
+    max-width: 500px;
+    display: block;
+    margin: 40px auto 0;
+    padding: 18px 40px;
+    font-size: 1.3em;
+    font-weight: 800;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    background: linear-gradient(135deg, #39B54A 0%, #00A14B 100%);
+    color: white;
+    box-shadow: 0 10px 30px rgba(57, 181, 74, 0.4);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    position: relative;
+    overflow: hidden;
+}
+
+.save-btn::before,
+.submit-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    transition: left 0.7s;
+}
+
+.save-btn:hover::before,
+.submit-btn:hover::before {
+    left: 100%;
+}
+
+.save-btn:hover,
+.submit-btn:hover {
+    background: linear-gradient(135deg, #2d8f3b 0%, #00781f 100%);
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 15px 40px rgba(57, 181, 74, 0.6);
+}
+
+.save-btn:active,
+.submit-btn:active {
+    transform: translateY(-2px) scale(1);
+}
+
+/* --- Tablas --- */
+.table-responsive {
+    margin-top: 30px;
+    border-radius: 15px;
+    overflow-x: auto;
+    overflow-y: visible;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+.table {
+    margin: 0;
+    border-collapse: separate;
+    border-spacing: 0;
+    width: 100%;
+}
+
+.table thead {
+    background: linear-gradient(135deg, #39B54A 0%, #00A14B 100%);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.table thead th {
+    color: white;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 18px 15px;
+    border: none;
+    font-size: 0.95em;
+}
+
+.table tbody tr {
+    transition: background 0.3s ease;
+    background: white;
+}
+
+.table tbody tr:nth-child(even) {
+    background: #f8fff8;
+}
+
+.table tbody tr:hover {
+    background: #e8f5e8;
+    box-shadow: 0 2px 8px rgba(57, 181, 74, 0.15);
+}
+
+.table tbody td {
+    padding: 15px;
+    border-bottom: 1px solid #e0e0e0;
+    vertical-align: middle;
+    position: relative;
+}
+
+/* --- Buscador --- */
+.mb-4.d-flex {
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.mb-4.d-flex input {
+    flex-grow: 1;
+    padding: 14px 20px;
+    border: 2px solid #c8e6c9;
+    border-radius: 12px;
+    font-size: 1.05em;
+}
+
+.mb-4.d-flex input:focus {
+    border-color: #39B54A;
+    box-shadow: 0 0 0 4px rgba(57, 181, 74, 0.2);
+}
+
+.mb-4.d-flex .btn-primary {
+    padding: 14px 30px;
+    background: linear-gradient(135deg, #39B54A 0%, #00A14B 100%);
+    border: none;
+    border-radius: 12px;
+    color: white;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(57, 181, 74, 0.3);
+}
+
+.mb-4.d-flex .btn-primary:hover {
+    background: linear-gradient(135deg, #2d8f3b 0%, #00781f 100%);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(57, 181, 74, 0.4);
+}
+
+/* --- Botones de Acción en Tablas --- */
+.btn-warning {
+    background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+    border: none;
+    color: #1a1a1a;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-weight: 700;
+    transition: all 0.3s ease;
+    box-shadow: 0 3px 10px rgba(255, 165, 0, 0.3);
+    position: relative;
+    z-index: 5;
+    white-space: nowrap;
+}
+
+.btn-warning:hover {
+    background: linear-gradient(135deg, #FFC107 0%, #FF9800 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 165, 0, 0.4);
+    z-index: 15;
+}
+
+.btn-danger {
+    background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+    border: none;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-weight: 700;
+    transition: all 0.3s ease;
+    box-shadow: 0 3px 10px rgba(220, 53, 69, 0.3);
+    position: relative;
+    z-index: 5;
+    white-space: nowrap;
+}
+
+.btn-danger:hover {
+    background: linear-gradient(135deg, #c82333 0%, #bd2130 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(220, 53, 69, 0.4);
+    z-index: 15;
+}
+
+.btn-sm {
+    font-size: 0.9em;
+    padding: 6px 14px;
+}
+
+/* Asegurar que la celda de acciones sea visible */
+.table tbody td:last-child {
+    position: relative;
+    z-index: 2;
+    white-space: nowrap;
+}
+
+/* --- Modales de Bootstrap --- */
+.modal-content {
+    border-radius: 20px;
+    border: 3px solid #39B54A;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.modal-header {
+    background: linear-gradient(135deg, #39B54A 0%, #00A14B 100%);
+    color: white;
+    border-radius: 17px 17px 0 0;
+    padding: 20px 30px;
+    border-bottom: none;
+}
+
+.modal-title {
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+}
+
+.modal-body {
+    padding: 30px;
+    background: #ffffff;
+}
+
+.modal-footer {
+    padding: 20px 30px;
+    border-top: 2px solid #e0e0e0;
+    background: #f8f9fa;
+    border-radius: 0 0 17px 17px;
+}
+
+.btn-success {
+    background: linear-gradient(135deg, #39B54A 0%, #00A14B 100%);
+    border: none;
+    padding: 12px 30px;
+    border-radius: 10px;
+    font-weight: 700;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(57, 181, 74, 0.3);
+}
+
+.btn-success:hover {
+    background: linear-gradient(135deg, #2d8f3b 0%, #00781f 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(57, 181, 74, 0.4);
+}
+
+.btn-secondary {
+    background: linear-gradient(135deg, #6c757d 0%, #495057 100%);
+    border: none;
+    padding: 12px 30px;
+    border-radius: 10px;
+    font-weight: 700;
+    transition: all 0.3s ease;
+}
+
+.btn-secondary:hover {
+    background: linear-gradient(135deg, #5a6268 0%, #3d4349 100%);
+    transform: translateY(-2px);
+}
+
+/* --- Responsive Design --- */
+@media (max-width: 1024px) {
+    .main-content {
+        gap: 25px;
+    }
+
+    .sidebar-menu {
+        padding: 15px;
+    }
+
+    .menu-list {
+        gap: 10px;
+    }
+
+    .menu-item {
+        padding: 10px 15px;
+        font-size: 0.95em;
+    }
+
+    .back-link {
+        padding: 10px 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    body {
+        padding: 20px 10px;
+    }
+
+    .container-full {
+        width: 100%;
+        border-radius: 20px;
+    }
+
+    .title-page {
+        font-size: 2em;
+        padding: 25px 20px;
+    }
+
+    .title-page::before,
+    .title-page::after {
+        display: none;
+    }
+
+    .main-content {
+        padding: 25px;
+    }
+
+    .metadata-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .select-with-button {
+        flex-direction: column;
+    }
+
+    .select-with-button select {
+        width: 100%;
+    }
+
+    .menu-list {
+        flex-direction: column;
+        gap: 10px;
+        width: 100%;
+    }
+
+    .menu-list li {
+        width: 100%;
+    }
+
+    .menu-item {
+        justify-content: center;
+    }
+
+    .content-area {
+        padding: 25px;
+        min-height: 300px;
+    }
+
+    .save-btn,
+    .submit-btn {
+        font-size: 1.1em;
+        padding: 15px 30px;
+    }
+}
+
+@media (max-width: 480px) {
+    .title-page {
+        font-size: 1.6em;
+        letter-spacing: 1px;
+    }
+
+    .main-content {
+        padding: 15px;
+    }
+
+    .content-area {
+        padding: 20px;
+    }
+
+    .form-title {
+        font-size: 1.6em;
+    }
+
+    .sidebar-menu {
+        border-radius: 15px;
+    }
+
+    .table-responsive {
+        font-size: 0.85em;
+    }
+
+    .table thead th,
+    .table tbody td {
+        padding: 10px 8px;
+    }
 }
