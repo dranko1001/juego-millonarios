@@ -52,7 +52,7 @@ if (isset($_GET['error'])) {
         <?php endif; ?>
 
         <input 
-            type="text" 
+            type="number" 
             name="codigo" 
             placeholder="000000" 
             required 

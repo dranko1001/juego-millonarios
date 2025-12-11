@@ -18,13 +18,13 @@
             <h1>🔑 Códigos de Acceso</h1>
             <div class="header-buttons">
                 <a href="../../backend/controllers/GenerarCodigoController.php?accion=generar" class="btn btn-primary">🎲 Generar Nuevo Código</a>
-                <a href="menu.php" class="btn btn-secondary"> Volver al Menú</a>
+                <a href="../../frontend/views/menuOpciones.php" class="btn btn-secondary"> Volver al Menú</a>
             </div>
         </div>
 
         <?php if (isset($_GET['success']) && $_GET['success'] === 'generado' && isset($_GET['codigo'])): ?>
             <div class="alert alert-success">
-                ✅ <strong>¡Código generado exitosamente!</strong><br><br>
+                 <strong>¡Código generado exitosamente!</strong><br><br>
                 <div class="codigo-destacado"><?php echo htmlspecialchars($_GET['codigo']); ?></div>
                 <p style="margin-top: 10px;">Comparte este código con los aprendices</p>
             </div>
@@ -32,7 +32,7 @@
 
         <?php if (isset($_GET['success']) && $_GET['success'] === 'eliminado'): ?>
             <div class="alert alert-success">
-                ✅ Código eliminado exitosamente
+                 Código eliminado exitosamente
             </div>
         <?php endif; ?>
 
@@ -55,7 +55,7 @@
 
         <?php if (empty($codigos)): ?>
             <div class="empty-state">
-                <h2>🔓 No hay códigos activos</h2>
+                <h2> No hay códigos activos</h2>
                 <p>Genera un código para que los aprendices puedan acceder al juego</p>
             </div>
         <?php else: ?>

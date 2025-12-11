@@ -41,6 +41,7 @@ $preguntas = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <title>Eliminar Preguntas</title>
 <link rel="stylesheet" href="../css/preguntas.css">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="../js/eliminarpregunta.js"></script>
 </head>
 <body>
 <div class="container-full">
@@ -141,13 +142,5 @@ $preguntas = $stmt->fetchAll(PDO::FETCH_ASSOC);
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
-<script>
-var eliminarModal = document.getElementById('eliminarModal');
-eliminarModal.addEventListener('show.bs.modal', function (event) {
-  var button = event.relatedTarget;
-  document.getElementById('modal-id').value = button.getAttribute('data-id');
-  document.getElementById('modal-enunciado').textContent = button.getAttribute('data-enunciado');
-});
-</script>
 </body>
 </html>

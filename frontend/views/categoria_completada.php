@@ -15,14 +15,6 @@
     <div class="felicitaciones">
         <h2>🏆 ¡Felicitaciones, <?php echo htmlspecialchars($aprendiz); ?>! 🏆</h2>
         <p>Has completado todas las preguntas de la categoría:</p>
-            echo "🌟 ¡Excelente! Dominas completamente este tema.";
-        } elseif ($porcentaje >= 70) {
-            echo "👏 ¡Muy bien! Tienes un buen conocimiento de este tema.";
-        } elseif ($porcentaje >= 50) {
-            echo "💪 ¡Buen intento! Sigue practicando para mejorar.";
-        } else {
-            echo "📚 Sigue estudiando, cada intento te hace mejor.";
-        }
         ?>
     </div>
     
