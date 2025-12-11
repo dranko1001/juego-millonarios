@@ -43,7 +43,7 @@
         <?php endif; ?>
 
         <div class="instrucciones">
-            <h3>📋 Instrucciones:</h3>
+            <h3> Instrucciones:</h3>
             <ol>
                 <li>Haz clic en "Generar Nuevo Código" para crear un código de acceso</li>
                 <li>Comparte el código de 6 dígitos con los aprendices</li>

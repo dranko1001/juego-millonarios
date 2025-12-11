@@ -77,9 +77,9 @@ function usar5050() {
         });
         return;
     }
-
+//los emojis son parte de la estetica de los botones
     Swal.fire({
-        title: '🎯 Comodín 50/50',
+        title: ' Comodín 50/50',
         text: '¿Deseas usar el comodín 50/50? Se eliminarán 2 respuestas incorrectas.',
         icon: 'question',
         showCancelButton: true,
