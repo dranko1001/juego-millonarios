@@ -2,11 +2,16 @@
 // backend/controllers/PreguntasController.php
 session_start();
 
+// ✅ NUEVO: Inicializar comodines
+require_once __DIR__ . '/../models/ComodinModel.php';
+ComodinModel::inicializarComodines();
+
 // Verificar autenticación
 if (!isset($_SESSION["aprendiz"]) || !isset($_SESSION["codigo_validado"])) {
     header("Location: ../../frontend/views/login_aprendiz.php");
     exit();
 }
+
 
 // ✅ NUEVO: Inicializar puntajes si no existen
 if (!isset($_SESSION['puntaje_pesos'])) {
@@ -23,7 +28,7 @@ if (!isset($_SESSION["categoria_seleccionada"])) {
     exit();
 }
 
-require_once __DIR__ . '/../models/PreguntaModel.php'; 
+require_once __DIR__ . '/../models/PreguntaModel.php';
 
 $preguntaModel = new PreguntaModel();
 $categoria_seleccionada = $_SESSION["categoria_seleccionada"];
@@ -39,23 +44,25 @@ $datosPregunta = null;
 
 // ✅ ANTI-TRAMPA: Verificar si ya hay una pregunta activa (sin responder)
 if (isset($_SESSION['pregunta_activa']) && $_SESSION['pregunta_activa'] === true) {
-    
+
     // ✅ Reutilizar la pregunta actual guardada en sesión
-    if (isset($_SESSION['pregunta_actual_id']) && 
-        isset($_SESSION['enunciado_pregunta']) && 
-        isset($_SESSION['opciones_mostradas'])) {
-        
+    if (
+        isset($_SESSION['pregunta_actual_id']) &&
+        isset($_SESSION['enunciado_pregunta']) &&
+        isset($_SESSION['opciones_mostradas'])
+    ) {
+
         // Reconstruir la pregunta desde la sesión
         $pregunta['enunciado'] = $_SESSION['enunciado_pregunta'];
         $opciones_a_mostrar = $_SESSION['opciones_mostradas'];
-        
+
         // Crear un array simulado de datos de pregunta para compatibilidad
         $datosPregunta = [
             'ID_pregunta' => $_SESSION['pregunta_actual_id'],
             'enunciado_pregunta' => $_SESSION['enunciado_pregunta'],
             'TBL_dificultades_ID_dificultad' => $_SESSION['dificultad_pregunta'] ?? 1
         ];
-        
+
         $pregunta['opciones_mostradas'] = $opciones_a_mostrar;
         $pregunta['respuesta_correcta_letra'] = $_SESSION['respuesta_correcta_letra'];
         $pregunta['respuesta_correcta_texto'] = $_SESSION['respuesta_correcta_texto'];
@@ -72,7 +79,7 @@ if (isset($_SESSION['pregunta_activa']) && $_SESSION['pregunta_activa'] === true
 
 // ✅ Si NO hay pregunta activa, generar una nueva
 if (!isset($_SESSION['pregunta_activa']) || $_SESSION['pregunta_activa'] === false) {
-    
+
     // Obtener pregunta según la categoría seleccionada
     if ($categoria_seleccionada === "MIXTA") {
         $datosPregunta = $preguntaModel->obtenerPreguntaAleatoria($_SESSION['preguntas_respondidas']);
@@ -91,7 +98,7 @@ if (!isset($_SESSION['pregunta_activa']) || $_SESSION['pregunta_activa'] === fal
         ];
 
         $pregunta['respuesta_correcta_texto'] = $datosPregunta['correcta_pregunta'];
-        
+
         // ✅ Mezclar las opciones
         shuffle($opciones);
 
@@ -99,12 +106,12 @@ if (!isset($_SESSION['pregunta_activa']) || $_SESSION['pregunta_activa'] === fal
         for ($i = 0; $i < count($opciones); $i++) {
             $opciones_a_mostrar[$letras[$i]] = $opciones[$i];
         }
-        
+
         $respuesta_correcta_letra = array_search($pregunta['respuesta_correcta_texto'], $opciones_a_mostrar);
 
         $pregunta['opciones_mostradas'] = $opciones_a_mostrar;
         $pregunta['respuesta_correcta_letra'] = $respuesta_correcta_letra;
-        
+
         // ✅ Guardar en sesión
         $_SESSION['pregunta_actual_id'] = $datosPregunta['ID_pregunta'];
         $_SESSION['respuesta_correcta_letra'] = $respuesta_correcta_letra;
@@ -119,7 +126,7 @@ if (!isset($_SESSION['pregunta_activa']) || $_SESSION['pregunta_activa'] === fal
         
         // ✅ MARCAR PREGUNTA COMO ACTIVA (sin responder)
         $_SESSION['pregunta_activa'] = true;
-        
+
         // ✅ Agregar a preguntas respondidas para no repetirla
         $_SESSION['preguntas_respondidas'][] = $datosPregunta['ID_pregunta'];
 
@@ -129,11 +136,11 @@ if (!isset($_SESSION['pregunta_activa']) || $_SESSION['pregunta_activa'] === fal
             require_once __DIR__ . '/../models/JugadorModel.php';
             $jugadorModel = new JugadorModel();
             $jugadorModel->actualizarPuntaje(
-                $_SESSION['id_jugador'], 
+                $_SESSION['id_jugador'],
                 $_SESSION['puntaje_pesos']
             );
         }
-        
+
         header("Location: ../../frontend/views/categoria_completada.php");
         exit();
     }

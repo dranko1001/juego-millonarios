@@ -56,9 +56,23 @@ CREATE TABLE `tbl_categorias` (
 --
 
 INSERT INTO `tbl_categorias` (`ID_categoria`, `nombre_categoria`) VALUES
+(5, '\''),
+(6, '\'=\''),
 (3, 'Arte y Literatura'),
 (14, 'Biología'),
+(14, 'Biología'),
 (2, 'Ciencia'),
+(11, 'Cine y TV'),
+(12, 'Cultura General'),
+(8, 'Deportes'),
+(16, 'Economía'),
+(7, 'Geografía'),
+(1, 'Historia'),
+(13, 'Matemáticas'),
+(9, 'Música'),
+(4, 'pizza'),
+(10, 'Tecnología'),
+(15, 'Videojuegos');
 (11, 'Cine y TV'),
 (12, 'Cultura General'),
 (8, 'Deportes'),
@@ -83,6 +97,13 @@ CREATE TABLE `tbl_codigoacesso` (
   `validar_codigoAcesso` tinyint(4) NOT NULL,
   `fecha_codigoAcesso` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `tbl_codigoacesso`
+--
+
+INSERT INTO `tbl_codigoacesso` (`ID_codigoAcesso`, `codigo_codigoAcesso`, `validar_codigoAcesso`, `fecha_codigoAcesso`) VALUES
+(1, '520902', 1, '2025-12-05');
 
 --
 -- Dumping data for table `tbl_codigoacesso`
@@ -511,6 +532,12 @@ ALTER TABLE `tbl_logs_debug`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `tbl_logs_debug`
+--
+ALTER TABLE `tbl_logs_debug`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `tbl_preguntas`
 --
 ALTER TABLE `tbl_preguntas`
@@ -539,11 +566,13 @@ ALTER TABLE `tbl_administradores`
 --
 ALTER TABLE `tbl_categorias`
   MODIFY `ID_categoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `ID_categoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `tbl_codigoacesso`
 --
 ALTER TABLE `tbl_codigoacesso`
+  MODIFY `ID_codigoAcesso` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
   MODIFY `ID_codigoAcesso` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
@@ -574,6 +603,7 @@ ALTER TABLE `tbl_logs_debug`
 -- AUTO_INCREMENT for table `tbl_preguntas`
 --
 ALTER TABLE `tbl_preguntas`
+  MODIFY `ID_pregunta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
   MODIFY `ID_pregunta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
