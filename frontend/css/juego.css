@@ -511,3 +511,143 @@ body::before {
 .answer-btn:nth-child(2) { animation-delay: 0.2s; }
 .answer-btn:nth-child(3) { animation-delay: 0.3s; }
 .answer-btn:nth-child(4) { animation-delay: 0.4s; }
+
+        /*  ESTILOS PARA COMODINES */
+        .lifeline {
+            position: relative;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .lifeline:hover:not(.usado) {
+            transform: scale(1.1);
+            filter: brightness(1.2);
+        }
+
+        .lifeline.usado {
+            opacity: 0.3;
+            cursor: not-allowed;
+            filter: grayscale(100%);
+        }
+
+        .lifeline.usado::after {
+            content: '✗';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 3em;
+            color: red;
+            font-weight: bold;
+        }
+
+        /* Opciones eliminadas por 50/50 */
+        .answer-btn.eliminada {
+            opacity: 0.3;
+            pointer-events: none;
+            text-decoration: line-through;
+            background: linear-gradient(135deg, #666 0%, #444 100%) !important;
+        }
+
+        /* Modal de Ayuda del Público */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            max-width: 500px;
+            border: 5px solid white;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-content h2 {
+            color: white;
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+
+        .modal-timer {
+            font-size: 4em;
+            color: #FFD700;
+            font-weight: bold;
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+        }
+
+        .modal-btn {
+            background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+            color: #1a1a1a;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.2em;
+            font-weight: bold;
+            border-radius: 10px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .modal-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(255, 215, 0, 0.5);
+        }
+
+        /* ✅ PERSONALIZAR SWEETALERT2 */
+        .swal2-popup {
+            font-size: 1.2rem;
+            border-radius: 20px;
+        }
+
+        .swal2-title {
+            font-size: 2em;
+            font-weight: bold;
+        }
+
+        .swal2-html-container {
+            font-size: 1.1em;
+        }
+
+        .swal2-confirm {
+            background: linear-gradient(135deg, #39B54A 0%, #00A14B 100%) !important;
+            padding: 12px 30px !important;
+            font-size: 1.1em !important;
+            border-radius: 10px !important;
+            font-weight: bold !important;
+        }
+
+        .swal2-cancel {
+            background: linear-gradient(135deg, #dc3545 0%, #c82333 100%) !important;
+            padding: 12px 30px !important;
+            font-size: 1.1em !important;
+            border-radius: 10px !important;
+            font-weight: bold !important;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+        }

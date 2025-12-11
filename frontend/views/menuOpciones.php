@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-// Proteger la página: si no hay sesión de admin, redirigir al login
+// protege la pagina  si no hay sesión de admin, redirigir al login
 if (!isset($_SESSION["admin"])) {
     header("Location: login_administrador.php");
     exit();
@@ -32,6 +32,7 @@ $nombre_admin = $_SESSION["admin"];
             <h1 class="title">Configuraciones</h1>
             <p class="subtitle">Panel de administración del sistema</p>
             
+            <!-- data icons para una mejor estetica -->
             <div class="buttons-container">
                 <a href="../../backend/controllers/GenerarCodigoController.php?accion=listar" class="btn btn-yellow" data-icon="🔑">
                     Cambiar Código

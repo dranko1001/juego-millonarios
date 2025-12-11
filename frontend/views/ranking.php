@@ -69,7 +69,7 @@ style="display: inline-block; --swal2-confirm-button-background-color: #dc3545; 
                                 </td>
                             </tr>
                             <?php
-                            $posicion++; // Incrementar posición
+                            $posicion++; 
                         endforeach;
                         ?>
                     </tbody>
