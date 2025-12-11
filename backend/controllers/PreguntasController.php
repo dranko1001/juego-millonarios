@@ -12,7 +12,6 @@ if (!isset($_SESSION["aprendiz"]) || !isset($_SESSION["codigo_validado"])) {
     exit();
 }
 
-
 // ✅ NUEVO: Inicializar puntajes si no existen
 if (!isset($_SESSION['puntaje_pesos'])) {
     $_SESSION['puntaje_pesos'] = 0;
@@ -68,8 +67,6 @@ if (isset($_SESSION['pregunta_activa']) && $_SESSION['pregunta_activa'] === true
         $pregunta['respuesta_correcta_texto'] = $_SESSION['respuesta_correcta_texto'];
         
         // ✅ CRÍTICO: NO REINICIAR EL TIEMPO - mantener el timestamp original
-        // El tiempo ya está guardado en $_SESSION['tiempo_inicio_pregunta']
-        // No hacer nada aquí con el tiempo
         
     } else {
         // Si falta información, forzar nueva pregunta
@@ -80,11 +77,43 @@ if (isset($_SESSION['pregunta_activa']) && $_SESSION['pregunta_activa'] === true
 // ✅ Si NO hay pregunta activa, generar una nueva
 if (!isset($_SESSION['pregunta_activa']) || $_SESSION['pregunta_activa'] === false) {
 
-    // Obtener pregunta según la categoría seleccionada
-    if ($categoria_seleccionada === "MIXTA") {
-        $datosPregunta = $preguntaModel->obtenerPreguntaAleatoria($_SESSION['preguntas_respondidas']);
+    // ✅ NUEVO: Determinar si deben ser preguntas fáciles obligatorias
+    $preguntasCorrectasActuales = $_SESSION['preguntas_correctas'] ?? 0;
+    
+    // 🎯 LAS PRIMERAS 3 PREGUNTAS DEBEN SER FÁCILES (DIFICULTAD 1)
+    if ($preguntasCorrectasActuales < 3) {
+        $dificultadRequerida = 1; // Fácil
+        
+        // Obtener pregunta FÁCIL según la categoría
+        if ($categoria_seleccionada === "MIXTA") {
+            $datosPregunta = $preguntaModel->obtenerPreguntaAleatoriaPorDificultad(
+                $dificultadRequerida, 
+                $_SESSION['preguntas_respondidas']
+            );
+        } else {
+            $datosPregunta = $preguntaModel->obtenerPreguntaPorCategoriaYDificultad(
+                $categoria_seleccionada, 
+                $dificultadRequerida, 
+                $_SESSION['preguntas_respondidas']
+            );
+        }
+        
+        // ✅ Si no hay más preguntas fáciles, buscar de cualquier dificultad
+        if (!$datosPregunta) {
+            if ($categoria_seleccionada === "MIXTA") {
+                $datosPregunta = $preguntaModel->obtenerPreguntaAleatoria($_SESSION['preguntas_respondidas']);
+            } else {
+                $datosPregunta = $preguntaModel->obtenerPreguntaPorCategoria($categoria_seleccionada, $_SESSION['preguntas_respondidas']);
+            }
+        }
+        
     } else {
-        $datosPregunta = $preguntaModel->obtenerPreguntaPorCategoria($categoria_seleccionada, $_SESSION['preguntas_respondidas']);
+        // 🎲 DESPUÉS DE LAS 3 PRIMERAS: DIFICULTAD ALEATORIA
+        if ($categoria_seleccionada === "MIXTA") {
+            $datosPregunta = $preguntaModel->obtenerPreguntaAleatoria($_SESSION['preguntas_respondidas']);
+        } else {
+            $datosPregunta = $preguntaModel->obtenerPreguntaPorCategoria($categoria_seleccionada, $_SESSION['preguntas_respondidas']);
+        }
     }
 
     if ($datosPregunta) {
@@ -145,9 +174,6 @@ if (!isset($_SESSION['pregunta_activa']) || $_SESSION['pregunta_activa'] === fal
         exit();
     }
 }
-
-// ✅ ELIMINADO: El código duplicado que estaba al final
-// Ya no necesitas esto porque el tiempo se guarda arriba solo para preguntas nuevas
 
 require_once __DIR__ . '/../../frontend/views/juego.php';
 ?>
