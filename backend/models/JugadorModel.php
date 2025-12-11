@@ -18,7 +18,7 @@ class JugadorModel {
             $this->mysql->conectar();
             $conexion = $this->mysql->getConexion();
             
-            // ✅ CAMBIO CRÍTICO: Quité la condición "AND puntaje_jugador < :puntaje"
+            
             $sql = "UPDATE tbl_jugadores 
                     SET puntaje_jugador = :puntaje 
                     WHERE ID_jugador = :id";
