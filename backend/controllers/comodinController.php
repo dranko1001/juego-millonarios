@@ -35,6 +35,10 @@ switch ($tipoComodin) {
         $resultado = ComodinModel::aplicarAyudaPublico();
         echo json_encode($resultado);
         break;
+    case 'llamada_amigo':
+        $resultado = ComodinModel::aplicarLlamadaAmigo();
+        echo json_encode($resultado);
+        break;
 
     default:
         echo json_encode(['error' => 'Comodín no válido']);

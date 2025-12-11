@@ -14,7 +14,8 @@ class ComodinModel
             $_SESSION['comodines'] = [
                 'cincuenta_cincuenta' => true,  // Disponible
                 'cambio_pregunta' => true,       // Disponible
-                'ayuda_publico' => true          // Disponible
+                'ayuda_publico' => true,         // Disponible
+                'llamada_amigo' => true          // Disponible
             ];
         }
     }
@@ -49,7 +50,8 @@ class ComodinModel
         $_SESSION['comodines'] = [
             'cincuenta_cincuenta' => true,
             'cambio_pregunta' => true,
-            'ayuda_publico' => true
+            'ayuda_publico' => true,
+            'llamada_amigo' => true
         ];
     }
 
@@ -198,6 +200,26 @@ class ComodinModel
         return [
             'success' => true,
             'mensaje' => 'Tienes 1 minuto extra para pensar'
+        ];
+    }
+
+    /**
+     * 📞 COMODÍN LLAMADA A UN AMIGO
+     * Solo marca el comodín como usado (el tiempo extra se maneja en frontend)
+     * @return array - Confirmación
+     */
+    public static function aplicarLlamadaAmigo()
+    {
+        if (!self::estaDisponible('llamada_amigo')) {
+            return ['error' => 'Comodín ya usado'];
+        }
+
+        // Marcar como usado
+        self::marcarComoUsado('llamada_amigo');
+
+        return [
+            'success' => true,
+            'mensaje' => 'Llamando a un amigo... 30 segundos extra'
         ];
     }
 }
