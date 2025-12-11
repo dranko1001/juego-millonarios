@@ -1,5 +1,4 @@
-/* Juego.css - Estilo para el juego de millonarios SENA */
-/* Colores del SENA: #39B54A (verde principal), #00A14B (verde oscuro) */
+
 
 * {
     margin: 0;
@@ -650,4 +649,13 @@ body::before {
             50% {
                 transform: scale(1.05);
             }
+        }
+
+                .left-panel a:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2) !important;
+        }
+
+        .left-panel a:active {
+            transform: translateY(-1px);
         }
