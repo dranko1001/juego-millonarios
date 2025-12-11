@@ -29,34 +29,11 @@ if (isset($_GET['error'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Validar Código de Acceso</title>
     <link rel="stylesheet" href="../css/login.css">
-    <style>
-        .codigo-input {
-            font-size: 2em;
-            text-align: center;
-            letter-spacing: 10px;
-            font-weight: bold;
-        }
-        .info-box {
-            background: #e7f3ff;
-            border-left: 4px solid #2196F3;
-            padding: 15px;
-            margin: 20px 0;
-            border-radius: 5px;
-        }
-        .error-message {
-            background-color: #f8d7da;
-            color: #721c24;
-            padding: 12px;
-            border-radius: 5px;
-            margin-bottom: 15px;
-            border: 1px solid #f5c6cb;
-            text-align: center;
-        }
-    </style>
+    <link rel="stylesheet" href="../css/validarCodigo.css">
 </head>
 <body>
     <form method="POST" action="../../backend/controllers/validar_codigo_aprendiz.php">
-        <h2>🔐 Código de Acceso</h2>
+        <h2>Código de Acceso</h2>
 
        <a href="reglas.php" style="display: block; text-align: center; margin-top: 15px; color: #008000; text-decoration: none;">
             Reglas
@@ -65,12 +42,12 @@ if (isset($_GET['error'])) {
 
         <div class="info-box">
             <strong>Bienvenido, <?php echo htmlspecialchars($_SESSION['aprendiz']); ?>!</strong><br>
-            Solicita el código de acceso al instructor para continuar
+            Solicita el código de acceso al administrador para continuar
         </div>
 
         <?php if (!empty($error_msg)): ?>
             <div class="error-message">
-                ⚠️ <?php echo htmlspecialchars($error_msg); ?>
+                 <?php echo htmlspecialchars($error_msg); ?>
             </div>
         <?php endif; ?>
 
@@ -84,7 +61,7 @@ if (isset($_GET['error'])) {
             class="codigo-input"
             autocomplete="off">
 
-        <button type="submit">✓ Validar y Continuar</button>
+        <button type="submit"> Validar y Continuar</button>
         
         <a href="../../backend/controllers/logout.php" style="display: block; text-align: center; margin-top: 15px; color: #666; text-decoration: none;">
             ← Volver al inicio
