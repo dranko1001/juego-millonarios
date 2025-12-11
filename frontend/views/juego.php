@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>¿Quién Quiere Ser Millonario? - SENA</title>
     <link rel="stylesheet" href="../../frontend/css/juego.css">
-    <script src="../js/juego.js"></script>
+    
 
     <!--  SweetAlert -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -122,7 +122,7 @@
                     <div class="lifeline" id="comodin-cambio" title="Cambiar pregunta" onclick="usarCambioPregunta()">
                         <span class="lifeline-icon">🔄</span>
                     </div>
-                    <div class="lifeline" id="comodin-50/50" title="Eliminar 2 respuestas incorrectas"
+                    <div class="lifeline" id="comodin-5050" title="Eliminar 2 respuestas incorrectas"
                         onclick="usar5050()">
                         <span class="lifeline-icon">50/50</span>
                     </div>
@@ -198,6 +198,7 @@
         </div>
     </div>
 
+    <script src="../js/juego.js"></script>
 </body>
 
 </html>

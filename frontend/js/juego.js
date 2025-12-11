@@ -544,7 +544,7 @@ function inicializarJuego() {
     intervalo = setInterval(actualizarTemporizador, 1000);
 
     // Marcar comodines usados
-    console.log('🎯 Estado de comodines:', config.comodines);
+    console.log(' Estado de comodines:', config.comodines);
     
     if (!config.comodines.cincuenta_cincuenta) {
         console.log('❌ 50/50 ya usado');
