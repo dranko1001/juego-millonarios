@@ -111,42 +111,100 @@ $categorias = $pdo->query($sqlCat)->fetchAll();
             <?php unset($_SESSION['msg_editar']); ?>
         <?php endif; ?>
 
-        
+        <!-- Buscador -->
         <form method="GET" class="mb-4 d-flex">
             <input type="text" name="buscar" placeholder="Buscar por texto de la pregunta" class="form-control me-2"
                    value="<?= htmlspecialchars($search) ?>">
             <button type="submit" class="btn btn-primary">Buscar</button>
+            <?php if ($search): ?>
+                <a href="editarpregunta.php" class="btn btn-secondary ms-2">Limpiar</a>
+            <?php endif; ?>
         </form>
 
-       
+        <!-- Información de paginación -->
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <div>
+                <small class="text-muted">
+                    Mostrando <?= min($inicio + 1, $totalRegistros) ?> - <?= min($inicio + $porPagina, $totalRegistros) ?> 
+                    de <?= $totalRegistros ?> preguntas
+                </small>
+            </div>
+        </div>
+
+        <!-- Paginación superior -->
         <?php if ($totalPaginas > 1): ?>
         <div class="d-flex justify-content-end mb-3">
-            <div class="btn-group">
-                <?php for ($i = 1; $i <= $totalPaginas; $i++): ?>
-                    <a href="?pagina=<?= $i ?>&buscar=<?= urlencode($search) ?>"
-                       class="btn <?= $i == $pagina ? 'btn-primary' : 'btn-secondary' ?>">
-                        <?= $i ?>
-                    </a>
-                <?php endfor; ?>
-            </div>
+            <nav>
+                <ul class="pagination pagination-sm mb-0">
+                    <!-- Botón anterior -->
+                    <li class="page-item <?= $pagina <= 1 ? 'disabled' : '' ?>">
+                        <a class="page-link" href="?pagina=<?= $pagina - 1 ?>&buscar=<?= urlencode($search) ?>">
+                            Anterior
+                        </a>
+                    </li>
+
+                    <!-- Primera página -->
+                    <?php if ($pagina > 3): ?>
+                        <li class="page-item">
+                            <a class="page-link" href="?pagina=1&buscar=<?= urlencode($search) ?>">1</a>
+                        </li>
+                        <?php if ($pagina > 4): ?>
+                            <li class="page-item disabled"><span class="page-link">...</span></li>
+                        <?php endif; ?>
+                    <?php endif; ?>
+
+                    <!-- Páginas cercanas -->
+                    <?php 
+                    $inicio_pag = max(1, $pagina - 2);
+                    $fin_pag = min($totalPaginas, $pagina + 2);
+                    
+                    for ($i = $inicio_pag; $i <= $fin_pag; $i++): 
+                    ?>
+                        <li class="page-item <?= $i == $pagina ? 'active' : '' ?>">
+                            <a class="page-link" href="?pagina=<?= $i ?>&buscar=<?= urlencode($search) ?>">
+                                <?= $i ?>
+                            </a>
+                        </li>
+                    <?php endfor; ?>
+
+                    <!-- Última página -->
+                    <?php if ($pagina < $totalPaginas - 2): ?>
+                        <?php if ($pagina < $totalPaginas - 3): ?>
+                            <li class="page-item disabled"><span class="page-link">...</span></li>
+                        <?php endif; ?>
+                        <li class="page-item">
+                            <a class="page-link" href="?pagina=<?= $totalPaginas ?>&buscar=<?= urlencode($search) ?>">
+                                <?= $totalPaginas ?>
+                            </a>
+                        </li>
+                    <?php endif; ?>
+
+                    <!-- Botón siguiente -->
+                    <li class="page-item <?= $pagina >= $totalPaginas ? 'disabled' : '' ?>">
+                        <a class="page-link" href="?pagina=<?= $pagina + 1 ?>&buscar=<?= urlencode($search) ?>">
+                            Siguiente
+                        </a>
+                    </li>
+                </ul>
+            </nav>
         </div>
         <?php endif; ?>
 
-       
+        <!-- Tabla de preguntas -->
         <div class="table-responsive">
-            <table class="table table-bordered">
-                <thead>
+            <table class="table table-bordered table-hover">
+                <thead class="table-light">
                     <tr>
-                        <th>ID</th>
+                        <th style="width: 50px;">ID</th>
                         <th>Pregunta</th>
                         <th>Opción A</th>
                         <th>Opción B</th>
                         <th>Opción C</th>
                         <th>Opción D</th>
-                        <th>Correcta</th>
-                        <th>Categoría</th>
-                        <th>Dificultad</th>
-                        <th>Acciones</th>
+                        <th style="width: 80px;">Correcta</th>
+                        <th style="width: 120px;">Categoría</th>
+                        <th style="width: 100px;">Dificultad</th>
+                        <th style="width: 100px;">Acciones</th>
                     </tr>
                 </thead>
 
@@ -160,24 +218,70 @@ $categorias = $pdo->query($sqlCat)->fetchAll();
                             <td><?= htmlspecialchars($p['opcion2_pregunta']) ?></td>
                             <td><?= htmlspecialchars($p['opcion3_pregunta']) ?></td>
                             <td><?= htmlspecialchars($p['opcion4_pregunta']) ?></td>
-                            <td><?= htmlspecialchars($p['correcta_pregunta']) ?></td>
+                            <td class="text-center">
+                                <span class="badge bg-success"><?= htmlspecialchars($p['correcta_pregunta']) ?></span>
+                            </td>
                             <td><?= htmlspecialchars($p['nombre_categoria']) ?></td>
                             <td><?= htmlspecialchars($p['nombre_dificultad']) ?></td>
                             <td>
-                                <button class="btn btn-warning btn-sm"
+                                <button class="btn btn-warning btn-sm w-100"
                                         onclick="abrirModalEdicion(<?= htmlspecialchars(json_encode($p), ENT_QUOTES) ?>)">
-                                    Editar
+                                    <i class="bi bi-pencil"></i> Editar
                                 </button>
                             </td>
                         </tr>
                         <?php endforeach; ?>
                     <?php else: ?>
-                        <tr><td colspan="10" class="text-center">No se encontraron preguntas.</td></tr>
+                        <tr>
+                            <td colspan="10" class="text-center py-4">
+                                <div class="text-muted">
+                                    <i class="bi bi-inbox" style="font-size: 2rem;"></i>
+                                    <p class="mt-2">No se encontraron preguntas<?= $search ? ' con el criterio de búsqueda' : '' ?>.</p>
+                                </div>
+                            </td>
+                        </tr>
                     <?php endif; ?>
                 </tbody>
 
             </table>
         </div>
+
+        <!-- Paginación inferior -->
+        <?php if ($totalPaginas > 1): ?>
+        <div class="d-flex justify-content-between align-items-center mt-3">
+            <div>
+                <small class="text-muted">Página <?= $pagina ?> de <?= $totalPaginas ?></small>
+            </div>
+            <nav>
+                <ul class="pagination pagination-sm mb-0">
+                    <li class="page-item <?= $pagina <= 1 ? 'disabled' : '' ?>">
+                        <a class="page-link" href="?pagina=<?= $pagina - 1 ?>&buscar=<?= urlencode($search) ?>">
+                            Anterior
+                        </a>
+                    </li>
+
+                    <?php 
+                    $inicio_pag = max(1, $pagina - 2);
+                    $fin_pag = min($totalPaginas, $pagina + 2);
+                    
+                    for ($i = $inicio_pag; $i <= $fin_pag; $i++): 
+                    ?>
+                        <li class="page-item <?= $i == $pagina ? 'active' : '' ?>">
+                            <a class="page-link" href="?pagina=<?= $i ?>&buscar=<?= urlencode($search) ?>">
+                                <?= $i ?>
+                            </a>
+                        </li>
+                    <?php endfor; ?>
+
+                    <li class="page-item <?= $pagina >= $totalPaginas ? 'disabled' : '' ?>">
+                        <a class="page-link" href="?pagina=<?= $pagina + 1 ?>&buscar=<?= urlencode($search) ?>">
+                            Siguiente
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        <?php endif; ?>
 
     </div>
 
@@ -185,17 +289,22 @@ $categorias = $pdo->query($sqlCat)->fetchAll();
 </div>
 
 
+<!-- Modal para editar -->
 <div class="modal fade" id="editarModal" tabindex="-1">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <form method="POST" action="../../backend/controllers/editarpregunta_controller.php">
-          <div class="modal-header">
-            <h5 class="modal-title">Editar Pregunta</h5>
+          <div class="modal-header bg-warning text-dark">
+            <h5 class="modal-title">
+                <i class="bi bi-pencil-square"></i> Editar Pregunta
+            </h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
           </div>
 
           <div class="modal-body">
               <input type="hidden" name="ID_pregunta" id="modal-id">
+              <input type="hidden" name="pagina_actual" value="<?= $pagina ?>">
+              <input type="hidden" name="buscar" value="<?= htmlspecialchars($search) ?>">
 
               <div class="mb-3">
                   <label class="form-label fw-bold">Pregunta:</label>
@@ -245,7 +354,9 @@ $categorias = $pdo->query($sqlCat)->fetchAll();
                       </div>
                   </div>
 
-                  <small class="text-muted">* Selecciona el radio button de la respuesta correcta</small>
+                  <small class="text-muted">
+                      <i class="bi bi-info-circle"></i> Selecciona el radio button de la respuesta correcta
+                  </small>
               </div>
 
               <div class="row">
@@ -271,8 +382,12 @@ $categorias = $pdo->query($sqlCat)->fetchAll();
           </div>
 
           <div class="modal-footer">
-            <button type="submit" class="btn btn-success">Guardar Cambios</button>
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                <i class="bi bi-x-circle"></i> Cancelar
+            </button>
+            <button type="submit" class="btn btn-success">
+                <i class="bi bi-check-circle"></i> Guardar Cambios
+            </button>
           </div>
       </form>
     </div>
@@ -280,7 +395,7 @@ $categorias = $pdo->query($sqlCat)->fetchAll();
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
-
 <script src="../js/editarpregunta.js"></script>
+
 </body>
 </html>
