@@ -1,5 +1,4 @@
 <?php
-// Incluir el controlador que obtiene los datos del ranking
 require_once __DIR__ . '/../../backend/controllers/ranking.php';
 ?>
 
@@ -64,7 +63,6 @@ require_once __DIR__ . '/../../backend/controllers/ranking.php';
     </div>
 
 <script>
-// CORREGIDO: fetch bien escrito y con ruta absoluta correcta
 document.querySelectorAll('.btn-eliminar').forEach(btn => {
     btn.addEventListener('click', function () {
 

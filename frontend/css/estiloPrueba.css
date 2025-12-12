@@ -591,6 +591,31 @@ body {
     flex-wrap: wrap;
 }
 
+/* Botón Eliminar en la tabla de ranking */
+.btn-eliminar {
+    background: #e74c3c; /* rojo fuerte */
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 8px 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+}
+
+.btn-eliminar:hover {
+    background: #c0392b; /* rojo más oscuro */
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.btn-eliminar:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+
 /* Responsive */
 @media (max-width: 768px) {
     .ranking-table th,

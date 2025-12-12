@@ -3,7 +3,7 @@ session_start();
 
 if (isset($_SESSION["admin"])) {
     $rol = "admin";
-    $enlaceVolver = "menuOpciones.php";
+    $enlaceVolver = "menu.php";
 } elseif (isset($_SESSION["aprendiz"])) {
     $rol = "aprendiz";
     $enlaceVolver = "validar_codigo.php";
