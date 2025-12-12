@@ -35,17 +35,6 @@ if (isset($_GET['error'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Administrador</title>
     <link rel="stylesheet" href="../css/login.css">
-    <style>
-        .error-message {
-            background-color: #f8d7da;
-            color: #721c24;
-            padding: 12px;
-            border-radius: 5px;
-            margin-bottom: 15px;
-            border: 1px solid #f5c6cb;
-            text-align: center;
-        }
-    </style>
 </head>
 <body>
     

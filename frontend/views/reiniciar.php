@@ -28,7 +28,7 @@ unset($_SESSION['preguntas_respondidas']);
 unset($_SESSION['puntaje_pesos']);
 unset($_SESSION['ultimo_puntaje_ganado']);
 unset($_SESSION['dificultad_pregunta']);
-// ✅ NUEVO: Resetear comodines
+// Resetear comodines
 ComodinModel::resetearComodines();
 // Verificar si quiere cambiar de categoría
 if (isset($_GET['cambiar_categoria']) && $_GET['cambiar_categoria'] == '1') {
@@ -36,12 +36,12 @@ if (isset($_GET['cambiar_categoria']) && $_GET['cambiar_categoria'] == '1') {
     unset($_SESSION['categoria_seleccionada']);
     unset($_SESSION['categoria_nombre']);
     header('Location: seleccionar_categoria.php');
-    // ✅ NUEVO: Resetear comodines
+    //  Resetear comodines
     ComodinModel::resetearComodines();
     exit;
 }
 
-// Redirigir al inicio del juego (mantiene la categoría actual pero reinicia preguntas)
+// Redirigir al inicio del juego 
 header('Location: ../../backend/controllers/PreguntasController.php');
 exit;
 ?>

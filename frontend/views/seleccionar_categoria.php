@@ -47,15 +47,17 @@ if (isset($_GET['error'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Seleccionar Categoría - Millonarios SENA</title>
     <link rel="stylesheet" href="../css/seleccionar_categoria.css">
+    
+    <!-- enlaces para que funcione bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 </head>
 
 <body>
     <div class="categoria-container">
         <div class="header">
-            <h1>📚 Selecciona una Categoría</h1>
+            <h1> <img src="../media/icons/libro.png" alt=""> Selecciona una Categoría</h1>
             <p class="subtitle">Elige el tema de las preguntas que responderás</p>
-            <p class="user-info">👤 Aprendiz: <strong><?php echo htmlspecialchars($_SESSION['aprendiz']); ?></strong>
-            </p>
+            <p class="user-info"> Aprendiz: <strong><?php echo htmlspecialchars($_SESSION['aprendiz']); ?></strong></p>
         </div>
 
         <?php if (!empty($error_msg)): ?>
@@ -64,17 +66,17 @@ if (isset($_GET['error'])) {
             </div>
         <?php endif; ?>
 
-        <!-- 🔄 LOADER DE CARGA -->
+        <!-- LOADER DE CARGA -->
         <div class="loader-overlay" id="loaderOverlay">
             <div class="loader-content">
                 <div class="loader-spinner"></div>
                 <h3 class="loader-text">Cargando categorías...</h3>
-                <p class="loader-subtext">Por favor espera un momento</p>
+                <p class="loader-subtext">Por favor espera un momento </p>
             </div>
         </div>
 
         <div class="categorias-grid" id="categoriasGrid">
-            <!-- Opción MIXTA (todas las categorías) - DESTACADA -->
+            <!-- Opción MIXTA (todas las categorías) -->
             <?php if ($total_preguntas > 0): ?>
                 <form method="POST" action="../../backend/controllers/SeleccionarCategoriaController.php"
                     class="categoria-card-form pagina-item">
@@ -102,7 +104,6 @@ if (isset($_GET['error'])) {
                             style="animation-delay: <?php echo ($index + 1) * 0.1; ?>s">
                             <div class="categoria-icon">
                                 <?php
-                                // Iconos según la categoría
                                 $iconos = [
                                     'Historia' => '🏛️',
                                     'Ciencia' => '🔬',
@@ -144,7 +145,7 @@ if (isset($_GET['error'])) {
             <?php endif; ?>
         </div>
 
-        <!-- 🔥 CONTROLES DE PAGINACIÓN -->
+        <!-- CONTROLES DE PAGINACIÓN -->
         <div class="pagination-wrapper">
             <button class="pagination-btn" id="prevBtn" onclick="cambiarPagina(-1)">
                 ← Anterior
@@ -162,515 +163,15 @@ if (isset($_GET['error'])) {
         </div>
 
         <div class="footer-actions">
-            <a href="../../backend/controllers/logout.php" class="btn-logout">← Cerrar Sesión</a>
+            <a href="../../backend/controllers/logout.php" class="btn-logout"> Cerrar Sesión</a>
         </div>
     </div>
 
-    <style>
-        /* ========================================
-           LOADER DE CARGA ANIMADO
-        ======================================== */
-        .loader-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(10px);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-            opacity: 1;
-            transition: opacity 0.5s ease;
-        }
-
-        .loader-overlay.hide {
-            opacity: 0;
-            pointer-events: none;
-        }
-
-        .loader-content {
-            background: white;
-            padding: 40px 60px;
-            border-radius: 20px;
-            text-align: center;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            animation: slideDown 0.5s ease;
-        }
-
-        @keyframes slideDown {
-            from {
-                transform: translateY(-50px);
-                opacity: 0;
-            }
-
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
-
-        .loader-spinner {
-            width: 60px;
-            height: 60px;
-            border: 6px solid #f3f3f3;
-            border-top: 6px solid #667eea;
-            border-radius: 50%;
-            margin: 0 auto 20px;
-            animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin {
-            0% {
-                transform: rotate(0deg);
-            }
-
-            100% {
-                transform: rotate(360deg);
-            }
-        }
-
-        .loader-text {
-            color: #2c3e50;
-            font-size: 1.5em;
-            margin: 10px 0;
-            font-weight: 700;
-        }
-
-        .loader-subtext {
-            color: #7f8c8d;
-            font-size: 0.95em;
-            margin: 5px 0 0 0;
-        }
-
-        /* ========================================
-           ESTILOS ORIGINALES (TU CSS)
-        ======================================== */
-        .user-info {
-            margin-top: 10px;
-            font-size: 1em;
-            color: #fff;
-            background: rgba(0, 0, 0, 0.2);
-            padding: 8px 15px;
-            border-radius: 20px;
-            display: inline-block;
-        }
-
-        .error-message {
-            background-color: #f8d7da;
-            color: #721c24;
-            padding: 15px;
-            border-radius: 10px;
-            margin: 0 20px 20px 20px;
-            border: 2px solid #f5c6cb;
-            text-align: center;
-            font-weight: 600;
-            animation: shake 0.5s;
-        }
-
-        @keyframes shake {
-
-            0%,
-            100% {
-                transform: translateX(0);
-            }
-
-            25% {
-                transform: translateX(-10px);
-            }
-
-            75% {
-                transform: translateX(10px);
-            }
-        }
-
-        .categoria-mixta {
-            background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%) !important;
-            border-color: #39B54A !important;
-        }
-
-        .categoria-mixta:hover {
-            transform: translateY(-10px) scale(1.08) !important;
-            box-shadow: 0 25px 60px rgba(255, 165, 0, 0.5) !important;
-        }
-
-        .categoria-mixta .categoria-nombre {
-            color: #1a1a1a !important;
-            font-size: 1.8em;
-            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-        }
-
-        .categoria-mixta .categoria-info {
-            color: #333 !important;
-            font-weight: 600;
-        }
-
-        .categoria-mixta .categoria-desc {
-            color: #444 !important;
-            font-weight: 500;
-        }
-
-        .categoria-mixta .categoria-icon {
-            font-size: 5em;
-            animation: rotateDice 4s ease-in-out infinite;
-        }
-
-        @keyframes rotateDice {
-
-            0%,
-            100% {
-                transform: rotate(0deg) translateY(0px);
-            }
-
-            25% {
-                transform: rotate(10deg) translateY(-5px);
-            }
-
-            50% {
-                transform: rotate(0deg) translateY(0px);
-            }
-
-            75% {
-                transform: rotate(-10deg) translateY(-5px);
-            }
-        }
-
-        .categoria-desc {
-            font-size: 0.9em;
-            color: #888;
-            margin-top: 5px;
-            font-style: italic;
-        }
-
-        .no-categorias {
-            grid-column: 1 / -1;
-            text-align: center;
-            padding: 60px 20px;
-            color: #666;
-            font-size: 1.2em;
-        }
-
-        .no-categorias p {
-            margin-bottom: 20px;
-        }
-
-        .btn-volver {
-            display: inline-block;
-            background: linear-gradient(135deg, #39B54A 0%, #00A14B 100%);
-            color: white;
-            padding: 12px 30px;
-            border-radius: 10px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s;
-            box-shadow: 0 5px 20px rgba(57, 181, 74, 0.3);
-        }
-
-        .btn-volver:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(57, 181, 74, 0.4);
-        }
-
-        /* ========================================
-           NUEVOS ESTILOS PARA PAGINACIÓN
-        ======================================== */
-
-        /* Control de visibilidad */
-        .pagina-item.ocultar-pagina {
-            display: none !important;
-        }
-
-        /* Wrapper de paginación */
-        .pagination-wrapper {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 15px;
-            margin: 30px 20px 20px 20px;
-            padding: 20px;
-            flex-wrap: wrap;
-        }
-
-        .pagination-info {
-            background: rgba(255, 255, 255, 0.95);
-            padding: 10px 20px;
-            border-radius: 10px;
-            font-weight: 600;
-            color: #2c3e50;
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .pagination-btn {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border: none;
-            padding: 12px 20px;
-            border-radius: 10px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 0.95em;
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
-        }
-
-        .pagination-btn:hover:not(:disabled) {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
-        }
-
-        .pagination-btn:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-            background: linear-gradient(135deg, #95a5a6 0%, #7f8c8d 100%);
-        }
-
-        .page-numbers {
-            display: flex;
-            gap: 8px;
-            flex-wrap: wrap;
-        }
-
-        .page-number {
-            background: white;
-            color: #667eea;
-            border: 2px solid #667eea;
-            padding: 10px 16px;
-            border-radius: 8px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            min-width: 45px;
-            text-align: center;
-        }
-
-        .page-number:hover {
-            background: #667eea;
-            color: white;
-            transform: translateY(-2px);
-        }
-
-        .page-number.active {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border-color: #764ba2;
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
-        }
-
-        /* Animación suave al cambiar */
-        .categorias-grid {
-            transition: opacity 0.3s ease;
-        }
-
-        .categorias-grid.fade {
-            opacity: 0.3;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .categoria-mixta .categoria-nombre {
-                font-size: 1.5em;
-            }
-
-            .categoria-mixta .categoria-icon {
-                font-size: 3.5em;
-            }
-
-            .pagination-wrapper {
-                gap: 10px;
-                padding: 15px;
-            }
-
-            .pagination-btn {
-                padding: 10px 15px;
-                font-size: 0.85em;
-            }
-
-            .page-number {
-                padding: 8px 12px;
-                min-width: 40px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .user-info {
-                font-size: 0.9em;
-                padding: 6px 12px;
-            }
-
-            .categoria-mixta .categoria-nombre {
-                font-size: 1.3em;
-            }
-
-            .categoria-mixta .categoria-icon {
-                font-size: 3em;
-            }
-
-            .pagination-wrapper {
-                flex-direction: column;
-                gap: 15px;
-            }
-        }
-    </style>
-
-    <script>
-        // ============================================
-        // SISTEMA DE PAGINACIÓN
-        // ============================================
-
-        const ITEMS_POR_PAGINA = 6;
-        let paginaActual = 1;
-        let totalPaginas = 1;
-
-        // Obtener todos los formularios (.categoria-card-form con clase .pagina-item)
-        const items = document.querySelectorAll('.pagina-item');
-        const grid = document.getElementById('categoriasGrid');
-
-        // Calcular total de páginas
-        totalPaginas = Math.ceil(items.length / ITEMS_POR_PAGINA);
-
-        console.log(`📊 Total categorías: ${items.length}`);
-        console.log(`📄 Total páginas: ${totalPaginas}`);
-
-        /**
-         * Muestra la página específica
-         */
-        function mostrarPagina(numeroPagina) {
-            if (numeroPagina < 1) numeroPagina = 1;
-            if (numeroPagina > totalPaginas) numeroPagina = totalPaginas;
-
-            paginaActual = numeroPagina;
-
-            console.log(`📖 Mostrando página ${numeroPagina}`);
-
-            // Mostrar loader
-            mostrarLoader();
-
-            // Efecto fade
-            grid.classList.add('fade');
-
-            setTimeout(() => {
-                const inicio = (numeroPagina - 1) * ITEMS_POR_PAGINA;
-                const fin = inicio + ITEMS_POR_PAGINA;
-
-                console.log(`🔢 Mostrando items del ${inicio} al ${fin - 1}`);
-
-                // Mostrar/ocultar items
-                items.forEach((item, index) => {
-                    if (index >= inicio && index < fin) {
-                        item.classList.remove('ocultar-pagina');
-                    } else {
-                        item.classList.add('ocultar-pagina');
-                    }
-                });
-
-                actualizarControles();
-                grid.classList.remove('fade');
-
-                // Ocultar loader
-                ocultarLoader();
-
-                // Scroll suave
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            }, 600); // Tiempo para mostrar el loader
-        }
-
-        /**
-         * Cambia de página
-         */
-        function cambiarPagina(direccion) {
-            mostrarPagina(paginaActual + direccion);
-        }
-
-        /**
-         * Va a página específica
-         */
-        function irAPagina(numeroPagina) {
-            mostrarPagina(numeroPagina);
-        }
-
-        /**
-         * Actualiza controles
-         */
-        function actualizarControles() {
-            document.getElementById('currentPage').textContent = paginaActual;
-            document.getElementById('totalPages').textContent = totalPaginas;
-
-            document.getElementById('prevBtn').disabled = paginaActual === 1;
-            document.getElementById('nextBtn').disabled = paginaActual === totalPaginas;
-
-            generarNumerosPagina();
-        }
-
-        /**
-         * Genera números de página
-         */
-        function generarNumerosPagina() {
-            const container = document.getElementById('pageNumbers');
-            container.innerHTML = '';
-
-            let inicio = Math.max(1, paginaActual - 2);
-            let fin = Math.min(totalPaginas, inicio + 4);
-
-            if (fin - inicio < 4) {
-                inicio = Math.max(1, fin - 4);
-            }
-
-            for (let i = inicio; i <= fin; i++) {
-                const btn = document.createElement('div');
-                btn.className = 'page-number' + (i === paginaActual ? ' active' : '');
-                btn.textContent = i;
-                btn.onclick = () => irAPagina(i);
-                container.appendChild(btn);
-            }
-        }
-
-        /**
-         * Inicialización
-         */
-        document.addEventListener('DOMContentLoaded', function () {
-            console.log('🚀 Inicializando paginación...');
-
-            // Solo iniciar si hay más de 6 items
-            if (items.length > ITEMS_POR_PAGINA) {
-                mostrarPagina(1);
-            } else {
-                // Si hay 6 o menos, ocultar controles y loader
-                document.querySelector('.pagination-wrapper').style.display = 'none';
-                ocultarLoader();
-            }
-        });
-
-        /**
-         * Muestra el loader
-         */
-        function mostrarLoader() {
-            const loader = document.getElementById('loaderOverlay');
-            loader.classList.remove('hide');
-        }
-
-        /**
-         * Oculta el loader
-         */
-        function ocultarLoader() {
-            const loader = document.getElementById('loaderOverlay');
-            setTimeout(() => {
-                loader.classList.add('hide');
-            }, 1000);
-        }
-
-        /**
-         * Navegación con teclado
-         */
-        document.addEventListener('keydown', function (e) {
-            if (e.key === 'ArrowLeft') {
-                cambiarPagina(-1);
-            } else if (e.key === 'ArrowRight') {
-                cambiarPagina(1);
-            }
-        });
-    </script>
+    <!-- Scripts  body -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    
+    <!--  Script de paginación  -->
+    <script src="../js/seleccionarCategoria.js"></script>
 </body>
 
 </html>

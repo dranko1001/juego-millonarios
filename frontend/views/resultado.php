@@ -1,6 +1,6 @@
 <?php
 session_start();
-// ✅ SOLUCIÓN: Inicializar puntaje_pesos SIEMPRE antes de usarlo
+
 if (!isset($_SESSION['puntaje_pesos'])) {
     $_SESSION['puntaje_pesos'] = 0;
 }
@@ -9,11 +9,13 @@ if (!isset($_SESSION['preguntas_correctas'])) {
     $_SESSION['preguntas_correctas'] = 0;
 }
 
-// ✅ DEBUG: Mostrar info de sesión actual (CON VALIDACIÓN DE TIPOS)
+/* Esta parte comentada es para debugear, en caso de editar el codigo para ver que pasa con los inputs del usuario
+
+
 $DEBUG_INFO = [
     'id_jugador' => $_SESSION['id_jugador'] ?? 'NO EXISTE',
-    'puntaje_pesos' => (int)($_SESSION['puntaje_pesos'] ?? 0), // ✅ CAST a int
-    'preguntas_correctas' => (int)($_SESSION['preguntas_correctas'] ?? 0), // ✅ CAST a int
+    'puntaje_pesos' => (int)($_SESSION['puntaje_pesos'] ?? 0), // CAST a int
+    'preguntas_correctas' => (int)($_SESSION['preguntas_correctas'] ?? 0), //  CAST a int
     'ultima_respuesta' => $_SESSION['ultima_respuesta'] ?? 'NO EXISTE'
 ];
 
@@ -22,12 +24,13 @@ if (!isset($_SESSION['ultima_respuesta'])) {
     header('Location: ../../backend/controllers/PreguntasController.php');
     exit;
 }
+    */
 
 $esCorrecta = ($_SESSION['ultima_respuesta'] === 'correcta');
 $esTiempoAgotado = ($_SESSION['ultima_respuesta'] === 'tiempo_agotado');
-$preguntasCorrectas = (int)($_SESSION['preguntas_correctas'] ?? 0); // ✅ CAST a int
-$puntajePesos = (int)($_SESSION['puntaje_pesos'] ?? 0); // ✅ CAST a int
-$ultimoPuntajeGanado = (int)($_SESSION['ultimo_puntaje_ganado'] ?? 0); // ✅ CAST a int
+$preguntasCorrectas = (int)($_SESSION['preguntas_correctas'] ?? 0); 
+$puntajePesos = (int)($_SESSION['puntaje_pesos'] ?? 0); 
+$ultimoPuntajeGanado = (int)($_SESSION['ultimo_puntaje_ganado'] ?? 0); 
 $respuestaElegida = $_SESSION['respuesta_elegida'] ?? '';
 $respuestaCorrectaLetra = $_SESSION['respuesta_correcta_letra'] ?? '';
 $respuestaCorrectaTexto = $_SESSION['respuesta_correcta_texto'] ?? '';

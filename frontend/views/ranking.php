@@ -49,8 +49,8 @@ require_once __DIR__ . '/../../backend/controllers/ranking.php';
                                     <button class="btn-eliminar" data-id="<?php echo $jugador['ID_jugador']; ?>">Eliminar</button>
                                 </td>
                             </tr>
-                        <?php
-                        $posicion++;
+                            <?php
+                            $posicion++; 
                         endforeach;
                         ?>
                     </tbody>

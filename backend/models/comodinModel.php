@@ -56,7 +56,7 @@ class ComodinModel
     }
 
     /**
-     * 🎯 COMODÍN 50/50
+     * COMODÍN 50/50
      * Elimina 2 opciones incorrectas aleatoriamente
      * @return array - Letras de las opciones a eliminar ['A', 'C']
      */
@@ -99,7 +99,7 @@ class ComodinModel
     }
 
     /**
-     * 🔄 COMODÍN CAMBIO DE PREGUNTA
+     * COMODÍN CAMBIO DE PREGUNTA
      * Obtiene una nueva pregunta de la misma dificultad y categoría
      * @return array - Nueva pregunta o error
      */
@@ -184,7 +184,7 @@ class ComodinModel
     }
 
     /**
-     * 👥 COMODÍN AYUDA DEL PÚBLICO
+     * COMODÍN AYUDA DEL PÚBLICO
      * Solo marca el comodín como usado (el tiempo extra se maneja en frontend)
      * @return array - Confirmación
      */
@@ -204,7 +204,7 @@ class ComodinModel
     }
 
     /**
-     * 📞 COMODÍN LLAMADA A UN AMIGO
+     * COMODÍN LLAMADA A UN AMIGO
      * Solo marca el comodín como usado (el tiempo extra se maneja en frontend)
      * @return array - Confirmación
      */

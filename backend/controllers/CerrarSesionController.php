@@ -2,7 +2,7 @@
 // backend/controllers/CerrarSesionController.php
 session_start();
 
-// ✅ GUARDAR PUNTAJE ANTES DE CERRAR SESIÓN
+// GUARDAR PUNTAJE ANTES DE CERRAR SESIÓN
 if (isset($_SESSION['id_jugador']) && isset($_SESSION['puntaje_pesos'])) {
     require_once __DIR__ . '/../models/JugadorModel.php';
     $jugadorModel = new JugadorModel();

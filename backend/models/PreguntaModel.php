@@ -167,7 +167,7 @@ class PreguntaModel {
     }
 
     /**
-     * ✅ NUEVO: Obtiene una pregunta específica por su ID
+     *  Obtiene una pregunta específica por su ID
      * Este método se usa cuando se agota el tiempo para recuperar la respuesta correcta
      * @param int $idPregunta - ID de la pregunta a obtener
      * @return array|null - Datos de la pregunta o null si no existe
