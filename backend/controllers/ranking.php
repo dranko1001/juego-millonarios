@@ -1,12 +1,7 @@
 <?php
 // backend/controllers/ranking.php
 
-// OPCIÓN 1: Si renombraste el archivo a minúsculas
 require_once __DIR__ . '/../models/pdoconexion.php';
-
-
-// OPCIÓN 2: Si dejaste el archivo con mayúscula
-// require_once '../models/PDOConnection.php';
 
 // Inicializar variables
 $jugadores = [];
@@ -17,8 +12,9 @@ try {
     $db = new PDOConnection();
     $conexion = $db->getConexion();
 
-    // Preparar la consulta SQL
+    // Preparar la consulta SQL - AGREGADO ID_jugador
     $sql = "SELECT 
+                ID_jugador,
                 ficha_jugador, 
                 usuario_jugador, 
                 puntaje_jugador 
@@ -50,5 +46,4 @@ try {
 
     $jugadores = [];
 }
-
 ?>

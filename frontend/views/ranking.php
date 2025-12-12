@@ -3,7 +3,6 @@
 require_once __DIR__ . '/../../backend/controllers/ranking.php';
 ?>
 
-
 <!DOCTYPE html>
 <html lang="es">
 
@@ -11,17 +10,23 @@ require_once __DIR__ . '/../../backend/controllers/ranking.php';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ranking - Juego Millonarios</title>
+
+    <!-- Estilos -->
     <link rel="stylesheet" href="../css/estiloPrueba.css">
+    <link rel="stylesheet" href="../css/ranking.css">
+
+    <!-- SweetAlert2 CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
     <div class="container">
-        <h1 class="title">Top 10 Mejores Jugadores</h1>
+        <h1 class="title">🏆 Top 10 Mejores Jugadores</h1>
 
         <?php if (isset($mensaje)): ?>
             <!-- Si hay un mensaje (error o no hay datos), mostrarlo -->
             <div class="message-box">
-                <p><?php echo $mensaje; ?></p>
+                <p><?php echo htmlspecialchars($mensaje); ?></p>
             </div>
         <?php else: ?>
             <!-- Si hay jugadores, mostrar la tabla -->
@@ -36,40 +41,42 @@ require_once __DIR__ . '/../../backend/controllers/ranking.php';
                             <th>Acciones</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="tabla-ranking">
                         <?php
-                        // Recorrer el array de jugadores
-                        $posicion = 1; // Contador para la posición
-                    
+                        $posicion = 1;
                         foreach ($jugadores as $jugador):
+                            $emoji = '';
+                            if ($posicion == 1)
+                                $emoji = '🥇';
+                            elseif ($posicion == 2)
+                                $emoji = '🥈';
+                            elseif ($posicion == 3)
+                                $emoji = '🥉';
+
+                            // Validar que existan los datos necesarios
+                            $idJugador = isset($jugador['ID_jugador']) ? (int) $jugador['ID_jugador'] : 0;
+                            $fichaJugador = isset($jugador['ficha_jugador']) ? htmlspecialchars($jugador['ficha_jugador']) : 'N/A';
+                            $usuarioJugador = isset($jugador['usuario_jugador']) ? htmlspecialchars($jugador['usuario_jugador']) : 'N/A';
+                            $puntajeJugador = isset($jugador['puntaje_jugador']) ? (int) $jugador['puntaje_jugador'] : 0;
                             ?>
-                            <tr class="ranking-row">
+                            <tr class="ranking-row" id="fila-<?php echo $idJugador; ?>">
                                 <td class="position">
-                                    <?php
-                                    // Mostrar medallas para los primeros 3
-                                    if ($posicion == 1) {
-                                        echo $posicion;
-                                    } elseif ($posicion == 2) {
-                                        echo $posicion;
-                                    } elseif ($posicion == 3) {
-                                        echo $posicion;
-                                    } else {
-                                        echo $posicion;
-                                    }
-                                    ?>
+                                    <?php echo $emoji . ' ' . $posicion; ?>
                                 </td>
-                                <td><?php echo htmlspecialchars($jugador['ficha_jugador']); ?></td>
-                                <td><?php echo htmlspecialchars($jugador['usuario_jugador']); ?></td>
+                                <td><?php echo $fichaJugador; ?></td>
+                                <td><?php echo $usuarioJugador; ?></td>
                                 <td class="score">
-                                    <?php echo number_format($jugador['puntaje_jugador'], 0, ',', '.'); ?> pts
+                                    💰 <?php echo number_format($puntajeJugador, 0, ',', '.'); ?> pts
                                 </td>
                                 <td>
-                                <button class="swal2-confirm swal2-styled" type="button"
-style="display: inline-block; --swal2-confirm-button-background-color: #dc3545; --swal2-confirm-button-hover-background-color: #c82333; --swal2-confirm-button-focus-box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.5);">Eliminar</button>
+                                    <button class="btn-eliminar" data-id="<?php echo $idJugador; ?>"
+                                        data-nombre="<?php echo $usuarioJugador; ?>" type="button">
+                                        🗑️ Eliminar
+                                    </button>
                                 </td>
                             </tr>
                             <?php
-                            $posicion++; 
+                            $posicion++;
                         endforeach;
                         ?>
                     </tbody>
@@ -78,9 +85,12 @@ style="display: inline-block; --swal2-confirm-button-background-color: #dc3545; 
         <?php endif; ?>
 
         <div class="buttons-container">
-            <a href="menu.php" class="btn btn-secondary">Volver al Menú</a>
+            <a href="menu.php" class="btn btn-secondary">⬅️ Volver al Menú</a>
         </div>
     </div>
+
+    <!-- JavaScript -->
+    <script src="../js/eliminarJugador.js"></script>
 </body>
 
 </html>

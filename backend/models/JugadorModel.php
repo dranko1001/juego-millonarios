@@ -71,6 +71,27 @@ class JugadorModel {
             return 0;
         }
     }
+
+    public function eliminarJugador($idJugador)
+    {
+        try {
+            $this->mysql->conectar();
+            $conexion = $this->mysql->getConexion();
+
+            $sql = "DELETE FROM tbl_jugadores WHERE ID_jugador = :id";
+            $stmt = $conexion->prepare($sql);
+            $resultado = $stmt->execute([':id' => $idJugador]);
+
+            $this->mysql->desconectar();
+
+            return $resultado;
+
+        } catch (PDOException $e) {
+            $this->mysql->desconectar();
+            error_log("Error al eliminar jugador: " . $e->getMessage());
+            return false;
+        }
+    }
     
     /**
      * Guarda logs en la tabla de debug
@@ -96,4 +117,5 @@ class JugadorModel {
         }
     }
 }
+
 ?>
