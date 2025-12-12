@@ -1,8 +1,6 @@
 <?php
-// Incluir el controlador que procesa los datos
 require_once __DIR__ . '/../../backend/controllers/ranking.php';
 ?>
-
 
 <!DOCTYPE html>
 <html lang="es">
@@ -19,12 +17,10 @@ require_once __DIR__ . '/../../backend/controllers/ranking.php';
         <h1 class="title">Top 10 Mejores Jugadores</h1>
 
         <?php if (isset($mensaje)): ?>
-            <!-- Si hay un mensaje (error o no hay datos), mostrarlo -->
             <div class="message-box">
                 <p><?php echo $mensaje; ?></p>
             </div>
         <?php else: ?>
-            <!-- Si hay jugadores, mostrar la tabla -->
             <div class="ranking-container">
                 <table class="ranking-table">
                     <thead>
@@ -38,34 +34,18 @@ require_once __DIR__ . '/../../backend/controllers/ranking.php';
                     </thead>
                     <tbody>
                         <?php
-                        // Recorrer el array de jugadores
-                        $posicion = 1; // Contador para la posición
-                    
+                        $posicion = 1;
                         foreach ($jugadores as $jugador):
-                            ?>
+                        ?>
                             <tr class="ranking-row">
-                                <td class="position">
-                                    <?php
-                                    // Mostrar medallas para los primeros 3
-                                    if ($posicion == 1) {
-                                        echo $posicion;
-                                    } elseif ($posicion == 2) {
-                                        echo $posicion;
-                                    } elseif ($posicion == 3) {
-                                        echo $posicion;
-                                    } else {
-                                        echo $posicion;
-                                    }
-                                    ?>
-                                </td>
+                                <td><?php echo $posicion; ?></td>
                                 <td><?php echo htmlspecialchars($jugador['ficha_jugador']); ?></td>
                                 <td><?php echo htmlspecialchars($jugador['usuario_jugador']); ?></td>
                                 <td class="score">
                                     <?php echo number_format($jugador['puntaje_jugador'], 0, ',', '.'); ?> pts
                                 </td>
                                 <td>
-                                <button class="swal2-confirm swal2-styled" type="button"
-style="display: inline-block; --swal2-confirm-button-background-color: #dc3545; --swal2-confirm-button-hover-background-color: #c82333; --swal2-confirm-button-focus-box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.5);">Eliminar</button>
+                                    <button class="btn-eliminar" data-id="<?php echo $jugador['ID_jugador']; ?>">Eliminar</button>
                                 </td>
                             </tr>
                             <?php
@@ -81,6 +61,36 @@ style="display: inline-block; --swal2-confirm-button-background-color: #dc3545; 
             <a href="menu.php" class="btn btn-secondary">Volver al Menú</a>
         </div>
     </div>
-</body>
 
+<script>
+document.querySelectorAll('.btn-eliminar').forEach(btn => {
+    btn.addEventListener('click', function () {
+
+        let id = this.getAttribute('data-id');
+
+        if (confirm("¿Seguro que deseas eliminar este jugador permanentemente?")) {
+
+            fetch("../../backend/controllers/eliminar_ranking.php", {
+
+                method: "POST",
+                headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                body: "id=" + id
+            })
+            .then(res => res.text())
+            .then(data => {
+                console.log("RESPUESTA SERVIDOR:", data);
+
+                if (data.trim() === "ok") {
+                    this.closest('tr').remove();
+                } else {
+                    alert("Error eliminando el jugador: " + data);
+                }
+            })
+            .catch(err => alert("Error en la conexión: " + err));
+        }
+    });
+});
+</script>
+
+</body>
 </html>
