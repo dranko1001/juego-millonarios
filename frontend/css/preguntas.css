@@ -529,7 +529,7 @@ body::before {
 }
 
 .table thead th {
-    color: white;
+    color: rgb(0, 0, 0);
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 1px;
