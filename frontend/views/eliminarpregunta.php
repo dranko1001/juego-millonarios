@@ -221,10 +221,12 @@ $categorias = $pdo->query($sqlCat)->fetchAll();
                             <td><?= htmlspecialchars($p['nombre_categoria']) ?></td>
                             <td><?= htmlspecialchars($p['nombre_dificultad']) ?></td>
                             <td>
-                                <button class="btn btn-danger btn-sm w-100"
-                                        onclick="abrirModalEliminar(<?= $p['ID_pregunta'] ?>, '<?= htmlspecialchars($p['enunciado_pregunta'], ENT_QUOTES) ?>')">
-                                    <i class="bi bi-trash"></i> Eliminar
-                                </button>
+  <button class="btn btn-danger btn-sm w-100"
+        data-id="<?= $p['ID_pregunta'] ?>"
+        data-enunciado="<?= htmlspecialchars($p['enunciado_pregunta'], ENT_QUOTES) ?>"
+        onclick="abrirModalEliminar(this)">
+    <i class="bi bi-trash"></i> Eliminar
+</button>
                             </td>
                         </tr>
                         <?php endforeach; ?>
