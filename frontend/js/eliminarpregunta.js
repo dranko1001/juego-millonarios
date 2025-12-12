@@ -1,6 +1,7 @@
-var eliminarModal = document.getElementById('eliminarModal');
-eliminarModal.addEventListener('show.bs.modal', function (event) {
-  var button = event.relatedTarget;
-  document.getElementById('modal-id').value = button.getAttribute('data-id');
-  document.getElementById('modal-enunciado').textContent = button.getAttribute('data-enunciado');
-});
+function abrirModalEliminar(id, enunciado) {
+    document.getElementById('modal-id').value = id;
+    document.getElementById('modal-enunciado').textContent = enunciado;
+    
+    const modal = new bootstrap.Modal(document.getElementById('eliminarModal'));
+    modal.show();
+}

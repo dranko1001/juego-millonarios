@@ -330,15 +330,7 @@ $categorias = $pdo->query($sqlCat)->fetchAll();
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 
-<script>
-function abrirModalEliminar(id, enunciado) {
-    document.getElementById('modal-id').value = id;
-    document.getElementById('modal-enunciado').textContent = enunciado;
-    
-    const modal = new bootstrap.Modal(document.getElementById('eliminarModal'));
-    modal.show();
-}
-</script>
+<script src="../js/eliminarpregunta.js"></script>
 
 </body>
 </html>
