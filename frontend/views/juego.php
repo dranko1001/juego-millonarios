@@ -129,7 +129,7 @@
                 </div>
 
                 <div style="margin-top: 20px; width: 100%; display: flex; flex-direction: column; gap: 10px;">
-                    <a href="../../frontend/views/seleccionar_categoria.php"
+                    <a href="../../backend/controllers/CambiarCategoriaController.php"
                         onclick="return confirm('¿Seguro que deseas cambiar de categoría? Se reiniciará tu progreso y perderás tu puntaje actual.')"
                         style="display: block; background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%); 
                           color: #1a1a1a; text-decoration: none; padding: 12px 15px; 

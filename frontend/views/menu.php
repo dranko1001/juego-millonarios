@@ -9,6 +9,7 @@ if (!isset($_SESSION["admin"])) {
 
 // Obtener el nombre del administrador
 $nombre_admin = $_SESSION["admin"];
+$_SESSION["rol"] = "usuario";
 ?>
 <!DOCTYPE html>
 <html lang="es">
