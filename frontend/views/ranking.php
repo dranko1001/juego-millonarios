@@ -46,12 +46,9 @@ require_once __DIR__ . '/../../backend/controllers/ranking.php';
                         $posicion = 1;
                         foreach ($jugadores as $jugador):
                             $emoji = '';
-                            if ($posicion == 1)
-                                $emoji = '🥇';
-                            elseif ($posicion == 2)
-                                $emoji = '🥈';
-                            elseif ($posicion == 3)
-                                $emoji = '🥉';
+                            if ($posicion == 1);
+                            elseif ($posicion == 2);
+                            elseif ($posicion == 3);
 
                             // Validar que existan los datos necesarios
                             $idJugador = isset($jugador['ID_jugador']) ? (int) $jugador['ID_jugador'] : 0;

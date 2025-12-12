@@ -3,16 +3,16 @@
 
 require_once __DIR__ . '/../models/pdoconexion.php';
 
-// Inicializar variables
+//*inicio variables
 $jugadores = [];
 $mensaje = null;
 
 try {
-    // Crear instancia de la conexión
+    //*crear instancia de conexion
     $db = new PDOConnection();
     $conexion = $db->getConexion();
 
-    // Preparar la consulta SQL - AGREGADO ID_jugador
+    //*consulta SQL
     $sql = "SELECT 
                 ID_jugador,
                 ficha_jugador, 
@@ -22,26 +22,26 @@ try {
             ORDER BY puntaje_jugador DESC 
             LIMIT 10";
 
-    // Preparar y ejecutar
+    //*preparar para ejecutar
     $stmt = $conexion->prepare($sql);
     $stmt->execute();
 
-    // Obtener los resultados
+    //*obtener resultados
     $jugadores = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-    // Verificar si hay resultados
+    //*verificar resultados
     if (empty($jugadores)) {
         $mensaje = "No hay jugadores registrados aún. ¡Sé el primero en jugar!";
     }
 
-    // Desconectar
+    //*desconectar
     $db->desconectar();
 
 } catch (PDOException $e) {
-    // Si hay error, capturarlo
+  
     $mensaje = "Error al obtener el ranking. Por favor intenta más tarde.";
 
-    // Solo para desarrollo (mostrar el error real):
+
     $mensaje .= "<br><small>Debug: " . $e->getMessage() . "</small>";
 
     $jugadores = [];

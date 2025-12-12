@@ -3,7 +3,7 @@
 // ============================================
 
 function limpiarJugadores() {
-    // Confirmación única
+    //*¨confirmar acción
     Swal.fire({
         title: '⚠️ ¿Estás completamente seguro?',
         html: `
@@ -33,7 +33,7 @@ function limpiarJugadores() {
 // ============================================
 
 function ejecutarLimpiezaJugadores() {
-    // Mostrar loading
+    //*peticion de limpieza
     Swal.fire({
         title: '🗑️ Eliminando jugadores...',
         text: 'Por favor espera',
@@ -44,7 +44,7 @@ function ejecutarLimpiezaJugadores() {
         }
     });
 
-    // Hacer petición al controlador
+    //* peticion controller
     fetch('../../backend/controllers/LimpiarJugadoresController.php', {
         method: 'POST',
         headers: {
@@ -55,7 +55,7 @@ function ejecutarLimpiezaJugadores() {
     .then(response => response.json())
     .then(data => {
         if (data.error) {
-            // Error
+            //*error
             Swal.fire({
                 icon: 'error',
                 title: 'Error',
@@ -64,7 +64,7 @@ function ejecutarLimpiezaJugadores() {
                 confirmButtonColor: '#dc3545'
             });
         } else if (data.success) {
-            // Éxito
+            //*ecito
             Swal.fire({
                 icon: 'success',
                 title: '✅ ¡Limpieza completada!',

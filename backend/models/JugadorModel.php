@@ -235,8 +235,7 @@ class JugadorModel
     }
 
     /**
-     * Limpia TODOS los jugadores y logs de la base de datos
-     * ⚠️ USAR CON PRECAUCIÓN - NO SE PUEDE DESHACER
+     * limpiar jugadores y logs de la base de datos
      */
     public function limpiarTodosLosJugadores()
     {
@@ -244,19 +243,19 @@ class JugadorModel
             $this->mysql->conectar();
             $conexion = $this->mysql->getConexion();
 
-            // 1. Primero eliminar las relaciones en la tabla intermedia
+            //*eliminar relaciones
             $conexion->exec("DELETE FROM tbl_jugadores_has_tbl_codigoacesso");
 
-            // 2. Eliminar todos los jugadores
+            //*eliminar jugadores y reiniciar auto_increment
             $conexion->exec("DELETE FROM tbl_jugadores");
 
-            // 3. Reiniciar el auto_increment
+            //*reiniciar el auto_increment de jugadores
             $conexion->exec("ALTER TABLE tbl_jugadores AUTO_INCREMENT = 1");
 
-            // 4. Eliminar todos los logs
+            //*eliminar logs
             $conexion->exec("DELETE FROM tbl_logs_debug");
 
-            // 5. Reiniciar el auto_increment de logs
+            //*reiniciar el auto_increment de logs
             $conexion->exec("ALTER TABLE tbl_logs_debug AUTO_INCREMENT = 1");
 
             $this->mysql->desconectar();

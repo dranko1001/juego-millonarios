@@ -49,8 +49,6 @@ $nombre_admin = $_SESSION["admin"];
                 <a href="agregaradmi.php" class="btn btn-yellow" data-icon="👤">
                     + Agregar Cuenta
                 </a>
-
-                <!-- ⭐ NUEVO BOTÓN DE LIMPIAR JUGADORES -->
                 <button onclick="limpiarJugadores()" class="btn btn-danger" data-icon="🗑️">
                     Limpiar Jugadores
                 </button>

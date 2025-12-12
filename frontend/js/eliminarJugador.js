@@ -1,20 +1,18 @@
-// ============================================
-// INICIALIZAR EVENT LISTENERS AL CARGAR LA PÁGINA
-// ============================================
+
 
 document.addEventListener('DOMContentLoaded', function() {
-    // Agregar event listener a todos los botones de eliminar
+    //*escuchador de botones de liminar
     const botonesEliminar = document.querySelectorAll('.btn-eliminar');
     
-    console.log('Total de botones encontrados:', botonesEliminar.length); // DEBUG
+    console.log('Total de botones encontrados:', botonesEliminar.length);
     
     botonesEliminar.forEach(boton => {
         boton.addEventListener('click', function() {
-            // Probar diferentes formas de obtener el ID
+            //*ids y nombres de los jugadores a eliminar
             const idJugador = this.dataset.id || this.getAttribute('data-id');
             const nombreUsuario = this.dataset.nombre || this.getAttribute('data-nombre');
             
-            // Debug: Verificar que se obtienen los datos
+            //*debug de datos obtenidos
             console.log('Botón clickeado:', this);
             console.log('ID del jugador:', idJugador);
             console.log('Nombre del usuario:', nombreUsuario);
@@ -36,14 +34,11 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-// ============================================
-// FUNCIÓN ELIMINAR JUGADOR CON SWEETALERT2
-// ============================================
 
-/**
- * Elimina un jugador del ranking con confirmación
- * @param {number} idJugador - ID del jugador a eliminar
- * @param {string} nombreUsuario - Nombre del usuario para mostrar en confirmación
+
+/** * Elimina un jugador mediante una petición AJAX
+ * @param {number} idJugador
+ * @param {string} nombreUsuario 
  */
 function eliminarJugador(idJugador, nombreUsuario) {
     console.log('=== INICIANDO ELIMINACIÓN ===');
@@ -62,7 +57,7 @@ function eliminarJugador(idJugador, nombreUsuario) {
         reverseButtons: true
     }).then((result) => {
         if (result.isConfirmed) {
-            // Mostrar loading
+            //*mostrar
             Swal.fire({
                 title: 'Eliminando...',
                 text: 'Por favor espera',
@@ -72,15 +67,15 @@ function eliminarJugador(idJugador, nombreUsuario) {
                 }
             });
             
-            // Preparar datos para enviar
+            //*preparar datos
             const formData = new FormData();
             formData.append('id_jugador', idJugador);
             
-            // Debug: Verificar datos antes de enviar
+            //*debug de datos a enviar
             console.log('=== DATOS A ENVIAR ===');
             console.log('FormData - id_jugador:', formData.get('id_jugador'));
             
-            // Hacer petición AJAX
+            //*peticion ajax
             fetch('../../backend/controllers/EliminarJugadorController.php', {
                 method: 'POST',
                 body: formData
@@ -88,7 +83,7 @@ function eliminarJugador(idJugador, nombreUsuario) {
             .then(response => {
                 console.log('Respuesta HTTP status:', response.status);
                 console.log('Respuesta completa:', response);
-                return response.text(); // Primero como texto para ver qué llega
+                return response.text();
             })
             .then(text => {
                 console.log('Respuesta raw:', text);
@@ -109,13 +104,13 @@ function eliminarJugador(idJugador, nombreUsuario) {
                     }
                     
                     if (data.success) {
-                        // Animar la eliminación de la fila
+                       
                         const fila = document.getElementById('fila-' + idJugador);
                         if (fila) {
                             fila.classList.add('fila-eliminada');
                         }
                         
-                        // Mostrar mensaje de éxito
+                      
                         Swal.fire({
                             icon: 'success',
                             title: '¡Eliminado!',
@@ -124,19 +119,19 @@ function eliminarJugador(idJugador, nombreUsuario) {
                             showConfirmButton: false
                         });
                         
-                        // Eliminar la fila del DOM después de la animación
+                    
                         setTimeout(() => {
                             if (fila) {
                                 fila.remove();
                             }
                             
-                            // Verificar si quedan filas
+                       
                             const tbody = document.getElementById('tabla-ranking');
                             if (tbody && tbody.children.length === 0) {
-                                // Si no quedan jugadores, recargar la página
+                        
                                 location.reload();
                             } else {
-                                // Actualizar las posiciones
+                   
                                 actualizarPosiciones();
                             }
                         }, 500);
@@ -173,7 +168,7 @@ function eliminarJugador(idJugador, nombreUsuario) {
 // ============================================
 
 /**
- * Actualiza las posiciones y medallas después de eliminar un jugador
+ *r
  */
 function actualizarPosiciones() {
     const filas = document.querySelectorAll('#tabla-ranking .ranking-row');
@@ -181,13 +176,13 @@ function actualizarPosiciones() {
         const posicion = index + 1;
         let emoji = '';
         
-        if (posicion === 1) emoji = '🥇';
-        else if (posicion === 2) emoji = '🥈';
-        else if (posicion === 3) emoji = '🥉';
+        if (posicion === 1);
+        else if (posicion === 2);
+        else if (posicion === 3);
         
         const celdaPosicion = fila.querySelector('.position');
         if (celdaPosicion) {
-            celdaPosicion.textContent = emoji + ' ' + posicion;
+            celdaPosicion.textContent =  posicion;
         }
     });
 }

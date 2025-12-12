@@ -1,15 +1,15 @@
 <?php
 // backend/controllers/EliminarJugadorController.php
 
-// Configurar headers para JSON
+//*header json
 header('Content-Type: application/json; charset=utf-8');
 
-// Iniciar sesión si no está iniciada
+//*sesion
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-// Verificar que sea una petición POST
+//*metodo
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     echo json_encode([
         'error' => 'Método no permitido',
@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     exit();
 }
 
-// Verificar que llegue el ID del jugador
+//*verificar la llegada del id_jugador
 if (!isset($_POST['id_jugador']) || empty($_POST['id_jugador'])) {  // ← CAMBIADO
     echo json_encode([
         'error' => 'ID de jugador no proporcionado',
@@ -29,7 +29,7 @@ if (!isset($_POST['id_jugador']) || empty($_POST['id_jugador'])) {  // ← CAMBI
 
 $idJugador = filter_var($_POST['id_jugador'], FILTER_VALIDATE_INT);  // ← CAMBIADO
 
-// Validar que el ID sea válido
+//*valido el id valido
 if ($idJugador === false || $idJugador <= 0) {
     echo json_encode([
         'error' => 'ID de jugador inválido',
@@ -43,7 +43,7 @@ require_once __DIR__ . '/../models/JugadorModel.php';
 try {
     $jugadorModel = new JugadorModel();
 
-    // Primero verificar que el jugador existe
+    //*verificar existencia del jugador
     $puntaje = $jugadorModel->obtenerPuntaje($idJugador);
 
     if ($puntaje === null) {
@@ -54,7 +54,7 @@ try {
         exit();
     }
 
-    // Eliminar el jugador
+    //*eliminar jugador
     $resultado = $jugadorModel->eliminarJugador($idJugador);
 
     if ($resultado) {
