@@ -18,7 +18,7 @@ try {
     $conexion = $db->getConexion();
 
     // Preparar la consulta SQL
-    $sql = "SELECT 
+    $sql = "SELECT ID_jugador,
                 ficha_jugador, 
                 usuario_jugador, 
                 puntaje_jugador 

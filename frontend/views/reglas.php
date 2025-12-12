@@ -5,10 +5,8 @@ $rol = $_SESSION["rol"] ?? null;
 
 if ($rol === "admin") {
     $enlaceVolver = "menuOpciones.php";
-} elseif ($rol !== "aprendiz") {
-    $enlaceVolver = "validar_codigo.php";
 } else {
-    $enlaceVolver = "menu.php";
+    $enlaceVolver = "validar_codigo.php";
 }
 ?>
 
