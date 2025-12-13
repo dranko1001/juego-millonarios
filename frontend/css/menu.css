@@ -366,22 +366,22 @@ body::before {
 .btn:nth-child(4) { animation-delay: 0.4s; }
 .btn:nth-child(5) { animation-delay: 0.5s; }
 
-/* ICONOS DENTRO DE LOS BOTONES */
+
 .btn img {
     width: 32px;              
     height: 32px;
     object-fit: contain;      
     margin-right: 2px;       
-    flex-shrink: 0;           /* Evita que se aplaste en pantallas pequeñas */
-    display: block;           /* Evita espacios raros con inline elements */
+    flex-shrink: 0;           
+    display: block;          
 }
 
-/* Hacer que el botón acomode icono + texto correctamente */
+
 .btn {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 4px;                /* Separación elegante entre icono y texto */
+    gap: 4px;                
 }
 
 
