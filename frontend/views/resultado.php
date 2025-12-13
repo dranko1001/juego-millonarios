@@ -115,7 +115,7 @@ $textoRespuestaElegida = $opcionesMostradas[$respuestaElegida] ?? '';
         
         <div class="botones-container">
             <a href="../../backend/controllers/PreguntasController.php" class="boton boton-siguiente">
-                => Siguiente Pregunta
+                 Siguiente Pregunta
             </a>
             
             <a href="reiniciar.php?cambiar_categoria=1" 
