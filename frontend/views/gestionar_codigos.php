@@ -38,7 +38,7 @@
 
         <?php if (isset($_GET['error'])): ?>
             <div class="alert alert-error">
-                ⚠️ Error al procesar la solicitud
+                 Error al procesar la solicitud
             </div>
         <?php endif; ?>
 
