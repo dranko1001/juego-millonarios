@@ -34,10 +34,6 @@ if (isset($_GET['error'])) {
 <body>
     <form method="POST" action="../../backend/controllers/validar_codigo_aprendiz.php">
         <h2>Código de Acceso</h2>
-
-       <a href="reglas.php" style="display: block; text-align: center; margin-top: 15px; color: #008000; text-decoration: none;">
-            Reglas
-        </a>
  
 
         <div class="info-box">
