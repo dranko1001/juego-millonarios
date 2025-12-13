@@ -1,18 +1,93 @@
-/* ============================================
-   ESTILOS PARA RANKING
-   ============================================ */
+
+
+/* Contenedor principal */
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* Título */
+.title {
+    text-align: center;
+    color: #2d3436;
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Contenedor de la tabla */
+.ranking-container {
+    background: white;
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    overflow-x: auto;
+    margin-bottom: 30px;
+}
+
+/* Tabla principal - Escritorio */
+.ranking-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.ranking-table thead {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.ranking-table th {
+    color: white;
+    padding: 15px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.ranking-table tbody tr {
+    border-bottom: 1px solid #e0e0e0;
+    transition: all 0.3s ease;
+}
+
+.ranking-table tbody tr:hover {
+    background-color: #f8f9fa;
+    transform: scale(1.02);
+}
+
+.ranking-table td {
+    padding: 15px;
+    text-align: center;
+    font-size: 1rem;
+}
+
+.ranking-table .position {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #667eea;
+}
+
+.ranking-table .score {
+    color: #27ae60;
+    font-weight: bold;
+    font-size: 1.1rem;
+}
 
 /* Botón de eliminar */
 .btn-eliminar {
     background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
     color: white;
     border: none;
-    padding: 8px 16px;
+    padding: 10px 20px;
     border-radius: 8px;
     cursor: pointer;
     font-weight: 600;
     transition: all 0.3s ease;
-    font-size: 0.9em;
+    font-size: 0.9rem;
+    white-space: nowrap;
 }
 
 .btn-eliminar:hover {
@@ -24,10 +99,47 @@
     transform: scale(0.98);
 }
 
-/* Fila en proceso de eliminación */
-.fila-eliminando {
-    opacity: 0.5;
-    pointer-events: none;
+/* Contenedor de botones */
+.buttons-container {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.btn {
+    padding: 15px 30px;
+    border-radius: 12px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    display: inline-block;
+    text-align: center;
+}
+
+.btn-secondary {
+    background: linear-gradient(135deg, #6c757d 0%, #5a6268 100%);
+    color: white;
+}
+
+.btn-secondary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 20px rgba(108, 117, 125, 0.4);
+}
+
+/* Caja de mensaje */
+.message-box {
+    background: white;
+    border-radius: 15px;
+    padding: 30px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+}
+
+.message-box p {
+    font-size: 1.2rem;
+    color: #555;
 }
 
 /* Animación de eliminación */
@@ -46,33 +158,137 @@
     animation: fadeOut 0.5s ease-out forwards;
 }
 
-/* Personalización de SweetAlert2 para ranking */
-.swal2-popup {
-    font-size: 1.2rem;
-    border-radius: 20px;
+/* ============================================
+   RESPONSIVE - TABLETS (768px o menos)
+   ============================================ */
+
+@media (max-width: 768px) {
+    .title {
+        font-size: 1.8rem;
+        margin-bottom: 20px;
+    }
+    
+    .ranking-container {
+        padding: 15px;
+        border-radius: 15px;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    .ranking-table {
+        font-size: 0.85rem;
+    }
+    
+    .ranking-table th,
+    .ranking-table td {
+        padding: 10px 8px;
+        font-size: 0.85rem;
+    }
+    
+    .ranking-table .position {
+        font-size: 1.2rem;
+    }
+    
+    .btn-eliminar {
+        padding: 8px 12px;
+        font-size: 0.8rem;
+    }
 }
 
-.swal2-title {
-    font-size: 2em;
-    font-weight: bold;
+/* ============================================
+   RESPONSIVE - MÓVILES (480px o menos)
+   ============================================ */
+
+@media (max-width: 480px) {
+    .container {
+        padding: 10px;
+    }
+    
+    .title {
+        font-size: 1.4rem;
+        margin-bottom: 15px;
+    }
+    
+    .ranking-container {
+        padding: 10px;
+        overflow-x: auto;
+    }
+    
+    .ranking-table {
+        font-size: 0.75rem;
+        min-width: 100%;
+    }
+    
+    .ranking-table th {
+        padding: 8px 5px;
+        font-size: 0.7rem;
+        letter-spacing: 0;
+    }
+    
+    .ranking-table td {
+        padding: 8px 5px;
+        font-size: 0.75rem;
+    }
+    
+    .ranking-table .position {
+        font-size: 1rem;
+    }
+    
+    .ranking-table .score {
+        font-size: 0.85rem;
+    }
+    
+    .btn-eliminar {
+        padding: 6px 10px;
+        font-size: 0.7rem;
+    }
+    
+    .btn {
+        padding: 12px 20px;
+        font-size: 0.9rem;
+    }
 }
 
-.swal2-html-container {
-    font-size: 1.1em;
+/* ============================================
+   RESPONSIVE - MÓVILES PEQUEÑOS (360px o menos)
+   ============================================ */
+
+@media (max-width: 360px) {
+    .title {
+        font-size: 1.2rem;
+    }
+    
+    .ranking-table th,
+    .ranking-table td {
+        padding: 6px 3px;
+        font-size: 0.7rem;
+    }
+    
+    .ranking-table .position {
+        font-size: 0.9rem;
+    }
+    
+    .btn-eliminar {
+        padding: 5px 8px;
+        font-size: 0.65rem;
+    }
 }
 
-.swal2-confirm {
-    background: linear-gradient(135deg, #dc3545 0%, #c82333 100%) !important;
-    padding: 12px 30px !important;
-    font-size: 1.1em !important;
-    border-radius: 10px !important;
-    font-weight: bold !important;
+/* Ajustes para scroll horizontal suave */
+.ranking-container::-webkit-scrollbar {
+    height: 8px;
 }
 
-.swal2-cancel {
-    background: linear-gradient(135deg, #6c757d 0%, #5a6268 100%) !important;
-    padding: 12px 30px !important;
-    font-size: 1.1em !important;
-    border-radius: 10px !important;
-    font-weight: bold !important;
+.ranking-container::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+.ranking-container::-webkit-scrollbar-thumb {
+    background: #667eea;
+    border-radius: 10px;
+}
+
+.ranking-container::-webkit-scrollbar-thumb:hover {
+    background: #764ba2;
 }

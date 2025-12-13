@@ -6,49 +6,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>¿Quién Quiere Ser Millonario? - SENA</title>
     <link rel="stylesheet" href="../../frontend/css/juego.css">
-    
 
-    <!--  SweetAlert -->
+
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    
-    <!-- Variables PHP para JavaScript ( juego.js) -->
+
     <script>
-        // Variables iniciales desde PHP
         window.juegoConfig = {
-            tiempoLimite: <?php echo isset($_SESSION['tiempo_limite_segundos']) ? (int)$_SESSION['tiempo_limite_segundos'] : 120; ?>,
-            tiempoInicio: <?php echo isset($_SESSION['tiempo_inicio_pregunta']) ? (int)$_SESSION['tiempo_inicio_pregunta'] : time(); ?>,
+            tiempoLimite: <?php echo isset($_SESSION['tiempo_limite_segundos']) ? (int) $_SESSION['tiempo_limite_segundos'] : 120; ?>,
+            tiempoInicio: <?php echo isset($_SESSION['tiempo_inicio_pregunta']) ? (int) $_SESSION['tiempo_inicio_pregunta'] : time(); ?>,
             comodines: {
-                cincuenta_cincuenta: <?php 
-                    echo (isset($_SESSION['comodines']) && isset($_SESSION['comodines']['cincuenta_cincuenta']) && $_SESSION['comodines']['cincuenta_cincuenta']) ? 'true' : 'false'; 
+                cincuenta_cincuenta: <?php
+                echo (isset($_SESSION['comodines']) && isset($_SESSION['comodines']['cincuenta_cincuenta']) && $_SESSION['comodines']['cincuenta_cincuenta']) ? 'true' : 'false';
                 ?>,
-                cambio_pregunta: <?php 
-                    echo (isset($_SESSION['comodines']) && isset($_SESSION['comodines']['cambio_pregunta']) && $_SESSION['comodines']['cambio_pregunta']) ? 'true' : 'false'; 
+                cambio_pregunta: <?php
+                echo (isset($_SESSION['comodines']) && isset($_SESSION['comodines']['cambio_pregunta']) && $_SESSION['comodines']['cambio_pregunta']) ? 'true' : 'false';
                 ?>,
-                ayuda_publico: <?php 
-                    echo (isset($_SESSION['comodines']) && isset($_SESSION['comodines']['ayuda_publico']) && $_SESSION['comodines']['ayuda_publico']) ? 'true' : 'false'; 
+                ayuda_publico: <?php
+                echo (isset($_SESSION['comodines']) && isset($_SESSION['comodines']['ayuda_publico']) && $_SESSION['comodines']['ayuda_publico']) ? 'true' : 'false';
                 ?>,
-                llamada_amigo: <?php 
-                    echo (isset($_SESSION['comodines']) && isset($_SESSION['comodines']['llamada_amigo']) && $_SESSION['comodines']['llamada_amigo']) ? 'true' : 'false'; 
+                llamada_amigo: <?php
+                echo (isset($_SESSION['comodines']) && isset($_SESSION['comodines']['llamada_amigo']) && $_SESSION['comodines']['llamada_amigo']) ? 'true' : 'false';
                 ?>
             }
         };
-        
     </script>
-    
-    <!-- Archivo JavaScript principal (DESPUÉS de la configuración) -->
+
     <script src="../../frontend/js/juego.js"></script>
+    <script src="../../frontend/js/sweetAlertsJuego.js"></script>
 
 </head>
 
 <body>
 
-    <!-- Formulario oculto para envío automático cuando se agota el tiempo -->
     <form id="tiempo-agotado-form" action="../controllers/TiempoAgotadoController.php" method="POST"
         style="display: none;">
         <input type="hidden" name="tiempo_agotado" value="1">
     </form>
 
-    <!-- MODAL AYUDA DEL PÚBLICO -->
     <div id="modal-ayuda-publico" class="modal-overlay">
         <div class="modal-content">
             <h2>👥 Ayuda del Público</h2>
@@ -58,7 +52,6 @@
         </div>
     </div>
 
-    <!-- MODAL LLAMADA A UN AMIGO -->
     <div id="modal-llamada-amigo" class="modal-overlay">
         <div class="modal-content" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
             <h2>📞 Llamada a un Amigo</h2>
@@ -72,7 +65,6 @@
         <div class="header">
             <h1>¡¿Quién Quiere Ser Millonario?!</h1>
 
-            <!-- Temporizador -->
             <div id="temporizador-container"
                 style="background: linear-gradient(135deg, #39B54A 0%, #00A14B 100%); padding: 15px 25px; border-radius: 15px; margin-top: 10px; display: inline-block; border: 3px solid white; box-shadow: 0 5px 20px rgba(57, 181, 74, 0.4); transition: all 0.3s ease;">
                 <p
@@ -85,7 +77,7 @@
                 <div
                     style="background: rgba(255,215,0,0.2); padding: 10px; border-radius: 10px; margin-top: 10px; display: inline-block;">
                     <p style="margin: 0; font-size: 1.1em; font-weight: 600;">
-                         Categoría: <?php echo htmlspecialchars($_SESSION['categoria_nombre']); ?>
+                        📚 Categoría: <?php echo htmlspecialchars($_SESSION['categoria_nombre']); ?>
                     </p>
                 </div>
             <?php endif; ?>
@@ -94,7 +86,7 @@
                 <div
                     style="background: rgba(57,181,74,0.2); padding: 8px 15px; border-radius: 10px; margin-top: 8px; display: inline-block;">
                     <p style="margin: 0; font-size: 1em; font-weight: 600; color: white;">
-                         Correctas: <?php echo $_SESSION['preguntas_correctas']; ?> | 💰
+                        Correctas: <?php echo $_SESSION['preguntas_correctas']; ?> | 💰
                         $<?php echo number_format($_SESSION['puntaje_pesos']); ?>
                     </p>
                 </div>
@@ -107,7 +99,6 @@
                     <img src="../../frontend/media/logo.jpg" alt="Logo SENA">
                 </div>
 
-                <!--  COMODINES -->
                 <div class="lifelines">
                     <div class="lifeline" id="comodin-publico" title="Ayuda del público - 1 minuto extra"
                         onclick="usarAyudaPublico()">
@@ -127,25 +118,22 @@
                 </div>
 
                 <div style="margin-top: 20px; width: 100%; display: flex; flex-direction: column; gap: 10px;">
-                    <a href="../../backend/controllers/CambiarCategoriaController.php"
-                        onclick="return confirm('¿Seguro que deseas cambiar de categoría? Se reiniciará tu progreso y perderás tu puntaje actual.')"
-                        style="display: block; background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%); 
+                    <a href="#" onclick="confirmarCambioCategoriaDuranteJuego(); return false;" style="display: block; background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%); 
                           color: #1a1a1a; text-decoration: none; padding: 12px 15px; 
                           border-radius: 12px; text-align: center; font-weight: 700; 
                           font-size: 0.9em; border: 3px solid white; 
                           box-shadow: 0 5px 15px rgba(255, 165, 0, 0.3);
                           transition: all 0.3s ease;">
-                         Cambiar Categoría
+                        Cambiar Categoría
                     </a>
 
-                    <a href="../../backend/controllers/logout.php"
-                        onclick="return confirm('¿Seguro que deseas salir? Tu puntaje actual se guardará.')" style="display: block; background: linear-gradient(135deg, #6c757d 0%, #495057 100%); 
+                    <a href="#" onclick="confirmarSalirYGuardar(); return false;" style="display: block; background: linear-gradient(135deg, #6c757d 0%, #495057 100%); 
                           color: white; text-decoration: none; padding: 12px 15px; 
                           border-radius: 12px; text-align: center; font-weight: 700; 
                           font-size: 0.9em; border: 3px solid white; 
                           box-shadow: 0 5px 15px rgba(108, 117, 125, 0.3);
                           transition: all 0.3s ease;">
-                         Salir y Guardar
+                        Salir y Guardar
                     </a>
                 </div>
             </div>
