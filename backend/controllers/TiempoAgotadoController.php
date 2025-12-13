@@ -79,7 +79,7 @@ if ((!isset($_SESSION['respuesta_correcta_letra']) || !isset($_SESSION['respuest
     }
 }
 
-// ✅ Establecer valores por defecto si aún no existen
+
 if (!isset($_SESSION['respuesta_elegida'])) {
     $_SESSION['respuesta_elegida'] = '';
 }

@@ -68,22 +68,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 ':op2'       => $opcion2,
                 ':op3'       => $opcion3,
                 ':op4'       => $opcion4,
-                ':correcta'  => $textoCorrecta,  // Ahora guarda el texto completo
+                ':correcta'  => $textoCorrecta,  
                 ':categoria' => $categoria_id,
                 ':dificultad'=> $dificultad_id,
                 ':id'        => $id_pregunta
             ]);
 
             if ($stmt->rowCount() > 0) {
-                $_SESSION['msg_editar'] = "✓ Pregunta actualizada correctamente.";
+                $_SESSION['msg_editar'] = " Pregunta actualizada correctamente.";
             } else {
-                $_SESSION['msg_editar'] = "⚠ No se realizaron cambios en la pregunta.";
+                $_SESSION['msg_editar'] = " No se realizaron cambios en la pregunta.";
             }
         } catch (PDOException $e) {
-            $_SESSION['msg_editar'] = "✗ Error al actualizar la pregunta: " . $e->getMessage();
+            $_SESSION['msg_editar'] = " Error al actualizar la pregunta: " . $e->getMessage();
         }
     } else {
-        $_SESSION['msg_editar'] = "✗ Todos los campos son obligatorios.";
+        $_SESSION['msg_editar'] = " Todos los campos son obligatorios.";
     }
 
     // Mantener la página y búsqueda actual

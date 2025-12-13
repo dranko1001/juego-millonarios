@@ -44,7 +44,7 @@ $datosPregunta = null;
 // ANTI-TRAMPA: Verificar si ya hay una pregunta activa (sin responder)
 if (isset($_SESSION['pregunta_activa']) && $_SESSION['pregunta_activa'] === true) {
 
-    // ✅ Reutilizar la pregunta actual guardada en sesión
+  
     if (
         isset($_SESSION['pregunta_actual_id']) &&
         isset($_SESSION['enunciado_pregunta']) &&
@@ -66,7 +66,7 @@ if (isset($_SESSION['pregunta_activa']) && $_SESSION['pregunta_activa'] === true
         $pregunta['respuesta_correcta_letra'] = $_SESSION['respuesta_correcta_letra'];
         $pregunta['respuesta_correcta_texto'] = $_SESSION['respuesta_correcta_texto'];
         
-        //  NO REINICIAR EL TIEMPO - mantener el timestamp original
+        
         
     } else {
         // Si falta información, forzar nueva pregunta
@@ -149,11 +149,11 @@ if (!isset($_SESSION['pregunta_activa']) || $_SESSION['pregunta_activa'] === fal
         $_SESSION['opciones_mostradas'] = $opciones_a_mostrar;
         $_SESSION['dificultad_pregunta'] = $datosPregunta['TBL_dificultades_ID_dificultad'];
         
-        // CRÍTICO: SOLO guardar el tiempo de inicio SI ES UNA PREGUNTA NUEVA
-        $_SESSION['tiempo_inicio_pregunta'] = time(); // Timestamp actual
-        $_SESSION['tiempo_limite_segundos'] = 120; // 2 minutos = 120 segundos
+        //  SOLO guardar el tiempo de inicio SI ES UNA PREGUNTA NUEVA
+        $_SESSION['tiempo_inicio_pregunta'] = time(); 
+        $_SESSION['tiempo_limite_segundos'] = 120; 
         
-        // MARCAR PREGUNTA COMO ACTIVA (sin responder)
+        // MARCAR PREGUNTA COMO ACTIVA 
         $_SESSION['pregunta_activa'] = true;
 
         // Agregar a preguntas respondidas para no repetirla
