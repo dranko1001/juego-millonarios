@@ -121,23 +121,6 @@ $categorias = $pdo->query($sqlCat)->fetchAll();
             <?php endif; ?>
         </form>
 
-<<<<<<< HEAD
-       
-        <?php if ($totalPaginas > 1): ?>
-        <div class="d-flex justify-content-end mb-3">
-            <div class="btn-group">
-                <?php for ($i = 1; $i <= $totalPaginas; $i++): ?>
-                    <a href="?pagina=<?= $i ?>&buscar=<?= urlencode($search) ?>"
-                       class="btn <?= $i == $pagina ? 'btn-primary' : 'btn-secondary' ?>">
-                        <?= $i ?>
-                    </a>
-                <?php endfor; ?>
-            </div>
-        </div>
-        <?php endif; ?>
-
-       
-=======
         <!-- Información de paginación -->
         <div class="d-flex justify-content-between align-items-center mb-3">
             <div>
@@ -208,7 +191,6 @@ $categorias = $pdo->query($sqlCat)->fetchAll();
         <?php endif; ?>
 
         <!-- Tabla de preguntas -->
->>>>>>> origin/frank
         <div class="table-responsive">
             <table class="table table-bordered table-hover">
                 <thead class="table-light">
@@ -236,25 +218,6 @@ $categorias = $pdo->query($sqlCat)->fetchAll();
                             <td><?= htmlspecialchars($p['opcion2_pregunta']) ?></td>
                             <td><?= htmlspecialchars($p['opcion3_pregunta']) ?></td>
                             <td><?= htmlspecialchars($p['opcion4_pregunta']) ?></td>
-<<<<<<< HEAD
-                            <td><?= htmlspecialchars($p['correcta_pregunta']) ?></td>
-                            <td><?= htmlspecialchars($p['nombre_categoria']) ?></td>
-                            <td><?= htmlspecialchars($p['nombre_dificultad']) ?></td>
-                            <td>
-                                <button class="btn btn-warning btn-sm"
-                                        data-bs-toggle="modal"
-                                        data-bs-target="#editarModal"
-                                        data-id="<?= $p['ID_pregunta'] ?>"
-                                        data-enunciado="<?= htmlspecialchars($p['enunciado_pregunta'], ENT_QUOTES) ?>"
-                                        data-op1="<?= htmlspecialchars($p['opcion1_pregunta'], ENT_QUOTES) ?>"
-                                        data-op2="<?= htmlspecialchars($p['opcion2_pregunta'], ENT_QUOTES) ?>"
-                                        data-op3="<?= htmlspecialchars($p['opcion3_pregunta'], ENT_QUOTES) ?>"
-                                        data-op4="<?= htmlspecialchars($p['opcion4_pregunta'], ENT_QUOTES) ?>"
-                                        data-correcta="<?= htmlspecialchars($p['correcta_pregunta'], ENT_QUOTES) ?>"
-                                        data-categoria="<?= $p['ID_categoria'] ?>"
-                                        data-dificultad="<?= $p['ID_dificultad'] ?>">
-                                    Editar
-=======
                             <td class="text-center">
                                 <span class="badge bg-success"><?= htmlspecialchars($p['correcta_pregunta']) ?></span>
                             </td>
@@ -264,15 +227,11 @@ $categorias = $pdo->query($sqlCat)->fetchAll();
                                 <button class="btn btn-warning btn-sm w-100"
                                         onclick="abrirModalEdicion(<?= htmlspecialchars(json_encode($p), ENT_QUOTES) ?>)">
                                     <i class="bi bi-pencil"></i> Editar
->>>>>>> origin/frank
                                 </button>
                             </td>
                         </tr>
                         <?php endforeach; ?>
                     <?php else: ?>
-<<<<<<< HEAD
-                        <tr><td colspan="10" class="text-center">No se encontraron preguntas.</td></tr>
-=======
                         <tr>
                             <td colspan="10" class="text-center py-4">
                                 <div class="text-muted">
@@ -281,7 +240,6 @@ $categorias = $pdo->query($sqlCat)->fetchAll();
                                 </div>
                             </td>
                         </tr>
->>>>>>> origin/frank
                     <?php endif; ?>
                 </tbody>
 
@@ -331,10 +289,7 @@ $categorias = $pdo->query($sqlCat)->fetchAll();
 </div>
 
 
-<<<<<<< HEAD
-=======
 <!-- Modal para editar -->
->>>>>>> origin/frank
 <div class="modal fade" id="editarModal" tabindex="-1">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
@@ -348,60 +303,14 @@ $categorias = $pdo->query($sqlCat)->fetchAll();
 
           <div class="modal-body">
               <input type="hidden" name="ID_pregunta" id="modal-id">
-<<<<<<< HEAD
-=======
               <input type="hidden" name="pagina_actual" value="<?= $pagina ?>">
               <input type="hidden" name="buscar" value="<?= htmlspecialchars($search) ?>">
->>>>>>> origin/frank
 
               <div class="mb-3">
                   <label class="form-label fw-bold">Pregunta:</label>
                   <textarea name="enunciado_pregunta" id="modal-enunciado" class="form-control" rows="3" required></textarea>
               </div>
 
-<<<<<<< HEAD
-              <div class="mb-2">
-                  <label>Opción A:</label>
-                  <input type="text" name="opcion1_pregunta" id="modal-op1" class="form-control" required>
-              </div>
-
-              <div class="mb-2">
-                  <label>Opción B:</label>
-                  <input type="text" name="opcion2_pregunta" id="modal-op2" class="form-control" required>
-              </div>
-
-              <div class="mb-2">
-                  <label>Opción C:</label>
-                  <input type="text" name="opcion3_pregunta" id="modal-op3" class="form-control" required>
-              </div>
-
-              <div class="mb-2">
-                  <label>Opción D:</label>
-                  <input type="text" name="opcion4_pregunta" id="modal-op4" class="form-control" required>
-              </div>
-
-              <div class="mb-2">
-                  <label>Respuesta Correcta:</label>
-                  <input type="text" name="correcta_pregunta" id="modal-correcta" class="form-control" required>
-              </div>
-
-              <div class="mb-3">
-                  <label>Categoría:</label>
-                  <select name="ID_categoria" id="modal-categoria" class="form-control" required>
-                      <?php foreach($categorias as $cat): ?>
-                          <option value="<?= $cat['ID_categoria'] ?>"><?= htmlspecialchars($cat['nombre_categoria']) ?></option>
-                      <?php endforeach; ?>
-                  </select>
-              </div>
-
-              <div class="mb-3">
-                  <label>Dificultad:</label>
-                  <select name="ID_dificultad" id="modal-dificultad" class="form-control" required>
-                      <option value="1">Fácil</option>
-                      <option value="2">Medio</option>
-                      <option value="3">Difícil</option>
-                  </select>
-=======
               <div class="mb-3 border p-3 rounded bg-light">
                   <label class="form-label fw-bold mb-3">Opciones de Respuesta:</label>
                   
@@ -468,7 +377,6 @@ $categorias = $pdo->query($sqlCat)->fetchAll();
                           <option value="3">Difícil</option>
                       </select>
                   </div>
->>>>>>> origin/frank
               </div>
 
           </div>
@@ -487,28 +395,7 @@ $categorias = $pdo->query($sqlCat)->fetchAll();
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
-<<<<<<< HEAD
-
-<script>
-var editarModal = document.getElementById('editarModal');
-
-editarModal.addEventListener('show.bs.modal', function (event) {
-  var button = event.relatedTarget;
-
-  document.getElementById('modal-id').value = button.getAttribute('data-id');
-  document.getElementById('modal-enunciado').value = button.getAttribute('data-enunciado');
-  document.getElementById('modal-op1').value = button.getAttribute('data-op1');
-  document.getElementById('modal-op2').value = button.getAttribute('data-op2');
-  document.getElementById('modal-op3').value = button.getAttribute('data-op3');
-  document.getElementById('modal-op4').value = button.getAttribute('data-op4');
-  document.getElementById('modal-correcta').value = button.getAttribute('data-correcta');
-  document.getElementById('modal-categoria').value = button.getAttribute('data-categoria');
-  document.getElementById('modal-dificultad').value = button.getAttribute('data-dificultad');
-});
-</script>
-=======
 <script src="../js/editarpregunta.js"></script>
->>>>>>> origin/frank
 
 </body>
 </html>

@@ -52,13 +52,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 ':dificultad'=> $dificultad_id
             ]);
 
-            $_SESSION['msg_pregunta'] = "Pregunta creada correctamente.";
+            // NO NOMBRAR TODAS LAS VARIABLES IGUAL, YAS
+            $_SESSION['msg_crear_pregunta'] = "Pregunta creada correctamente.";
 
         } catch (PDOException $e) {
-            $_SESSION['msg_pregunta'] = "Error al guardar la pregunta: " . $e->getMessage();
+            $_SESSION['msg_crear_pregunta'] = "Error al guardar la pregunta: " . $e->getMessage();
         }
     } else {
-        $_SESSION['msg_pregunta'] = "Todos los campos son obligatorios.";
+        $_SESSION['msg_crear_pregunta'] = "Todos los campos son obligatorios.";
     }
 
     header("Location: ../../frontend/views/crearpregunta.php");

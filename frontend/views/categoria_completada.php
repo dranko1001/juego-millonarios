@@ -17,7 +17,9 @@ $porcentaje = $_SESSION["porcentaje"] ?? 0;
 
 <div class="contenedor-resultado">
     
-    <div class="emoji">🎉</div>
+    <div class="emoji">
+    <img src="../media/gano.png" alt="Celebración">
+</div>
     
     <div class="resultado-correcto" style="font-size: 2.5em; margin-bottom: 20px;">
         ¡CATEGORÍA COMPLETADA!

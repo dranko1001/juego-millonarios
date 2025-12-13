@@ -1,0 +1,40 @@
+/Juegomillonarios
+│
+├── backend/
+│   ├── controllers/
+│   │       ├── preguntasController.php
+│   │       
+│   │       
+│   │
+│   ├── models/
+│   │       ├── MySQL.php <-cuidado con editarlo, recuerden que es con PDO
+│   │       
+│   │       
+│   │
+│   ├── database/
+│   │       
+│   │       └── DB.sql ← aqui ponemos la estructura e la db en caso de necesitar un backup
+│   │
+│
+├── frontend/
+│   ├── css/
+│   │       └── estilos.css 
+│   ├── js/
+│   │       ├── juego.js
+│   │       
+│   │       ├── views
+│        
+│   
+│   ├── media/
+│          ├── imagenes <-carpeta si se necesitan imagenes
+│          ├── videos <-de ser necesario videos o audios o gifs, crear sus respectivas carpetas para ordenarlos
+│          ├── audio
+│          
+│          
+│          
+│        
+│
+├── docs/
+│   ├── txt <-documentos donde podremos escribir comentarios mas extensos, los requerimientos extras o aportes que nos diga el instructor y la bibliotecaria, etc..
+│   ├── //probablemente esa carpeta se borre al final del proyecto
+

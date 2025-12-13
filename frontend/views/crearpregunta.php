@@ -43,6 +43,14 @@ $categorias = $stmt->fetchAll();
 
         <div class="content-area">
             <h2 class="form-title">Crear Nueva Pregunta</h2>
+             <!--  Mostrar solo mensaje de crear -->
+    <?php if (isset($_SESSION['msg_crear_pregunta'])): ?>
+        <div class="alert alert-info alert-dismissible fade show" role="alert">
+            <?= htmlspecialchars($_SESSION['msg_crear_pregunta']) ?>
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+        <?php unset($_SESSION['msg_crear_pregunta']); ?>
+    <?php endif; ?>
 
             <form id="form-crear-pregunta" method="POST" action="../../backend/controllers/crearpregunta_controller.php">
 

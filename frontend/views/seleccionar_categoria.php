@@ -119,7 +119,24 @@ if (isset($_GET['error'])) {
                                     'Cultura General' => '📖',
                                     'Biología' => '🧬',
                                     'Videojuegos' => '🎮',
-                                    'Economía' => '💰'
+                                    'Economía' => '💰',
+                                    //agregar iconos segun cuantas categorias quieran crear
+                                    'Física' => '⚛️',
+'Química' => '🧪',
+'Astronomía' => '🌌',
+'Filosofía' => '📘',
+'Psicología' => '🧠',
+'Sociología' => '👥',
+'Política' => '🏛️',
+'Religión' => '⛪',
+'Educación' => '🎓',
+   'SENA' => '🏫',
+    'Halloween' => '🎃',
+    'Navidad' => '🎄',
+        'Administración' => '🗂️',
+    'Contabilidad' => '🧮',
+    'Costura'       => '🧵',
+    'Cocina'        => '🍳',
                                 ];
                                 $nombre = $categoria['nombre_categoria'];
                                 echo isset($iconos[$nombre]) ? $iconos[$nombre] : '📖';
