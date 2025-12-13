@@ -1,5 +1,4 @@
 <?php
-// backend/controllers/ValidarRespuestaController.php
 session_start();
 
 // Función para guardar logs en la base de datos

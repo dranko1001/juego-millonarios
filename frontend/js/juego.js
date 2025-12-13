@@ -1,6 +1,6 @@
-// ============================================
-// VARIABLES GLOBALES DEL TEMPORIZADOR
-// ============================================
+// 
+//
+//  VARIABLES GLOBALES DEL TEMPORIZADOR
 let tiempoRestante;
 let tiempoInicio;
 let tiempoTranscurrido;
@@ -9,19 +9,18 @@ let formSubmitted = false;
 let tiempoDetenido = false;
 
 // Variables para ayuda del público
-let tiempoAyudaPublico = 60; // 1 minuto
+let tiempoAyudaPublico = 60; // la pueden cambiar segun el tiempo que quieran
 let intervaloAyudaPublico;
 
 // Variables para llamada a un amigo
-let tiempoLlamadaAmigo = 30; // 30 segundos
+let tiempoLlamadaAmigo = 30; // tiempo de la llamada
 let intervaloLlamadaAmigo;
 let audioLlamada;
 
-// ============================================
+// 
 // FUNCIÓN ACTUALIZAR TEMPORIZADOR
-// ============================================
 function actualizarTemporizador() {
-    if (tiempoDetenido) return; // No actualizar si está detenido
+    if (tiempoDetenido) return; 
 
     if (tiempoRestante <= 0) {
         clearInterval(intervalo);
@@ -49,23 +48,21 @@ function actualizarTemporizador() {
     tiempoRestante--;
 }
 
-// ============================================
+
 // FUNCIÓN DETENER TEMPORIZADOR
-// ============================================
 function detenerTemporizador() {
     tiempoDetenido = true;
 }
 
-// ============================================
-// FUNCIÓN REANUDAR TEMPORIZADOR
-// ============================================
+
+// FUNCIÓN DETENER TEMPORIZADOR
 function reanudarTemporizador() {
     tiempoDetenido = false;
 }
 
-// ============================================
+
 // COMODÍN: 50/50
-// ============================================
+
 function usar5050() {
     if (document.getElementById('comodin-5050').classList.contains('usado')) {
         Swal.fire({
@@ -155,9 +152,9 @@ function usar5050() {
     });
 }
 
-// ============================================
+
 // COMODÍN: CAMBIO DE PREGUNTA
-// ============================================
+
 function usarCambioPregunta() {
     if (document.getElementById('comodin-cambio').classList.contains('usado')) {
         Swal.fire({
@@ -257,9 +254,8 @@ function usarCambioPregunta() {
     });
 }
 
-// ============================================
 // COMODÍN: AYUDA DEL PÚBLICO
-// ============================================
+
 function usarAyudaPublico() {
     if (document.getElementById('comodin-publico').classList.contains('usado')) {
         Swal.fire({
@@ -324,9 +320,9 @@ function usarAyudaPublico() {
     });
 }
 
-// ============================================
+
 // COMODÍN: LLAMADA A UN AMIGO
-// ============================================
+
 function usarLlamadaAmigo() {
     if (document.getElementById('comodin-llamada').classList.contains('usado')) {
         Swal.fire({
@@ -396,9 +392,9 @@ function usarLlamadaAmigo() {
     });
 }
 
-// ============================================
+
 // REPRODUCIR TONO DE LLAMADA
-// ============================================
+
 function reproducirTonoLlamada() {
     // Mostrar SweetAlert de "Llamando..."
     Swal.fire({
@@ -450,9 +446,7 @@ function reproducirTonoLlamada() {
     });
 }
 
-// ============================================
-// MODAL LLAMADA A UN AMIGO
-// ============================================
+
 function mostrarModalLlamadaAmigo() {
     const modal = document.getElementById('modal-llamada-amigo');
     modal.classList.add('active');
@@ -482,9 +476,8 @@ function cerrarModalLlamadaAmigo() {
     reanudarTemporizador();
 }
 
-// ============================================
 // MODAL AYUDA DEL PÚBLICO
-// ============================================
+
 function mostrarModalAyudaPublico() {
     const modal = document.getElementById('modal-ayuda-publico');
     modal.classList.add('active');
@@ -515,11 +508,11 @@ function cerrarModalAyudaPublico() {
     reanudarTemporizador();
 }
 
-// ============================================
+
 // INICIALIZACIÓN
-// ============================================
+
 function inicializarJuego() {
-    // ✅ Verificar que la configuración exista
+    //  Verificar que la configuración exista
     if (!window.juegoConfig) {
         console.error('❌ ERROR: window.juegoConfig no está definido');
         console.error('Asegúrate de que el script de configuración se cargue ANTES de juego.js');
@@ -529,7 +522,7 @@ function inicializarJuego() {
     // Cargar configuración desde PHP
     const config = window.juegoConfig;
     
-    console.log('✅ Configuración cargada:', config);
+    console.log(' Configuración cargada:', config);
     
     // Calcular tiempo restante
     tiempoRestante = config.tiempoLimite;
@@ -537,7 +530,7 @@ function inicializarJuego() {
     tiempoTranscurrido = Math.floor(Date.now() / 1000) - tiempoInicio;
     tiempoRestante = Math.max(0, tiempoRestante - tiempoTranscurrido);
 
-    console.log('⏱️ Tiempo restante:', tiempoRestante, 'segundos');
+    console.log(' Tiempo restante:', tiempoRestante, 'segundos');
 
     // Iniciar temporizador
     actualizarTemporizador();
