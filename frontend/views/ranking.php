@@ -60,12 +60,12 @@ require_once __DIR__ . '/../../backend/controllers/ranking.php';
                                 <td><?php echo $fichaJugador; ?></td>
                                 <td><?php echo $usuarioJugador; ?></td>
                                 <td class="score">
-                                    💰 <?php echo number_format($puntajeJugador, 0, ',', '.'); ?> pts
+                                    $ <?php echo number_format($puntajeJugador, 0, ',', '.'); ?> pts
                                 </td>
                                 <td>
                                     <button class="btn-eliminar" data-id="<?php echo $idJugador; ?>"
                                         data-nombre="<?php echo $usuarioJugador; ?>" type="button">
-                                        🗑️ Eliminar
+                                         Eliminar
                                     </button>
                                 </td>
                             </tr>
@@ -79,7 +79,7 @@ require_once __DIR__ . '/../../backend/controllers/ranking.php';
         <?php endif; ?>
 
         <div class="buttons-container">
-            <a href="menu.php" class="btn btn-secondary">⬅️ Volver al Menú</a>
+            <a href="menu.php" class="btn btn-secondary">  Volver al Menú</a>
         </div>
     </div>
 

@@ -53,7 +53,7 @@ $nombre_admin = $_SESSION["admin"];
                     Limpiar Jugadores
                 </button>
 
-                <a href="menu.php" class="btn btn-gris btn-full" data-icon="↩️">
+                <a href="menu.php" class="btn btn-gris btn-full" >
                     Volver al Menú
                 </a>
             </div>

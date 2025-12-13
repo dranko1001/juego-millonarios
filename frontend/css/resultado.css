@@ -555,3 +555,15 @@ h3 {
         font-size: 1.8em;
     }
 }
+.emoji img {
+    width: 80px;       
+    height: auto;       
+    display: block;
+    margin: 0 auto;
+}
+
+@media (max-width: 600px) {
+    .emoji img {
+        width: 55px;    
+    }
+}

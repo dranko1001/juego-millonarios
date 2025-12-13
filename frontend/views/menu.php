@@ -43,10 +43,10 @@ $_SESSION["rol"] = "usuario";
         <h1 class="title">Menú de opciones</h1>
         <br>
         <div class="buttons-container">
-            <a href="../../backend/controllers/PreguntasController.php" class="btn btn-primary">Iniciar juego </a>
-            <a href="reglas.php" class="btn btn-primary">Reglas</a>
-            <a href="menuOpciones.php" class="btn btn-primary">Configuracion</a>
-            <a href="ranking.php" class="btn btn-primary">Puntajes</a>
+            <a href="../../backend/controllers/PreguntasController.php" class="btn btn-primary"><img src="../media/video.png">Iniciar juego </a>
+            <a href="reglas.php" class="btn btn-primary"> <img src="../media/book.png" alt=""> Reglas</a>
+            <a href="menuOpciones.php" class="btn btn-primary"><img src="../media/setting.png"> Configuracion</a>
+            <a href="ranking.php" class="btn btn-primary"><img src="../media/scoreboard.png">Puntajes</a>
             <a href="../../backend/controllers/logout.php" class="btn btn-secondary btn-full">Cerrar sesión</a>
         </div>
    

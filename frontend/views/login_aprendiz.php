@@ -11,6 +11,7 @@
 
     <a href="login_administrador.php" class="btn-aprendiz">Admin</a>
     
+    
     <form method="POST" action="../../backend/controllers/validar_aprendiz.php">
         <h2>Ingrese los datos</h2>
 
@@ -18,6 +19,8 @@
         <input type="text" name="usuario_jugador" placeholder="ingrese su nombre" required>
 
         <button type="submit">Guardar</button>
+        <a href="reglas.php" class="btn-warning">reglas</a>
+         
     </form>
 
 </body>

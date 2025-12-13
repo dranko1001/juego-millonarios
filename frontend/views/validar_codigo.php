@@ -63,6 +63,7 @@ if (isset($_GET['error'])) {
 
         <button type="submit"> Validar y Continuar</button>
         
+        
         <a href="../../backend/controllers/logout.php" style="display: block; text-align: center; margin-top: 15px; color: #666; text-decoration: none;">
             ← Volver al inicio
         </a>

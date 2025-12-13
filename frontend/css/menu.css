@@ -365,3 +365,30 @@ body::before {
 .btn:nth-child(3) { animation-delay: 0.3s; }
 .btn:nth-child(4) { animation-delay: 0.4s; }
 .btn:nth-child(5) { animation-delay: 0.5s; }
+
+/* ICONOS DENTRO DE LOS BOTONES */
+.btn img {
+    width: 32px;              
+    height: 32px;
+    object-fit: contain;      
+    margin-right: 2px;       
+    flex-shrink: 0;           /* Evita que se aplaste en pantallas pequeñas */
+    display: block;           /* Evita espacios raros con inline elements */
+}
+
+/* Hacer que el botón acomode icono + texto correctamente */
+.btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;                /* Separación elegante entre icono y texto */
+}
+
+
+@media (max-width: 480px) {
+    .btn img {
+        width: 26px;
+        height: 26px;
+        margin-right: 10px;
+    }
+}

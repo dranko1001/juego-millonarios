@@ -33,8 +33,6 @@
             }
         };
         
-        // Debug: Ver qué valores se están cargando
-        // console.log('🎮 Configuración del juego cargada:', window.juegoConfig);
     </script>
     
     <!-- Archivo JavaScript principal (DESPUÉS de la configuración) -->
@@ -87,7 +85,7 @@
                 <div
                     style="background: rgba(255,215,0,0.2); padding: 10px; border-radius: 10px; margin-top: 10px; display: inline-block;">
                     <p style="margin: 0; font-size: 1.1em; font-weight: 600;">
-                        📚 Categoría: <?php echo htmlspecialchars($_SESSION['categoria_nombre']); ?>
+                         Categoría: <?php echo htmlspecialchars($_SESSION['categoria_nombre']); ?>
                     </p>
                 </div>
             <?php endif; ?>
