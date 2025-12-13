@@ -108,7 +108,7 @@ if ($esCorrecta) {
         $_SESSION['puntaje_pesos']
     );
     
-    // ✅ NUEVO: Guardar también después de respuesta correcta
+    //  Guardar también después de respuesta correcta
     if (isset($_SESSION['id_jugador'])) {
         require_once __DIR__ . '/../models/JugadorModel.php';
         $jugadorModel = new JugadorModel();

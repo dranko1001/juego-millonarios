@@ -25,7 +25,7 @@ function guardarLog($tipo, $mensaje, $id_jugador = null, $puntaje = null) {
     }
 }
 
-// ✅ IMPORTANTE: Inicializar puntaje_pesos si no existe
+// Inicializar puntaje_pesos si no existe
 if (!isset($_SESSION['puntaje_pesos'])) {
     $_SESSION['puntaje_pesos'] = 0;
 }
@@ -41,7 +41,7 @@ guardarLog(
     $_SESSION['puntaje_pesos']
 );
 
-// ✅ INTENTAR RECUPERAR LA RESPUESTA CORRECTA SI NO ESTÁ EN SESIÓN
+// INTENTAR RECUPERAR LA RESPUESTA CORRECTA SI NO ESTÁ EN SESIÓN
 if ((!isset($_SESSION['respuesta_correcta_letra']) || !isset($_SESSION['respuesta_correcta_texto'])) 
     && isset($_SESSION['pregunta_actual_id'])) {
     
