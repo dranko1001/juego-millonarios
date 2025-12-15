@@ -17,6 +17,9 @@ let tiempoLlamadaAmigo = 30; // tiempo de la llamada
 let intervaloLlamadaAmigo;
 let audioLlamada;
 
+// Variable para almacenar el tiempo restante cuando se abre un modal
+let tiempoRestanteAlAbrirModal = 0;
+
 // 
 // FUNCIÓN ACTUALIZAR TEMPORIZADOR
 function actualizarTemporizador() {
@@ -451,6 +454,13 @@ function mostrarModalLlamadaAmigo() {
     const modal = document.getElementById('modal-llamada-amigo');
     modal.classList.add('active');
 
+    // Guardar el tiempo restante actual antes de abrir el modal
+    tiempoRestanteAlAbrirModal = tiempoRestante;
+    
+    // Asegurar que el temporizador principal esté detenido
+    detenerTemporizador();
+    clearInterval(intervalo);
+
     tiempoLlamadaAmigo = 30;
     actualizarTimerLlamada();
 
@@ -466,14 +476,33 @@ function mostrarModalLlamadaAmigo() {
 
 function actualizarTimerLlamada() {
     const segundos = tiempoLlamadaAmigo;
-    document.getElementById('timer-llamada').textContent =
-        '00:' + segundos.toString().padStart(2, '0');
+    const timerElement = document.getElementById('timer-llamada');
+    if (timerElement) {
+        timerElement.textContent = '00:' + segundos.toString().padStart(2, '0');
+        
+        // Cambiar color cuando queda poco tiempo
+        if (segundos <= 10) {
+            timerElement.style.color = '#ff4444';
+            timerElement.style.animation = 'pulse 0.5s infinite';
+        } else {
+            timerElement.style.color = '#FFD700';
+            timerElement.style.animation = 'none';
+        }
+    }
 }
 
 function cerrarModalLlamadaAmigo() {
     clearInterval(intervaloLlamadaAmigo);
     document.getElementById('modal-llamada-amigo').classList.remove('active');
+    
+    // Restaurar el tiempo restante que tenía antes de abrir el modal
+    // El tiempo del modal (30 segundos) no afecta el tiempo principal
+    tiempoRestante = tiempoRestanteAlAbrirModal;
+    
+    // Reanudar el temporizador principal
     reanudarTemporizador();
+    actualizarTemporizador();
+    intervalo = setInterval(actualizarTemporizador, 1000);
 }
 
 // MODAL AYUDA DEL PÚBLICO
@@ -481,6 +510,13 @@ function cerrarModalLlamadaAmigo() {
 function mostrarModalAyudaPublico() {
     const modal = document.getElementById('modal-ayuda-publico');
     modal.classList.add('active');
+
+    // Guardar el tiempo restante actual antes de abrir el modal
+    tiempoRestanteAlAbrirModal = tiempoRestante;
+    
+    // Asegurar que el temporizador principal esté detenido
+    detenerTemporizador();
+    clearInterval(intervalo);
 
     tiempoAyudaPublico = 60;
     actualizarTimerAyuda();
@@ -498,14 +534,33 @@ function mostrarModalAyudaPublico() {
 function actualizarTimerAyuda() {
     const minutos = Math.floor(tiempoAyudaPublico / 60);
     const segundos = tiempoAyudaPublico % 60;
-    document.getElementById('timer-ayuda').textContent =
-        minutos.toString().padStart(2, '0') + ':' + segundos.toString().padStart(2, '0');
+    const timerElement = document.getElementById('timer-ayuda');
+    if (timerElement) {
+        timerElement.textContent = minutos.toString().padStart(2, '0') + ':' + segundos.toString().padStart(2, '0');
+        
+        // Cambiar color cuando queda poco tiempo
+        if (tiempoAyudaPublico <= 10) {
+            timerElement.style.color = '#ff4444';
+            timerElement.style.animation = 'pulse 0.5s infinite';
+        } else {
+            timerElement.style.color = '#FFD700';
+            timerElement.style.animation = 'none';
+        }
+    }
 }
 
 function cerrarModalAyudaPublico() {
     clearInterval(intervaloAyudaPublico);
     document.getElementById('modal-ayuda-publico').classList.remove('active');
+    
+    // Restaurar el tiempo restante que tenía antes de abrir el modal
+    // El tiempo del modal (60 segundos) no afecta el tiempo principal
+    tiempoRestante = tiempoRestanteAlAbrirModal;
+    
+    // Reanudar el temporizador principal
     reanudarTemporizador();
+    actualizarTemporizador();
+    intervalo = setInterval(actualizarTemporizador, 1000);
 }
 
 
@@ -529,6 +584,11 @@ function inicializarJuego() {
     tiempoInicio = config.tiempoInicio;
     tiempoTranscurrido = Math.floor(Date.now() / 1000) - tiempoInicio;
     tiempoRestante = Math.max(0, tiempoRestante - tiempoTranscurrido);
+
+    // Asegurar que el tiempo restante no sea negativo o inválido
+    if (isNaN(tiempoRestante) || tiempoRestante < 0) {
+        tiempoRestante = config.tiempoLimite;
+    }
 
     console.log(' Tiempo restante:', tiempoRestante, 'segundos');
 

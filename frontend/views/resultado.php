@@ -25,6 +25,8 @@ $categoriaNombre = $_SESSION['categoria_nombre'] ?? 'Desconocida';
 // Obtener el texto de la opción elegida
 $opcionesMostradas = $_SESSION['opciones_mostradas'] ?? [];
 $textoRespuestaElegida = $opcionesMostradas[$respuestaElegida] ?? '';
+
+
 ?>
 
 <!DOCTYPE html>
@@ -59,15 +61,7 @@ $textoRespuestaElegida = $opcionesMostradas[$respuestaElegida] ?? '';
             <p>📚 Categoría: <strong><?php echo htmlspecialchars($categoriaNombre); ?></strong></p>
         </div>
         
-        <div class="puntaje-final">
-            <div class="label-puntaje-final"> Puntaje Final:</div>
-            <div class="valor-puntaje-final">$<?php echo number_format($puntajePesos); ?></div>
-            <div class="preguntas-correctas"><?php echo $preguntasCorrectas; ?> pregunta<?php echo $preguntasCorrectas != 1 ? 's' : ''; ?> correcta<?php echo $preguntasCorrectas != 1 ? 's' : ''; ?></div>
-        </div>
-        
-        <h3>¡Se acabó el tiempo!</h3>
-        <p style="color: #fff; margin: 15px 0;">No respondiste a tiempo, pero tu puntaje ha sido guardado.</p>
-        
+        <!-- BOTONES REPOSICIONADOS AQUÍ -->
         <div class="botones-container">
             <a href="reiniciar.php" class="boton boton-reiniciar">
                  Jugar de Nuevo (Misma Categoría)
@@ -82,11 +76,20 @@ $textoRespuestaElegida = $opcionesMostradas[$respuestaElegida] ?? '';
             </a>
         </div>
         
+        <div class="puntaje-final">
+            <div class="label-puntaje-final">💰 Puntaje Final:</div>
+            <div class="valor-puntaje-final">$<?php echo number_format($puntajePesos); ?></div>
+            <div class="preguntas-correctas"><?php echo $preguntasCorrectas; ?> pregunta<?php echo $preguntasCorrectas != 1 ? 's' : ''; ?> correcta<?php echo $preguntasCorrectas != 1 ? 's' : ''; ?></div>
+        </div>
+        
+        <h3>¡Se acabó el tiempo!</h3>
+        <p style="color: #fff; margin: 15px 0;">No respondiste a tiempo, pero tu puntaje ha sido guardado.</p>
+        
     <?php elseif ($esCorrecta): ?>
         <!-- ============ CASO: RESPUESTA CORRECTA ============ -->
-           <div class="emoji">
-    <img src="../media/gano.png" alt="Celebración">
-</div>
+        <div class="emoji">
+            <img src="../media/gano.png" alt="Celebración">
+        </div>
         <div class="resultado-correcto">¡CORRECTO!</div>
         
         <?php if ($ultimoPuntajeGanado > 0): ?>
@@ -99,20 +102,13 @@ $textoRespuestaElegida = $opcionesMostradas[$respuestaElegida] ?? '';
             <p class="enunciado"><?php echo htmlspecialchars($enunciado); ?></p>
         </div>
         
-        <div class="info-respuesta">
-            <p><strong>Tu respuesta:</strong> <span class="respuesta-letra"><?php echo htmlspecialchars($respuestaElegida); ?>:</span> <?php echo htmlspecialchars($textoRespuestaElegida); ?></p>
-        </div>
+
         
         <div class="info-categoria">
-            <p> Categoría: <strong><?php echo htmlspecialchars($categoriaNombre); ?></strong></p>
+            <p>📚 Categoría: <strong><?php echo htmlspecialchars($categoriaNombre); ?></strong></p>
         </div>
         
-        <div class="puntaje-total">
-            <div class="label-puntaje"> Puntaje Acumulado:</div>
-            <div class="valor-puntaje">$<?php echo number_format($puntajePesos); ?></div>
-            <div class="preguntas-correctas"><?php echo $preguntasCorrectas; ?> pregunta<?php echo $preguntasCorrectas != 1 ? 's' : ''; ?> correcta<?php echo $preguntasCorrectas != 1 ? 's' : ''; ?></div>
-        </div>
-        
+        <!-- BOTONES REPOSICIONADOS AQUÍ -->
         <div class="botones-container">
             <a href="../../backend/controllers/PreguntasController.php" class="boton boton-siguiente">
                  Siguiente Pregunta
@@ -125,12 +121,18 @@ $textoRespuestaElegida = $opcionesMostradas[$respuestaElegida] ?? '';
             </a>
         </div>
         
+        <div class="puntaje-total">
+            <div class="label-puntaje"> Puntaje Acumulado:</div>
+            <div class="valor-puntaje">$<?php echo number_format($puntajePesos); ?></div>
+            <div class="preguntas-correctas"><?php echo $preguntasCorrectas; ?> pregunta<?php echo $preguntasCorrectas != 1 ? 's' : ''; ?> correcta<?php echo $preguntasCorrectas != 1 ? 's' : ''; ?></div>
+        </div>
+        
     <?php else: ?>
         <!-- ============ CASO: RESPUESTA INCORRECTA ============ -->
-                   <div class="emoji">
-    <img src="../media/perdio.png" alt="Celebración">
-</div>
-        <div class="resultado-incorrecto">INCORRECTO</div>
+        <div class="emoji">
+            <img src="../media/perdio.png" alt="Perdió">
+        </div>
+        <div class="resultado-incorrecto">❌ INCORRECTO</div>
         
         <div class="info-pregunta">
             <p class="enunciado"><?php echo htmlspecialchars($enunciado); ?></p>
@@ -144,21 +146,12 @@ $textoRespuestaElegida = $opcionesMostradas[$respuestaElegida] ?? '';
             <p><strong>Respuesta correcta:</strong> <span class="respuesta-letra"><?php echo htmlspecialchars($respuestaCorrectaLetra); ?>:</span> <?php echo htmlspecialchars($respuestaCorrectaTexto); ?></p>
         </div>
         
-        <div class="info-categoria">
-            <p> Categoría: <strong><?php echo htmlspecialchars($categoriaNombre); ?></strong></p>
-        </div>
+
         
-        <div class="puntaje-final">
-            <div class="label-puntaje-final">$ Puntaje Final:</div>
-            <div class="valor-puntaje-final">$<?php echo number_format($puntajePesos); ?></div>
-            <div class="preguntas-correctas"><?php echo $preguntasCorrectas; ?> pregunta<?php echo $preguntasCorrectas != 1 ? 's' : ''; ?> correcta<?php echo $preguntasCorrectas != 1 ? 's' : ''; ?></div>
-        </div>
-        
-        <h3>¡Juego Terminado!</h3>
-        
+        <!-- BOTONES REPOSICIONADOS AQUÍ -->
         <div class="botones-container">
             <a href="reiniciar.php" class="boton boton-reiniciar">
-                 Jugar de Nuevo (Misma Categoría)
+                 Jugar de Nuevo 
             </a>
             
             <a href="reiniciar.php?cambiar_categoria=1" class="boton boton-cambiar">
@@ -169,6 +162,14 @@ $textoRespuestaElegida = $opcionesMostradas[$respuestaElegida] ?? '';
                  Salir
             </a>
         </div>
+        
+        <div class="puntaje-final">
+            <div class="label-puntaje-final"> Puntaje Final:</div>
+            <div class="valor-puntaje-final">$<?php echo number_format($puntajePesos); ?></div>
+            <div class="preguntas-correctas"><?php echo $preguntasCorrectas; ?> pregunta<?php echo $preguntasCorrectas != 1 ? 's' : ''; ?> correcta<?php echo $preguntasCorrectas != 1 ? 's' : ''; ?></div>
+        </div>
+        
+        <h3>¡Juego Terminado!</h3>
         
     <?php endif; ?>
 
