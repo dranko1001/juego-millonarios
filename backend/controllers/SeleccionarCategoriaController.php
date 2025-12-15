@@ -1,5 +1,5 @@
 <?php
-// backend/controllers/SeleccionarCategoriaController.php
+
 session_start();
 
 // Verificar que el aprendiz haya iniciado sesión y validado el código

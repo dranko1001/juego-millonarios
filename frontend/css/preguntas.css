@@ -274,6 +274,17 @@ body::before {
     cursor: pointer;
 }
 
+/* Forzar texto blanco sin afectar otros botones */
+.btn.back-link,
+.btn.back-link:visited {
+    color: #fff !important;
+}
+
+.btn.back-link:hover,
+.btn.back-link:focus {
+    color: #fff !important;
+}
+
 
 .back-link::before {
     content: ''; 

@@ -1,6 +1,6 @@
-// ============================================
+
 // FUNCIÓN LIMPIAR TODOS LOS JUGADORES
-// ============================================
+
 
 function limpiarJugadores() {
     //*¨confirmar acción
@@ -28,9 +28,9 @@ function limpiarJugadores() {
     });
 }
 
-// ============================================
+
 // EJECUTAR LIMPIEZA
-// ============================================
+
 
 function ejecutarLimpiezaJugadores() {
     //*peticion de limpieza

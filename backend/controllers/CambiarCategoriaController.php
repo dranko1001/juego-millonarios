@@ -1,5 +1,4 @@
 <?php
-// backend/controllers/CambiarCategoriaController.php
 session_start();
 
 //*verificar que la sesion de aprendiz este activa

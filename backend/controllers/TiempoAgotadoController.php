@@ -1,5 +1,5 @@
 <?php
-// backend/controllers/TiempoAgotadoController.php
+
 session_start();
 
 // Función para guardar logs

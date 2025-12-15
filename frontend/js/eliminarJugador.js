@@ -163,9 +163,9 @@ function eliminarJugador(idJugador, nombreUsuario) {
     });
 }
 
-// ============================================
+
+// 
 // ACTUALIZAR POSICIONES DESPUÉS DE ELIMINAR
-// ============================================
 
 /**
  *r
