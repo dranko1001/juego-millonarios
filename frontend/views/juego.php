@@ -118,9 +118,6 @@
                 </div>
 
                 <div class="action-buttons-panel">
-                    <a href="#" onclick="confirmarCambioCategoriaDuranteJuego(); return false;" class="action-btn action-btn-category">
-                        Cambiar Categoría
-                    </a>
 
                     <a href="#" onclick="confirmarSalirYGuardar(); return false;" class="action-btn action-btn-exit">
                         Salir y Guardar
