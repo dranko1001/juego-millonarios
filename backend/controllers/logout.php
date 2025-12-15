@@ -4,6 +4,6 @@ session_start();
 session_unset();   
 session_destroy(); 
 
-header("Location: ../../frontend/views/login_administrador.php");
+header("Location: ../../frontend/views/login_aprendiz.php");
 exit();
 ?>
