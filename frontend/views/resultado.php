@@ -1,6 +1,13 @@
 <?php
 session_start();
 
+// Evitar que el navegador cachee esta página y el usuario
+// pueda volver al formulario anterior con el botón "Atrás"
+header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+header("Cache-Control: post-check=0, pre-check=0", false);
+header("Pragma: no-cache");
+header("Expires: 0");
+
 if (!isset($_SESSION['puntaje_pesos'])) {
     $_SESSION['puntaje_pesos'] = 0;
 }
