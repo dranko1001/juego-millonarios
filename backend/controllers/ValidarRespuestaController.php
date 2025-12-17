@@ -1,5 +1,4 @@
 <?php
-// backend/controllers/ValidarRespuestaController.php
 session_start();
 
 // Función para guardar logs en la base de datos
@@ -23,6 +22,25 @@ function guardarLog($tipo, $mensaje, $id_jugador = null, $puntaje = null) {
     } catch (Exception $e) {
         error_log("Error al guardar log: " . $e->getMessage());
     }
+}
+
+// ANTI-TRAMPA: solo permitir validar si hay una pregunta activa
+if (!isset($_SESSION['pregunta_activa']) || $_SESSION['pregunta_activa'] !== true) {
+    guardarLog(
+        'REINTENTO_NO_PERMITIDO',
+        'Intento de validar respuesta sin pregunta activa (posible uso del botón atrás)',
+        $_SESSION['id_jugador'] ?? null,
+        $_SESSION['puntaje_pesos'] ?? null
+    );
+
+    // Redirigir al resultado si ya existe una última respuesta,
+    // de lo contrario volver al controlador de preguntas.
+    if (isset($_SESSION['ultima_respuesta'])) {
+        header('Location: ../../frontend/views/resultado.php');
+    } else {
+        header('Location: PreguntasController.php');
+    }
+    exit;
 }
 
 // Verificar que lleguen los datos por POST

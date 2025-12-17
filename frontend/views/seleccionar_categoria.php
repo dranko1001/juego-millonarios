@@ -66,6 +66,16 @@ if (isset($_GET['error'])) {
             </div>
         <?php endif; ?>
 
+        <!-- CAMPO DE BÚSQUEDA -->
+        <div class="search-container">
+            <input type="text" 
+                   id="searchInput" 
+                   class="search-input" 
+                   placeholder="🔍 Buscar categoría..." 
+                   autocomplete="off">
+            <button type="button" id="clearSearch" class="clear-search-btn" style="display: none;">✕</button>
+        </div>
+
         <!-- LOADER DE CARGA -->
         <div class="loader-overlay" id="loaderOverlay">
             <div class="loader-content">

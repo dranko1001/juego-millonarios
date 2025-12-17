@@ -117,22 +117,9 @@
                     </div>
                 </div>
 
-                <div style="margin-top: 20px; width: 100%; display: flex; flex-direction: column; gap: 10px;">
-                    <a href="#" onclick="confirmarCambioCategoriaDuranteJuego(); return false;" style="display: block; background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%); 
-                          color: #1a1a1a; text-decoration: none; padding: 12px 15px; 
-                          border-radius: 12px; text-align: center; font-weight: 700; 
-                          font-size: 0.9em; border: 3px solid white; 
-                          box-shadow: 0 5px 15px rgba(255, 165, 0, 0.3);
-                          transition: all 0.3s ease;">
-                        Cambiar Categoría
-                    </a>
+                <div class="action-buttons-panel">
 
-                    <a href="#" onclick="confirmarSalirYGuardar(); return false;" style="display: block; background: linear-gradient(135deg, #6c757d 0%, #495057 100%); 
-                          color: white; text-decoration: none; padding: 12px 15px; 
-                          border-radius: 12px; text-align: center; font-weight: 700; 
-                          font-size: 0.9em; border: 3px solid white; 
-                          box-shadow: 0 5px 15px rgba(108, 117, 125, 0.3);
-                          transition: all 0.3s ease;">
+                    <a href="#" onclick="confirmarSalirYGuardar(); return false;" class="action-btn action-btn-exit">
                         Salir y Guardar
                     </a>
                 </div>

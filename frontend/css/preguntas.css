@@ -244,36 +244,70 @@ body::before {
 
 /* --- Botón de Volver --- */
 .back-link {
-    display: block;
+    /* Propiedades de visualización */
+    display: inline-flex; /* Usa flexbox para alinear el texto y el ícono */
+    align-items: center;
+    justify-content: center;
     text-align: center;
+    
+    /* Espaciado y dimensiones */
     padding: 12px 25px;
-    background: linear-gradient(135deg, #6c757d 0%, #495057 100%);
-    color: white;
+    
+    /*  */
+    background-color: #007bff; /* Azul primario */
+    background: linear-gradient(135deg, #007bff 0%, #0056b3 100%); 
+    color: #ffffff; /* Texto blanco puro */
+    
+    /* Borde y Esquinas */
     border: none;
-    border-radius: 12px;
+    border-radius: 8px; 
+    
+    /* Tipografía */
     text-decoration: none;
-    font-weight: 700;
-    font-size: 1.05em;
+    font-weight: 600; 
+    font-size: 1em;
+    letter-spacing: 0.5px;
+    
+    /* Efectos */
     transition: all 0.3s ease;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
-    letter-spacing: 1px;
-    white-space: nowrap;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); 
+    cursor: pointer;
 }
+
+/* Forzar texto blanco sin afectar otros botones */
+.btn.back-link,
+.btn.back-link:visited {
+    color: #fff !important;
+}
+
+.btn.back-link:hover,
+.btn.back-link:focus {
+    color: #fff !important;
+}
+
 
 .back-link::before {
-    content: '↩️ ';
+    content: ''; 
     font-size: 1.2em;
+    margin-right: 5px; 
+    line-height: 1; 
 }
 
+/* Estado Hover (Al pasar el ratón) */
 .back-link:hover {
-    background: linear-gradient(135deg, #5a6268 0%, #3d4349 100%);
-    transform: translateY(-3px);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+    background: linear-gradient(135deg, #0056b3 0%, #004085 100%); 
+    color: #ffffff; 
+    transform: translateY(-2px); 
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3); 
 }
 
+/* Estado Active (Al hacer clic) */
 .back-link:active {
-    transform: translateY(-1px);
+    transform: translateY(0);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2); 
+    background-color: #004085; 
 }
+
 
 /* --- Área de Contenido Principal --- */
 .content-area {

@@ -1,5 +1,5 @@
 <?php
-// backend/controllers/validar_codigo_aprendiz.php
+
 session_start();
 require_once __DIR__ . '/../models/CodigoAccesoModel.php';
 

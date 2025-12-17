@@ -1,6 +1,6 @@
-// ============================================
-// VARIABLES GLOBALES DEL TEMPORIZADOR
-// ============================================
+// 
+//
+//  VARIABLES GLOBALES DEL TEMPORIZADOR
 let tiempoRestante;
 let tiempoInicio;
 let tiempoTranscurrido;
@@ -9,19 +9,21 @@ let formSubmitted = false;
 let tiempoDetenido = false;
 
 // Variables para ayuda del público
-let tiempoAyudaPublico = 60; // 1 minuto
+let tiempoAyudaPublico = 60; // la pueden cambiar segun el tiempo que quieran
 let intervaloAyudaPublico;
 
 // Variables para llamada a un amigo
-let tiempoLlamadaAmigo = 30; // 30 segundos
+let tiempoLlamadaAmigo = 30; // tiempo de la llamada
 let intervaloLlamadaAmigo;
 let audioLlamada;
 
-// ============================================
+// Variable para almacenar el tiempo restante cuando se abre un modal
+let tiempoRestanteAlAbrirModal = 0;
+
+// 
 // FUNCIÓN ACTUALIZAR TEMPORIZADOR
-// ============================================
 function actualizarTemporizador() {
-    if (tiempoDetenido) return; // No actualizar si está detenido
+    if (tiempoDetenido) return; 
 
     if (tiempoRestante <= 0) {
         clearInterval(intervalo);
@@ -49,23 +51,21 @@ function actualizarTemporizador() {
     tiempoRestante--;
 }
 
-// ============================================
+
 // FUNCIÓN DETENER TEMPORIZADOR
-// ============================================
 function detenerTemporizador() {
     tiempoDetenido = true;
 }
 
-// ============================================
-// FUNCIÓN REANUDAR TEMPORIZADOR
-// ============================================
+
+// FUNCIÓN DETENER TEMPORIZADOR
 function reanudarTemporizador() {
     tiempoDetenido = false;
 }
 
-// ============================================
+
 // COMODÍN: 50/50
-// ============================================
+
 function usar5050() {
     if (document.getElementById('comodin-5050').classList.contains('usado')) {
         Swal.fire({
@@ -155,9 +155,9 @@ function usar5050() {
     });
 }
 
-// ============================================
+
 // COMODÍN: CAMBIO DE PREGUNTA
-// ============================================
+
 function usarCambioPregunta() {
     if (document.getElementById('comodin-cambio').classList.contains('usado')) {
         Swal.fire({
@@ -257,9 +257,8 @@ function usarCambioPregunta() {
     });
 }
 
-// ============================================
 // COMODÍN: AYUDA DEL PÚBLICO
-// ============================================
+
 function usarAyudaPublico() {
     if (document.getElementById('comodin-publico').classList.contains('usado')) {
         Swal.fire({
@@ -324,9 +323,9 @@ function usarAyudaPublico() {
     });
 }
 
-// ============================================
+
 // COMODÍN: LLAMADA A UN AMIGO
-// ============================================
+
 function usarLlamadaAmigo() {
     if (document.getElementById('comodin-llamada').classList.contains('usado')) {
         Swal.fire({
@@ -396,9 +395,9 @@ function usarLlamadaAmigo() {
     });
 }
 
-// ============================================
+
 // REPRODUCIR TONO DE LLAMADA
-// ============================================
+
 function reproducirTonoLlamada() {
     // Mostrar SweetAlert de "Llamando..."
     Swal.fire({
@@ -450,12 +449,17 @@ function reproducirTonoLlamada() {
     });
 }
 
-// ============================================
-// MODAL LLAMADA A UN AMIGO
-// ============================================
+
 function mostrarModalLlamadaAmigo() {
     const modal = document.getElementById('modal-llamada-amigo');
     modal.classList.add('active');
+
+    // Guardar el tiempo restante actual antes de abrir el modal
+    tiempoRestanteAlAbrirModal = tiempoRestante;
+    
+    // Asegurar que el temporizador principal esté detenido
+    detenerTemporizador();
+    clearInterval(intervalo);
 
     tiempoLlamadaAmigo = 30;
     actualizarTimerLlamada();
@@ -472,22 +476,47 @@ function mostrarModalLlamadaAmigo() {
 
 function actualizarTimerLlamada() {
     const segundos = tiempoLlamadaAmigo;
-    document.getElementById('timer-llamada').textContent =
-        '00:' + segundos.toString().padStart(2, '0');
+    const timerElement = document.getElementById('timer-llamada');
+    if (timerElement) {
+        timerElement.textContent = '00:' + segundos.toString().padStart(2, '0');
+        
+        // Cambiar color cuando queda poco tiempo
+        if (segundos <= 10) {
+            timerElement.style.color = '#ff4444';
+            timerElement.style.animation = 'pulse 0.5s infinite';
+        } else {
+            timerElement.style.color = '#FFD700';
+            timerElement.style.animation = 'none';
+        }
+    }
 }
 
 function cerrarModalLlamadaAmigo() {
     clearInterval(intervaloLlamadaAmigo);
     document.getElementById('modal-llamada-amigo').classList.remove('active');
+    
+    // Restaurar el tiempo restante que tenía antes de abrir el modal
+    // El tiempo del modal (30 segundos) no afecta el tiempo principal
+    tiempoRestante = tiempoRestanteAlAbrirModal;
+    
+    // Reanudar el temporizador principal
     reanudarTemporizador();
+    actualizarTemporizador();
+    intervalo = setInterval(actualizarTemporizador, 1000);
 }
 
-// ============================================
 // MODAL AYUDA DEL PÚBLICO
-// ============================================
+
 function mostrarModalAyudaPublico() {
     const modal = document.getElementById('modal-ayuda-publico');
     modal.classList.add('active');
+
+    // Guardar el tiempo restante actual antes de abrir el modal
+    tiempoRestanteAlAbrirModal = tiempoRestante;
+    
+    // Asegurar que el temporizador principal esté detenido
+    detenerTemporizador();
+    clearInterval(intervalo);
 
     tiempoAyudaPublico = 60;
     actualizarTimerAyuda();
@@ -505,21 +534,40 @@ function mostrarModalAyudaPublico() {
 function actualizarTimerAyuda() {
     const minutos = Math.floor(tiempoAyudaPublico / 60);
     const segundos = tiempoAyudaPublico % 60;
-    document.getElementById('timer-ayuda').textContent =
-        minutos.toString().padStart(2, '0') + ':' + segundos.toString().padStart(2, '0');
+    const timerElement = document.getElementById('timer-ayuda');
+    if (timerElement) {
+        timerElement.textContent = minutos.toString().padStart(2, '0') + ':' + segundos.toString().padStart(2, '0');
+        
+        // Cambiar color cuando queda poco tiempo
+        if (tiempoAyudaPublico <= 10) {
+            timerElement.style.color = '#ff4444';
+            timerElement.style.animation = 'pulse 0.5s infinite';
+        } else {
+            timerElement.style.color = '#FFD700';
+            timerElement.style.animation = 'none';
+        }
+    }
 }
 
 function cerrarModalAyudaPublico() {
     clearInterval(intervaloAyudaPublico);
     document.getElementById('modal-ayuda-publico').classList.remove('active');
+    
+    // Restaurar el tiempo restante que tenía antes de abrir el modal
+    // El tiempo del modal (60 segundos) no afecta el tiempo principal
+    tiempoRestante = tiempoRestanteAlAbrirModal;
+    
+    // Reanudar el temporizador principal
     reanudarTemporizador();
+    actualizarTemporizador();
+    intervalo = setInterval(actualizarTemporizador, 1000);
 }
 
-// ============================================
+
 // INICIALIZACIÓN
-// ============================================
+
 function inicializarJuego() {
-    // ✅ Verificar que la configuración exista
+    //  Verificar que la configuración exista
     if (!window.juegoConfig) {
         console.error('❌ ERROR: window.juegoConfig no está definido');
         console.error('Asegúrate de que el script de configuración se cargue ANTES de juego.js');
@@ -529,7 +577,7 @@ function inicializarJuego() {
     // Cargar configuración desde PHP
     const config = window.juegoConfig;
     
-    console.log('✅ Configuración cargada:', config);
+    console.log(' Configuración cargada:', config);
     
     // Calcular tiempo restante
     tiempoRestante = config.tiempoLimite;
@@ -537,7 +585,12 @@ function inicializarJuego() {
     tiempoTranscurrido = Math.floor(Date.now() / 1000) - tiempoInicio;
     tiempoRestante = Math.max(0, tiempoRestante - tiempoTranscurrido);
 
-    console.log('⏱️ Tiempo restante:', tiempoRestante, 'segundos');
+    // Asegurar que el tiempo restante no sea negativo o inválido
+    if (isNaN(tiempoRestante) || tiempoRestante < 0) {
+        tiempoRestante = config.tiempoLimite;
+    }
+
+    console.log(' Tiempo restante:', tiempoRestante, 'segundos');
 
     // Iniciar temporizador
     actualizarTemporizador();

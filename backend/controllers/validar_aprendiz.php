@@ -1,5 +1,5 @@
 <?php
-// backend/controllers/validar_aprendiz.php
+
 require_once "../models/pdoconexion.php"; 
 session_start();
 

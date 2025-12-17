@@ -290,7 +290,7 @@ section ul li strong {
 }
 
 .btn-secondary::before {
-    content: '↩️ ';
+    content: ' ';
     font-size: 1.3em;
     margin-right: 10px;
 }

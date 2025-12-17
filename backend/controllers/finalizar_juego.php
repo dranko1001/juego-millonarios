@@ -1,5 +1,5 @@
 <?php
-// backend/controllers/finalizar_juego.php
+
 session_start();
 
 // Guardar puntaje final en la base de datos

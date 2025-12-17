@@ -1,5 +1,5 @@
 <?php
-// backend/controllers/ranking.php
+
 
 require_once __DIR__ . '/../models/pdoconexion.php';
 

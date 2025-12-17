@@ -1,5 +1,5 @@
 <?php
-// backend/controllers/FinalizarCategoriaController.php
+
 session_start();
 
 // Verificar autenticación

@@ -1,5 +1,5 @@
 <?php
-// backend/controllers/GenerarCodigoController.php
+
 session_start();
 
 // Proteger la página

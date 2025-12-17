@@ -1,5 +1,5 @@
 <?php
-// backend/controllers/ComodinController.php
+
 session_start();
 
 // Verificar autenticación

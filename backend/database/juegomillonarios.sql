@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 13, 2025 at 01:47 AM
+-- Generation Time: Dec 17, 2025 at 01:20 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -107,7 +107,6 @@ CREATE TABLE `tbl_codigoacesso` (
 --
 
 INSERT INTO `tbl_codigoacesso` (`ID_codigoAcesso`, `codigo_codigoAcesso`, `validar_codigoAcesso`, `fecha_codigoAcesso`) VALUES
-(1, '520902', 1, '2025-12-05'),
 (5, '123456', 1, '2025-12-12');
 
 -- --------------------------------------------------------
@@ -159,7 +158,16 @@ CREATE TABLE `tbl_jugadores` (
 --
 
 INSERT INTO `tbl_jugadores` (`ID_jugador`, `ficha_jugador`, `usuario_jugador`, `puntaje_jugador`) VALUES
-(56, '3064749', 'frank', 500000);
+(1, '3064749', 'santiago', 300000),
+(2, '3064749', 'Angel', 300000),
+(3, '474849', 'natalia mayor', 200000),
+(6, '4564654', 'michael', 100000),
+(10, '23124', 'frank', 0),
+(11, '2425', 'drank', 300000),
+(14, '3164749', 'peña', 300000),
+(16, '3064749', 'edgar', 200000),
+(18, '3064749', 'martha', 2100000),
+(19, '3064749', 'frank', 0);
 
 -- --------------------------------------------------------
 
@@ -915,7 +923,7 @@ ALTER TABLE `tbl_categorias`
 -- AUTO_INCREMENT for table `tbl_codigoacesso`
 --
 ALTER TABLE `tbl_codigoacesso`
-  MODIFY `ID_codigoAcesso` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `ID_codigoAcesso` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `tbl_comodines`
@@ -933,13 +941,13 @@ ALTER TABLE `tbl_dificultades`
 -- AUTO_INCREMENT for table `tbl_jugadores`
 --
 ALTER TABLE `tbl_jugadores`
-  MODIFY `ID_jugador` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
+  MODIFY `ID_jugador` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `tbl_preguntas`
 --
 ALTER TABLE `tbl_preguntas`
-  MODIFY `ID_pregunta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=621;
+  MODIFY `ID_pregunta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=676;
 
 --
 -- Constraints for dumped tables

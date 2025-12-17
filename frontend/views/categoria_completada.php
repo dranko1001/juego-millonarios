@@ -37,7 +37,7 @@ $porcentaje = $_SESSION["porcentaje"] ?? 0;
         } elseif ($porcentaje >= 50) {
             echo " ¡Buen intento! Sigue practicando para mejorar.";
         } else {
-            echo "📚 Sigue estudiando, cada intento te hace mejor.";
+            echo " Sigue estudiando, cada intento te hace mejor.";
         }
         ?>
     </div>

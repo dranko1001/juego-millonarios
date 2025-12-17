@@ -1,5 +1,5 @@
 <?php
-// backend/controllers/EliminarJugadorController.php
+
 
 //*header json
 header('Content-Type: application/json; charset=utf-8');
@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 }
 
 //*verificar la llegada del id_jugador
-if (!isset($_POST['id_jugador']) || empty($_POST['id_jugador'])) {  // ← CAMBIADO
+if (!isset($_POST['id_jugador']) || empty($_POST['id_jugador'])) {  
     echo json_encode([
         'error' => 'ID de jugador no proporcionado',
         'debug' => 'POST data: ' . json_encode($_POST)
@@ -27,13 +27,13 @@ if (!isset($_POST['id_jugador']) || empty($_POST['id_jugador'])) {  // ← CAMBI
     exit();
 }
 
-$idJugador = filter_var($_POST['id_jugador'], FILTER_VALIDATE_INT);  // ← CAMBIADO
+$idJugador = filter_var($_POST['id_jugador'], FILTER_VALIDATE_INT);  
 
 //*valido el id valido
 if ($idJugador === false || $idJugador <= 0) {
     echo json_encode([
         'error' => 'ID de jugador inválido',
-        'debug' => 'Valor recibido: ' . $_POST['id_jugador']  // ← CAMBIADO
+        'debug' => 'Valor recibido: ' . $_POST['id_jugador'] 
     ]);
     exit();
 }

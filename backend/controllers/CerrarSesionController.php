@@ -1,5 +1,5 @@
 <?php
-// backend/controllers/CerrarSesionController.php
+
 session_start();
 
 // GUARDAR PUNTAJE ANTES DE CERRAR SESIÓN
