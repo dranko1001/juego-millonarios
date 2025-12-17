@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 15, 2025 at 01:53 PM
+-- Generation Time: Dec 17, 2025 at 01:20 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -161,7 +161,13 @@ INSERT INTO `tbl_jugadores` (`ID_jugador`, `ficha_jugador`, `usuario_jugador`, `
 (1, '3064749', 'santiago', 300000),
 (2, '3064749', 'Angel', 300000),
 (3, '474849', 'natalia mayor', 200000),
-(6, '4564654', 'michael', 100000);
+(6, '4564654', 'michael', 100000),
+(10, '23124', 'frank', 0),
+(11, '2425', 'drank', 300000),
+(14, '3164749', 'peña', 300000),
+(16, '3064749', 'edgar', 200000),
+(18, '3064749', 'martha', 2100000),
+(19, '3064749', 'frank', 0);
 
 -- --------------------------------------------------------
 
@@ -818,62 +824,7 @@ INSERT INTO `tbl_preguntas` (`ID_pregunta`, `enunciado_pregunta`, `opcion1_pregu
 (617, '¿Qué es un \"fondo oscuro\" o \"caldo oscuro\"?', 'Un caldo hecho con pescado', 'Un caldo hecho con huesos asados previamente para darle color', 'Un caldo hecho solo con vegetales', 'Un caldo con mucho vino tinto', 'Un caldo hecho con huesos asados previamente para darle color', 31, 3),
 (618, '¿Qué nombre recibe el método de cocción por calor seco donde la fuente de calor viene de arriba (Ej. para gratinar quesos)?', 'Escalfar', 'Pochar', 'Grillar', 'Salamandra (Broil)', 'Salamandra (Broil)', 31, 3),
 (619, '¿Qué tipo de masa clásica de repostería es ligera y hueca, utilizada para hacer profiteroles o eclairs?', 'Masa quebrada', 'Masa hojaldre', 'Masa choux', 'Masa filo', 'Masa choux', 31, 3),
-(620, '¿Qué nombre recibe la técnica de frotar una grasa sólida (mantequilla fría) con harina para crear una textura escamosa (Ej. en tartas)?', 'Amasar', 'Cremar', 'Sablar (Rubbing-in)', 'Macerar', 'Sablar (Rubbing-in)', 31, 3),
-(621, '¿Qué tipo de contracción muscular implica que el músculo se alarga mientras está bajo tensión (Ej. bajar lentamente una pesa)?', 'Isométrica', 'Isotónica', 'Excéntrica', 'Concéntrica', 'Excéntrica', 14, 1),
-(622, '¿Qué es el \"VO2 máximo\"?', 'El volumen máximo de oxígeno que el cuerpo puede consumir por minuto', 'La frecuencia cardíaca máxima', 'La fuerza muscular máxima', 'El número de repeticiones máximas', 'El volumen máximo de oxígeno que el cuerpo puede consumir por minuto', 14, 1),
-(623, '¿Qué nombre recibe el proceso de aumentar progresivamente la carga de entrenamiento para obtener mejoras continuas?', 'Principio de especificidad', 'Principio de reversibilidad', 'Principio de sobrecarga progresiva', 'Principio de individualización', 'Principio de sobrecarga progresiva', 14, 1),
-(624, '¿Qué nutriente es la principal fuente de energía rápida durante ejercicios de alta intensidad?', 'Proteínas', 'Grasas', 'Vitaminas', 'Carbohidratos', 'Carbohidratos', 14, 1),
-(625, '¿Qué articulación conecta el fémur con la pelvis y es una de las más estables del cuerpo?', 'Rodilla', 'Codo', 'Hombro', 'Cadera', 'Cadera', 14, 1),
-(626, '¿Qué nombre recibe la adaptación fisiológica que permite al corazón bombear más sangre por latido (Aumento del Volumen Sistólico)?', 'Hipertensión', 'Bradicardia', 'Hipertrofia cardíaca patológica', 'Hipertrofia cardíaca fisiológica', 'Hipertrofia cardíaca fisiológica', 14, 2),
-(627, '¿Qué zona del entrenamiento cardiovascular se recomienda para mejorar la resistencia aeróbica de base (generalmente 60-70% de la FCM)?', 'Zona Roja', 'Zona 1 (Recuperación)', 'Zona 3 (Umbral aeróbico)', 'Zona 5 (Máximo esfuerzo)', 'Zona 3 (Umbral aeróbico)', 14, 2),
-(628, '¿Qué músculo principal es el responsable de la extensión del codo (Ej. en un press de banca)?', 'Bíceps braquial', 'Deltoides anterior', 'Pectoral mayor', 'Tríceps braquial', 'Tríceps braquial', 14, 2),
-(629, '¿Qué técnica de entrenamiento se caracteriza por alternar periodos cortos y muy intensos de ejercicio con periodos de descanso o baja intensidad?', 'Entrenamiento de fuerza máxima', 'Entrenamiento de resistencia aeróbica continua', 'Entrenamiento Intervalico de Alta Intensidad (HIIT)', 'Entrenamiento isométrico', 'Entrenamiento Intervalico de Alta Intensidad (HIIT)', 14, 2),
-(630, '¿Qué se busca evaluar con la prueba de \"1 Repetición Máxima\" (1RM)?', 'Resistencia aeróbica', 'Potencia muscular', 'Fuerza máxima', 'Velocidad de reacción', 'Fuerza máxima', 14, 2),
-(631, '¿Qué tipo de palanca biomecánica tiene el fulcro (articulación) entre la fuerza aplicada (músculo) y la resistencia (peso)?', 'Palanca de primer género', 'Palanca de segundo género', 'Palanca de tercer género', 'Palanca de cuarto género', 'Palanca de primer género', 14, 2),
-(632, '¿Qué hormona anabólica promueve la síntesis de proteínas y el crecimiento muscular después del ejercicio de fuerza?', 'Cortisol', 'Insulina', 'Testosterona', 'Adrenalina', 'Testosterona', 14, 2),
-(633, '¿Qué fase del ciclo de periodización anual se enfoca en el desarrollo de capacidades físicas generales y una alta carga de trabajo?', 'Fase competitiva', 'Fase de transición', 'Fase específica', 'Fase preparatoria general', 'Fase preparatoria general', 14, 2),
-(634, '¿Cuál es la función principal de los ligamentos en el sistema músculo-esquelético?', 'Unir músculo con músculo', 'Unir hueso con hueso', 'Unir músculo con hueso', 'Producir movimiento', 'Unir hueso con hueso', 14, 2),
-(635, '¿Qué nombre recibe el sistema de energía que utiliza el fosfocreatina y es predominante en esfuerzos explosivos de menos de 10 segundos?', 'Sistema oxidativo', 'Glucólisis aeróbica', 'Sistema anaeróbico aláctico (ATP-PCr)', 'Glucólisis anaeróbica', 'Sistema anaeróbico aláctico (ATP-PCr)', 14, 2),
-(636, '¿Qué herramienta se utiliza para medir el cuerpo y el largo de la tela?', 'Regla de metal', 'Cinta métrica', 'Escuadra', 'Transportador', 'Cinta métrica', 30, 1),
-(637, '¿Qué herramienta se usa para cortar la tela antes de coser?', 'Cuchillo', 'Tijeras de papel', 'Tijeras de sastre', 'Cutter', 'Tijeras de sastre', 30, 1),
-(638, '¿Qué elemento es esencial para unir dos piezas de tela temporalmente antes de coserlas?', 'Pegamento', 'Alfileres', 'Grapas', 'Tiza', 'Alfileres', 30, 1),
-(639, '¿Qué nombre recibe el borde de la tela que está tejido o acabado para evitar que se deshilache?', 'Centro', 'Sisa', 'Bies', 'Orillo', 'Orillo', 30, 1),
-(640, '¿Qué parte de la máquina de coser sostiene la canilla y regula la tensión del hilo inferior?', 'Prensatelas', 'Aguja', 'Bobina', 'Canillero (Caja de bobina)', 'Canillero (Caja de bobina)', 30, 1),
-(641, '¿Qué se hace para asegurar los extremos de una costura y evitar que se deshaga?', 'Cortar el hilo', 'Rematar (hacer un nudo o retroceder la costura)', 'Planchar', 'Bordar', 'Rematar (hacer un nudo o retroceder la costura)', 30, 1),
-(642, '¿Qué tipo de puntada es la más común y básica para unir dos piezas de tela en línea recta?', 'Zigzag', 'Overlock', 'Puntada recta', 'Puntada invisible', 'Puntada recta', 30, 1),
-(643, '¿Qué nombre recibe el hilo que se usa en la parte superior de la máquina de coser y viene de un carrete grande?', 'Hilo inferior', 'Hilo de bobina', 'Hilo de canilla', 'Hilo superior', 'Hilo superior', 30, 1),
-(644, '¿Qué nombre recibe el pequeño instrumento que se usa para deshacer las costuras incorrectas?', 'Aguja', 'Dedal', 'Descosedor (Abre-ojales)', 'Ganchillo', 'Descosedor (Abre-ojales)', 30, 1),
-(645, '¿Qué es un patrón en costura?', 'Una tela de color sólido', 'Un molde de papel para cortar las piezas de la prenda', 'Un tipo de aguja', 'El nombre de un hilo', 'Un molde de papel para cortar las piezas de la prenda', 30, 1),
-(646, '¿Qué función tiene el \"dedal\"?', 'Sostener la tela', 'Proteger el dedo al coser a mano y empujar la aguja', 'Medir la distancia entre puntadas', 'Guardar los alfileres', 'Proteger el dedo al coser a mano y empujar la aguja', 30, 2),
-(647, '¿Qué tela está hecha de fibras entrelazadas que se pueden deshilachar fácilmente y se teje en un telar?', 'Punto (knit)', 'Fieltro', 'Tela plana (tejido de calada)', 'Cuero', 'Tela plana (tejido de calada)', 30, 2),
-(648, '¿Qué tipo de costura se utiliza para unir dos piezas de tela y luego cortar y rematar el exceso de margen para prevenir el deshilachado?', 'Costura francesa', 'Costura abierta', 'Costura inglesa', 'Costura solapada', 'Costura francesa', 30, 2),
-(649, '¿Qué nombre recibe la máquina que cose y remata los bordes de la tela simultáneamente?', 'Máquina recta industrial', 'Máquina overlock (remalladora)', 'Máquina de bordar', 'Máquina de acolchar', 'Máquina overlock (remalladora)', 30, 2),
-(650, '¿Qué se marca en la tela con \"piquetes\" (pequeños cortes o muescas)?', 'Los bolsillos', 'Los puntos de unión o alineación de las piezas', 'El centro de la tela', 'El largo del ruedo', 'Los puntos de unión o alineación de las piezas', 30, 2),
-(651, '¿Qué es el \"borde sesgado\" (o bies)?', 'Una línea horizontal', 'Una línea que sigue el sentido del hilo', 'Una línea que se corta en un ángulo de 45 grados respecto al orillo', 'Una línea vertical', 'Una línea que se corta en un ángulo de 45 grados respecto al orillo', 30, 2),
-(652, '¿Qué se conoce como \"patrón de línea A\" en el diseño de moda?', 'Un patrón recto y ajustado', 'Un patrón que es ajustado en la parte superior y se ensancha gradualmente hacia el bajo', 'Un patrón con cuello alto', 'Un patrón sin mangas', 'Un patrón que es ajustado en la parte superior y se ensancha gradualmente hacia el bajo', 30, 3),
-(653, '¿Qué nombre recibe el método de corte que consiste en disponer todas las piezas del patrón sobre la tela antes de cortar para optimizar el uso del material?', 'Tizado', 'Marcado', 'Tendido', 'Entretelado', 'Tendido', 30, 3),
-(654, '¿Cuál es la función principal de la \"entretela\" o \"interfaz\" en la costura?', 'Decorar la prenda', 'Dar cuerpo y estabilidad a áreas específicas (Ej. cuellos y puños)', 'Hacer la prenda más suave', 'Impedir el deshilachado', 'Dar cuerpo y estabilidad a áreas específicas (Ej. cuellos y puños)', 30, 3),
-(655, '¿Qué hilo es típicamente más grueso y resistente, utilizado para costuras decorativas o para coser materiales pesados como el cuero?', 'Hilo de seda', 'Hilo de poliéster', 'Hilo de coser normal', 'Hilo de torzal', 'Hilo de torzal', 30, 3),
-(656, '¿Qué utensilio se utiliza para batir huevos o cremas vigorosamente?', 'Cuchara', 'Espátula', 'Batidor de varillas (Globo)', 'Cucharón', 'Batidor de varillas (Globo)', 31, 1),
-(657, '¿Qué se añade a la masa para que el pan o un pastel crezca?', 'Azúcar', 'Sal', 'Levadura (o polvo de hornear)', 'Agua', 'Levadura (o polvo de hornear)', 31, 1),
-(658, '¿Qué técnica de cocción implica cocinar los alimentos sumergidos en grasa muy caliente?', 'Hervir', 'Asar', 'Freír', 'Hornear', 'Freír', 31, 1),
-(659, '¿Qué se utiliza para saber la temperatura interna de un pavo o un trozo de carne?', 'Termómetro de cocina', 'Cronómetro', 'Báscula', 'Tenedor', 'Termómetro de cocina', 31, 1),
-(660, '¿Qué nombre recibe la acción de cortar verduras en tiras muy finas (Ej. cebolla)?', 'Picar', 'Rebanar', 'Juliana', 'Majar', 'Juliana', 31, 1),
-(661, '¿Qué tipo de cuchillo es el más versátil y se utiliza para la mayoría de tareas en la cocina?', 'Cuchillo de pan', 'Cuchillo de chef (Cebollero)', 'Cuchillo de sierra', 'Cuchillo de pescado', 'Cuchillo de chef (Cebollero)', 31, 1),
-(662, '¿Qué se hace para \"sellar\" la carne antes de asarla o guisarla?', 'Congelarla', 'Cubrirla con especias', 'Dorar la superficie rápidamente a fuego alto', 'Hervirla', 'Dorar la superficie rápidamente a fuego alto', 31, 1),
-(663, '¿Qué nombre recibe el líquido resultante de cocer lentamente huesos, verduras o carnes para obtener sabor concentrado?', 'Agua con sal', 'Caldo o fondo', 'Jugo de frutas', 'Leche', 'Caldo o fondo', 31, 1),
-(664, '¿Qué especia es la que proviene de la corteza de un árbol y se usa frecuentemente en postres y bebidas calientes?', 'Pimienta', 'Azafrán', 'Vainilla', 'Canela', 'Canela', 31, 1),
-(665, '¿Qué se utiliza para saber el peso exacto de los ingredientes en una receta?', 'Taza medidora', 'Balanza (Báscula) de cocina', 'Jarra medidora', 'Cuchara sopera', 'Balanza (Báscula) de cocina', 31, 1),
-(666, '¿Qué significa \"blanquear\" en cocina?', 'Hervir un alimento brevemente y luego enfriarlo rápidamente', 'Agregar leche a un caldo', 'Cocinar sin sal', 'Freír hasta que esté pálido', 'Hervir un alimento brevemente y luego enfriarlo rápidamente', 31, 2),
-(667, '¿Qué proceso químico produce burbujas de gas en la masa de pan, haciendo que suba?', 'Caramelización', 'Fermentación', 'Emulsión', 'Oxidación', 'Fermentación', 31, 2),
-(668, '¿Qué se utiliza para espesar una salsa mediante la mezcla de mantequilla y harina a partes iguales?', 'Glaseado', 'Beurre manié', 'Roux', 'Gelatina', 'Roux', 31, 2),
-(669, '¿Qué nombre recibe el método de cocinar a fuego lento y prolongado, utilizando una pequeña cantidad de líquido en un recipiente cerrado?', 'Saltear', 'Gratinar', 'Estofar (Braising)', 'Vapor', 'Estofar (Braising)', 31, 2),
-(670, '¿Qué salsa clásica se prepara emulsionando yemas de huevo con mantequilla clarificada y jugo de limón?', 'Salsa bechamel', 'Salsa de tomate', 'Salsa holandesa', 'Salsa pesto', 'Salsa holandesa', 31, 2),
-(671, '¿Cuál es la temperatura de seguridad recomendada para la cocción de la carne de ave (pollo, pavo)?', '$60^circ C$', '$74^circ C$', '$85^circ C$', '$100^circ C$', '$74^circ C$', 31, 2),
-(672, '¿Qué es un \"fondo oscuro\" o \"caldo oscuro\"?', 'Un caldo hecho con pescado', 'Un caldo hecho con huesos asados previamente para darle color', 'Un caldo hecho solo con vegetales', 'Un caldo con mucho vino tinto', 'Un caldo hecho con huesos asados previamente para darle color', 31, 3),
-(673, '¿Qué nombre recibe el método de cocción por calor seco donde la fuente de calor viene de arriba (Ej. para gratinar quesos)?', 'Escalfar', 'Pochar', 'Grillar', 'Salamandra (Broil)', 'Salamandra (Broil)', 31, 3),
-(674, '¿Qué tipo de masa clásica de repostería es ligera y hueca, utilizada para hacer profiteroles o eclairs?', 'Masa quebrada', 'Masa hojaldre', 'Masa choux', 'Masa filo', 'Masa choux', 31, 3),
-(675, '¿Qué nombre recibe la técnica de frotar una grasa sólida (mantequilla fría) con harina para crear una textura escamosa (Ej. en tartas)?', 'Amasar', 'Cremar', 'Sablar (Rubbing-in)', 'Macerar', 'Sablar (Rubbing-in)', 31, 3);
+(620, '¿Qué nombre recibe la técnica de frotar una grasa sólida (mantequilla fría) con harina para crear una textura escamosa (Ej. en tartas)?', 'Amasar', 'Cremar', 'Sablar (Rubbing-in)', 'Macerar', 'Sablar (Rubbing-in)', 31, 3);
 
 -- --------------------------------------------------------
 
@@ -990,7 +941,7 @@ ALTER TABLE `tbl_dificultades`
 -- AUTO_INCREMENT for table `tbl_jugadores`
 --
 ALTER TABLE `tbl_jugadores`
-  MODIFY `ID_jugador` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `ID_jugador` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `tbl_preguntas`

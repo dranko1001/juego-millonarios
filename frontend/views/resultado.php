@@ -57,9 +57,6 @@ $textoRespuestaElegida = $opcionesMostradas[$respuestaElegida] ?? '';
             <p><strong>Respuesta correcta era:</strong> <span class="respuesta-letra"><?php echo htmlspecialchars($respuestaCorrectaLetra); ?>:</span> <?php echo htmlspecialchars($respuestaCorrectaTexto); ?></p>
         </div>
         
-        <div class="info-categoria">
-            <p>📚 Categoría: <strong><?php echo htmlspecialchars($categoriaNombre); ?></strong></p>
-        </div>
         
         <!-- BOTONES REPOSICIONADOS AQUÍ -->
         <div class="botones-container">
@@ -103,10 +100,7 @@ $textoRespuestaElegida = $opcionesMostradas[$respuestaElegida] ?? '';
         </div>
         
 
-        
-        <div class="info-categoria">
-            <p>📚 Categoría: <strong><?php echo htmlspecialchars($categoriaNombre); ?></strong></p>
-        </div>
+
         
         <!-- BOTONES REPOSICIONADOS AQUÍ -->
         <div class="botones-container">
