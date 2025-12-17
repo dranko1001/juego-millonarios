@@ -1,9 +1,14 @@
 <?php
 // backend/controllers/PreguntasController.php
+
+// Habilitar reporte de errores para debug (remover en producción)
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 session_start();
 
-//  Inicializar comodines
-require_once __DIR__ . '/../models/ComodinModel.php';
+// Inicializar comodines
+require_once __DIR__ . '/../models/comodinModel.php';
 ComodinModel::inicializarComodines();
 
 // Verificar autenticación
@@ -37,23 +42,27 @@ if (!isset($_SESSION['preguntas_respondidas'])) {
     $_SESSION['preguntas_respondidas'] = [];
 }
 
+// Inicializar variables
 $pregunta = [];
 $opciones_a_mostrar = [];
 $datosPregunta = null;
 
 // ANTI-TRAMPA: Verificar si ya hay una pregunta activa (sin responder)
 if (isset($_SESSION['pregunta_activa']) && $_SESSION['pregunta_activa'] === true) {
-
-  
+    
     if (
         isset($_SESSION['pregunta_actual_id']) &&
         isset($_SESSION['enunciado_pregunta']) &&
-        isset($_SESSION['opciones_mostradas'])
+        isset($_SESSION['opciones_mostradas']) &&
+        isset($_SESSION['respuesta_correcta_letra']) &&
+        isset($_SESSION['respuesta_correcta_texto'])
     ) {
-
         // Reconstruir la pregunta desde la sesión
         $pregunta['enunciado'] = $_SESSION['enunciado_pregunta'];
         $opciones_a_mostrar = $_SESSION['opciones_mostradas'];
+        $pregunta['opciones_mostradas'] = $opciones_a_mostrar;
+        $pregunta['respuesta_correcta_letra'] = $_SESSION['respuesta_correcta_letra'];
+        $pregunta['respuesta_correcta_texto'] = $_SESSION['respuesta_correcta_texto'];
 
         // Crear un array simulado de datos de pregunta para compatibilidad
         $datosPregunta = [
@@ -61,12 +70,6 @@ if (isset($_SESSION['pregunta_activa']) && $_SESSION['pregunta_activa'] === true
             'enunciado_pregunta' => $_SESSION['enunciado_pregunta'],
             'TBL_dificultades_ID_dificultad' => $_SESSION['dificultad_pregunta'] ?? 1
         ];
-
-        $pregunta['opciones_mostradas'] = $opciones_a_mostrar;
-        $pregunta['respuesta_correcta_letra'] = $_SESSION['respuesta_correcta_letra'];
-        $pregunta['respuesta_correcta_texto'] = $_SESSION['respuesta_correcta_texto'];
-        
-        
         
     } else {
         // Si falta información, forzar nueva pregunta
@@ -74,10 +77,10 @@ if (isset($_SESSION['pregunta_activa']) && $_SESSION['pregunta_activa'] === true
     }
 }
 
-//  Si NO hay pregunta activa, generar una nueva
+// Si NO hay pregunta activa, generar una nueva
 if (!isset($_SESSION['pregunta_activa']) || $_SESSION['pregunta_activa'] === false) {
 
-    //  NUEVO: Determinar si deben ser preguntas fáciles obligatorias
+    // Determinar si deben ser preguntas fáciles obligatorias
     $preguntasCorrectasActuales = $_SESSION['preguntas_correctas'] ?? 0;
     
     // LAS PRIMERAS 3 PREGUNTAS DEBEN SER FÁCILES (DIFICULTAD 1)
@@ -132,6 +135,7 @@ if (!isset($_SESSION['pregunta_activa']) || $_SESSION['pregunta_activa'] === fal
         shuffle($opciones);
 
         $letras = ['A', 'B', 'C', 'D'];
+        $opciones_a_mostrar = [];
         for ($i = 0; $i < count($opciones); $i++) {
             $opciones_a_mostrar[$letras[$i]] = $opciones[$i];
         }
@@ -149,7 +153,7 @@ if (!isset($_SESSION['pregunta_activa']) || $_SESSION['pregunta_activa'] === fal
         $_SESSION['opciones_mostradas'] = $opciones_a_mostrar;
         $_SESSION['dificultad_pregunta'] = $datosPregunta['TBL_dificultades_ID_dificultad'];
         
-        //  SOLO guardar el tiempo de inicio SI ES UNA PREGUNTA NUEVA
+        // SOLO guardar el tiempo de inicio SI ES UNA PREGUNTA NUEVA
         $_SESSION['tiempo_inicio_pregunta'] = time(); 
         $_SESSION['tiempo_limite_segundos'] = 120; 
         
@@ -175,5 +179,6 @@ if (!isset($_SESSION['pregunta_activa']) || $_SESSION['pregunta_activa'] === fal
     }
 }
 
+// CRÍTICO: Corregir la ruta (era frontend1, debe ser frontend)
 require_once __DIR__ . '/../../frontend/views/juego.php';
 ?>

@@ -1,5 +1,4 @@
-// 
-//
+
 //  VARIABLES GLOBALES DEL TEMPORIZADOR
 let tiempoRestante;
 let tiempoInicio;
@@ -101,7 +100,7 @@ function usar5050() {
                 }
             });
 
-            fetch('../../backend/controllers/ComodinController.php', {
+            fetch('/backend/controllers/comodincontroller.php', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
                 body: 'tipo_comodin=cincuenta_cincuenta'
@@ -193,7 +192,7 @@ function usarCambioPregunta() {
                 }
             });
 
-            fetch('../../backend/controllers/ComodinController.php', {
+            fetch('/backend/controllers/comodincontroller.php', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
                 body: 'tipo_comodin=cambio_pregunta'
@@ -285,7 +284,7 @@ function usarAyudaPublico() {
             // Detener temporizador principal
             detenerTemporizador();
 
-            fetch('../../backend/controllers/ComodinController.php', {
+            fetch('/backend/controllers/comodincontroller.php', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
                 body: 'tipo_comodin=ayuda_publico'
@@ -352,7 +351,7 @@ function usarLlamadaAmigo() {
             // Detener temporizador principal
             detenerTemporizador();
 
-            fetch('../../backend/controllers/ComodinController.php', {
+            fetch('/backend/controllers/comodincontroller.php', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
                 body: 'tipo_comodin=llamada_amigo'

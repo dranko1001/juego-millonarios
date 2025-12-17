@@ -171,7 +171,7 @@
         </div>
     </div>
 
-    <script src="../js/juego.js"></script>
+    <script src="../../frontend/js/juego.js"></script>
 </body>
 
 </html>

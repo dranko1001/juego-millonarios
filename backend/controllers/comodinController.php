@@ -2,13 +2,16 @@
 
 session_start();
 
+// Siempre responder JSON
+header('Content-Type: application/json; charset=utf-8');
+
 // Verificar autenticación
 if (!isset($_SESSION["aprendiz"]) || !isset($_SESSION["id_jugador"])) {
     echo json_encode(['error' => 'No autenticado']);
     exit();
 }
 
-require_once __DIR__ . '/../models/ComodinModel.php';
+require_once __DIR__ . '/../models/comodinModel.php';
 
 // Obtener el tipo de comodín solicitado
 $tipoComodin = $_POST['tipo_comodin'] ?? $_GET['tipo_comodin'] ?? null;

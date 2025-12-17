@@ -18,7 +18,7 @@
         <input type="text" name="ficha" placeholder="Ficha" required>
         <input type="text" name="usuario_jugador" placeholder="ingrese su nombre" required>
 
-        <button type="submit">Guardar</button>
+        <button type="submit">Iniciar</button>
         <a href="reglas.php" class="btn-warning">reglas</a>
          
     </form>
