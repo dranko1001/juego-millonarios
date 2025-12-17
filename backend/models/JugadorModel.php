@@ -20,6 +20,32 @@ class JugadorModel
             $this->mysql->conectar();
             $conexion = $this->mysql->getConexion();
 
+            // 1. Obtener puntaje actual del jugador
+            $sqlSelect = "SELECT puntaje_jugador 
+                          FROM tbl_jugadores 
+                          WHERE ID_jugador = :id";
+
+            $stmtSelect = $conexion->prepare($sqlSelect);
+            $stmtSelect->execute([':id' => $idJugador]);
+            $resultado = $stmtSelect->fetch(PDO::FETCH_ASSOC);
+
+            $puntajeActual = $resultado ? (int) $resultado['puntaje_jugador'] : 0;
+
+            // 2. Si el nuevo puntaje es menor o igual, NO actualizar
+            if ($nuevoPuntaje <= $puntajeActual) {
+                $this->guardarLog(
+                    'PUNTAJE_NO_ACTUALIZADO',
+                    "ID: $idJugador | Puntaje actual: $puntajeActual | Nuevo puntaje: $nuevoPuntaje (no se actualiza porque no es mayor)",
+                    $idJugador,
+                    $nuevoPuntaje
+                );
+
+                $this->mysql->desconectar();
+                // false indica que no hubo actualización en BD
+                return false;
+            }
+
+            // 3. Nuevo puntaje es mayor: actualizar en BD
             $sql = "UPDATE tbl_jugadores 
                     SET puntaje_jugador = :puntaje 
                     WHERE ID_jugador = :id";
