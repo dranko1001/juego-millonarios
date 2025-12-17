@@ -114,12 +114,6 @@ $textoRespuestaElegida = $opcionesMostradas[$respuestaElegida] ?? '';
             <a href="../../backend/controllers/PreguntasController.php" class="boton boton-siguiente">
                  Siguiente Pregunta
             </a>
-            
-            <a href="reiniciar.php?cambiar_categoria=1" 
-               onclick="return confirm('¿Deseas cambiar de categoría? Tu progreso se reiniciará.')"
-               class="boton boton-cambiar">
-                 Cambiar Categoría
-            </a>
         </div>
         
         <div class="puntaje-total">
