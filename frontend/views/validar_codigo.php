@@ -30,6 +30,7 @@ if (isset($_GET['error'])) {
     <title>Validar Código de Acceso</title>
     <link rel="stylesheet" href="../css/login.css">
     <link rel="stylesheet" href="../css/validarCodigo.css">
+    <link rel="icon" href="../media/sena logo.png">
 </head>
 <body>
     <form method="POST" action="../../backend/controllers/validar_codigo_aprendiz.php">

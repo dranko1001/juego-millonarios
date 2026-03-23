@@ -21,6 +21,7 @@ $nombre_admin = $_SESSION["admin"];
 
     <!-- SweetAlert2 para alertas bonitas -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="icon" href="../media/sena logo.png">
 </head>
 
 <body>

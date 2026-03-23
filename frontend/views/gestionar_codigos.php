@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestionar Códigos de Acceso</title>
     <link rel="stylesheet" href="../../frontend/css/gestionCodigo.css">
+    <link rel="icon" href="../../frontend/media/sena logo.png">
     <style>
         
     </style>

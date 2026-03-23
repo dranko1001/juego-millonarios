@@ -12,6 +12,7 @@ $porcentaje = $_SESSION["porcentaje"] ?? 0;
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>¡Categoría Completada! - Millonarios SENA</title>
     <link rel="stylesheet" href="../css/categoria_completada.css">
+    <link rel="icon" href="../media/sena logo.png">
 </head>
 <body>
 

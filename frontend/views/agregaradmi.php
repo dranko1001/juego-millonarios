@@ -13,6 +13,7 @@ if (!isset($_SESSION["admin"]) || empty($_SESSION["admin"])) {
 <title>Agregar Administrador</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="../css/agregaradmin.css">
+<link rel="icon" href="../media/sena logo.png">
 </head>
 <body>
 

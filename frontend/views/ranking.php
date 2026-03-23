@@ -16,6 +16,7 @@ require_once __DIR__ . '/../../backend/controllers/ranking.php';
 
     <!-- SweetAlert2 CDN -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="icon" href="../media/sena logo.png">
 </head>
 
 <body>

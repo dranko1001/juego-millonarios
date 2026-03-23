@@ -82,6 +82,7 @@ $categorias = $pdo->query($sqlCat)->fetchAll();
 <title>Editar Preguntas</title>
 <link rel="stylesheet" href="../css/preguntas.css">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="icon" href="../media/sena logo.png">
 </head>
 <body>
 

@@ -28,6 +28,7 @@ if ($esAdmin) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reglas del Juego Millonarios</title>
     <link rel="stylesheet" href="../css/reglas.css">
+    <link rel="icon" href="../media/sena logo.png">
 </head>
 
 <body>
