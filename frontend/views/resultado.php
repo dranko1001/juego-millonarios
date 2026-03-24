@@ -41,7 +41,7 @@ $textoRespuestaElegida = $opcionesMostradas[$respuestaElegida] ?? '';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Resultado - ¿Quién Quiere Ser Millonario?</title>
+    <title>Resultado - Millonarios del Saber</title>
     <link rel="stylesheet" href="../css/resultado.css">
     <link rel="icon" href="../media/sena logo.png">
 </head>

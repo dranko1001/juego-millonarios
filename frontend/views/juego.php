@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>¿Quién Quiere Ser Millonario? - SENA</title>
+    <title>Millonarios del Saber - SENA</title>
     <link rel="stylesheet" href="../../frontend/css/juego.css">
     <link rel="icon" href="../../frontend/media/sena logo.png">
 
@@ -63,7 +63,7 @@
 
     <div class="game-container">
         <div class="header">
-            <h1>¡¿Quién Quiere Ser Millonario?!</h1>
+            <h1>¡Millonarios del Saber!</h1>
 
             <div id="temporizador-container"
                 style="background: linear-gradient(135deg, #39B54A 0%, #00A14B 100%); padding: 15px 25px; border-radius: 15px; margin-top: 10px; display: inline-block; border: 3px solid white; box-shadow: 0 5px 20px rgba(57, 181, 74, 0.4); transition: all 0.3s ease;">
