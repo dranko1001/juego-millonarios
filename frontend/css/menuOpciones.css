@@ -22,11 +22,10 @@ body {
 /* Efecto de fondo animado profesional */
 body::before {
     content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
     background: radial-gradient(circle, rgba(255, 255, 255, 0.08) 2px, transparent 2px);
     background-size: 60px 60px;
     animation: backgroundMove 25s linear infinite;
