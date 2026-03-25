@@ -127,11 +127,11 @@ body::before {
 
 .logo-container {
     background: linear-gradient(135deg, #39B54A, #00A14B);
-    padding: 15px;
+    padding: 8px;
     border-radius: 20px;
     box-shadow: 0 10px 30px rgba(57, 181, 74, 0.4);
     border: 3px solid #FFD700;
-    animation: logoFloat 3s ease-in-out infinite;
+    /* animation: logoFloat 3s ease-in-out infinite; */
 }
 
 @keyframes logoFloat {
@@ -140,11 +140,11 @@ body::before {
 }
 
 .logo-container img {
-    width: 150px;
-    height: 150px;
+    width: 105px;
+    height: 105px;
     border-radius: 50%;
     object-fit: cover;
-    border: 5px solid white;
+    border: 3px solid white;
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
 }
 
@@ -466,8 +466,8 @@ body::before {
     }
 
     .logo-container img {
-        width: 120px;
-        height: 120px;
+        width: 100px;
+        height: 100px;
     }
 
     .next-btn {

@@ -1,5 +1,8 @@
 
-const ITEMS_POR_PAGINA = 6;
+// Número de tarjetas de categoría que se muestran por página.
+// Al subirlo a 10 se reduce el número de cambios de página,
+// pero sin renderizar de nuevo en el servidor (solo se ocultan/muestran con CSS).
+const ITEMS_POR_PAGINA = 10;
 let paginaActual = 1;
 let totalPaginas = 1;
 

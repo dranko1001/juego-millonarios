@@ -120,7 +120,7 @@
                 <div class="action-buttons-panel">
 
                     <a href="#" onclick="confirmarSalirYGuardar(); return false;" class="action-btn action-btn-exit">
-                        Salir y Guardar
+                        Finalizar 
                     </a>
                 </div>
             </div>

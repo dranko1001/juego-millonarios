@@ -2,9 +2,9 @@
 class PDOConnection {
     // Propiedades de conexión
     private $ipServidor = "localhost";
-    private $usuarioBase = "u810917883_millonarios";
-    private $contrasena = "adso3064749A#";
-    private $nombreBaseDatos = "u810917883_millonarios";
+    private $usuarioBase = "root";
+    private $contrasena = "";
+    private $nombreBaseDatos = "juegomillonarios";
     private $conexion; 
 
     // Conectar a la base de datos
